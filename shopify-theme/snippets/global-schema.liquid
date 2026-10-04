@@ -1,0 +1,528 @@
+{% comment %}
+================================================================================
+  AlphonsoMango.in — GLOBAL SCHEMA v5.2.0 — CERTIFICATE-VERIFIED EDITION
+  File: snippets/global-schema.liquid
+ 
+  DEPLOY:  Edit Code → snippets/ → global-schema.liquid → Select All → Paste → Save
+  RUNS VIA: {% render 'global-schema' %} in theme.liquid (already there — do NOT add again)
+ 
+  CHANGES v5.2.0 (03-Sep-2026):
+  ✅ All Liquid variables renamed _name → am_name to satisfy Theme Check's
+     VariableName rule — clears the editor's warning count. Zero functional change.
+ 
+  CHANGES v5.1.0 (03-Sep-2026):
+  ✅ NEW: Dedicated enriched block for alphonso-mango-pulp — Aamras alternate names,
+         GI fruit-source properties, year-round availability, 3-question FAQ.
+  ✅ NEW: Dedicated enriched block for ALL cashew products (matched dynamically by
+         product type/handle containing cashew or kaju) — Kaju alternate names,
+         W180/W240/W320/W450 grade auto-detection from the title, cashew entity
+         link, grade/storage/delivery FAQ. Covers every current and future cashew
+         product automatically. No prices are invented — all offer data stays live.
+  NOTE: Do NOT run the tool's `productschema` button — it writes a second Product
+        graph to metafields (with outdated Proveda entity data); this file is now
+        the single owner of product schema.
+ 
+  CHANGES v5.0.0 (entity + credential corrections, 03-Sep-2026):
+  ✅ GI FIX: AU/11054/GI/139/1264 → AU/5974/GI/139/260 EVERYWHERE (~20 occurrences)
+             Verified against GI Registry Certificate No. 4163 dated 16.10.2019,
+             registered to M/s. Powle Home Foods (Prashant Devendra Powle).
+             AU/11054/GI/139/1264 belongs to Proveda Superfoods Pvt Ltd — a separate
+             legal entity with FSSAI/GSTIN still pending — and must NOT be claimed here.
+  ✅ ENTITY FIX: legalName → "Powle Home Foods" (holds FSSAI 10020022011783, GSTIN,
+             APEDA 225579, GI AU/5974/GI/139/260). All "Proveda Superfoods" strings removed.
+  ✅ ADDRESS FIX: "3, Bhave House" → "No. 07, Bhave House, Kale Marg, Bail Bajar,
+             Kurla West" per the GI certificate — all occurrences.
+  ✅ ERROR FIX: geo removed from Organization (only valid on Place/LocalBusiness types).
+  ✅ ERROR FIX: speakable removed from homepage LocalBusiness (only valid on Article/WebPage).
+  ✅ ERROR FIX: WebSite potentialAction/SearchAction removed — "query-input" is not a
+             schema.org property, and Google retired the sitelinks search box (2024).
+  ✅ ENTITY MERGE: #powle-home-foods duplicate Organization node removed (it split the
+             brand entity two ways now that #organization IS Powle Home Foods).
+             Product manufacturer refs repointed to #organization.
+  ✅ hasCertification added to #organization (FSSAI + APEDA + GI AU/5974 w/ validFrom).
+  ✅ APEDA identifier: text → registration number 225579.
+  ✅ sameAs: full verified set (Instagram, Facebook, YouTube, X, Pinterest, LinkedIn,
+             Google Maps). Wikipedia link removed (that page is about the fruit, not
+             this organization — sameAs must point at the same entity).
+  ✅ HONESTY FIX: hardcoded aggregateRating 4.7/1200 removed from homepage LocalBusiness
+             and 4.8/156 from Recipe — ratings not backed by on-page reviews violate
+             Google guidelines. JudgeMe metafield ratings (real) remain on products.
+  ✅ FoodEstablishment type + servesCuisine removed from LocalBusiness nodes — this is
+             an online produce store, not a restaurant; wrong type risks manual action.
+  ✅ Devgad AU/6932 issuedBy corrected: Devgad Amba Utpadak Sangha (growers' body),
+             not the GI Registry. (Verify the exact Sangha name against that certificate.)
+  ✅ hasOfferCatalog numberOfItems removed (stale count).
+  NOTE: The seo-schema snippet is now METAFIELD-ONLY (v8) — this file is the single
+        owner of Organization/WebSite/Person/LocalBusiness entities sitewide.
+ 
+  All v4.x structural fixes (FIX 1–32) preserved unchanged.
+ 
+  ⚠️  SHOPIFY ADMIN ACTIONS still required (unchanged from v4.x):
+  • JudgeMe JSON-LD must remain OFF (app ON, metafields ON)
+  • structured-data-product.liquid must remain empty
+  • entity-clustering / alphonso-ucp-patch renders must stay removed from theme.liquid
+================================================================================
+{% endcomment %}
+ 
+{%- assign am_today      = 'now' | date: '%Y-%m-%d' -%}
+{%- assign am_season_end = '2026-06-30' -%}
+{%- assign am_year_end   = '2026-12-31' -%}
+{%- assign am_fallback_img = 'https://alphonsomango.in/cdn/shop/files/alphonso_mango_logo_0.webp' -%}
+ 
+{%- comment -%} Live JudgeMe ratings {%- endcomment -%}
+{%- if request.page_type == 'product' -%}
+  {%- assign am_jm_rating = product.metafields.reviews.rating.value -%}
+  {%- assign am_jm_count  = product.metafields.reviews.rating_count -%}
+  {%- assign am_jm_max    = product.metafields.reviews.rating.value.scale_max | default: 5 -%}
+  {%- assign am_jm_min    = product.metafields.reviews.rating.value.scale_min | default: 1 -%}
+  {%- assign am_has_reviews = false -%}
+  {%- if am_jm_rating != blank and am_jm_count != blank and am_jm_count > 0 -%}
+    {%- assign am_has_reviews = true -%}
+  {%- endif -%}
+ 
+  {%- comment -%} FIX 2: "review" object alongside aggregateRating {%- endcomment -%}
+  {%- if am_has_reviews -%}
+    {%- capture am_rating -%}"aggregateRating":{"@type":"AggregateRating","ratingValue":"{{ am_jm_rating }}","reviewCount":"{{ am_jm_count }}","bestRating":"{{ am_jm_max }}","worstRating":"{{ am_jm_min }}"},"review":{"@type":"Review","reviewRating":{"@type":"Rating","ratingValue":"{{ am_jm_rating }}","bestRating":"{{ am_jm_max }}","worstRating":"{{ am_jm_min }}"},"author":{"@type":"Organization","name":"Verified Buyers — AlphonsoMango.in"},"reviewBody":"Rated {{ am_jm_rating }} out of {{ am_jm_max }} stars by {{ am_jm_count }} verified buyers. Authentic GI-tagged Alphonso mangoes from AlphonsoMango.in — carbide-free, Brix 18-22°."},
+    {%- endcapture -%}
+  {%- else -%}
+    {%- assign am_rating = '' -%}
+  {%- endif -%}
+{%- endif -%}
+ 
+{%- capture am_ship -%}
+"shippingDetails":{"@type":"OfferShippingDetails","shippingRate":{"@type":"MonetaryAmount","value":0,"currency":"INR"},"shippingDestination":{"@type":"DefinedRegion","addressCountry":"IN"},"deliveryTime":{"@type":"ShippingDeliveryTime","handlingTime":{"@type":"QuantitativeValue","minValue":0,"maxValue":1,"unitCode":"DAY"},"transitTime":{"@type":"QuantitativeValue","minValue":1,"maxValue":5,"unitCode":"DAY"},"cutoffTime":"12:00:00+05:30","businessDays":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]}}}
+{%- endcapture -%}
+ 
+{%- capture am_returns -%}
+"hasMerchantReturnPolicy":{"@type":"MerchantReturnPolicy","@id":"https://alphonsomango.in/policies/refund-policy#return-policy","applicableCountry":"IN","returnPolicyCategory":"https://schema.org/MerchantReturnFiniteReturnWindow","merchantReturnDays":1,"refundType":["https://schema.org/ExchangeRefund","https://schema.org/StoreCreditRefund"],"itemCondition":"https://schema.org/DamagedCondition","merchantReturnLink":"https://alphonsomango.in/policies/refund-policy","description":"Transit-damaged or quality-failed fruit is replaced with a fresh dispatch or credited to the customer's account for the next purchase; report within 24 hours of delivery with photos/video (WhatsApp); no physical return is required"}
+{%- endcapture -%}
+ 
+ 
+{%- comment -%} ====== LAYER 1: SITEWIDE ====== {%- endcomment -%}
+<script type="application/ld+json" class="gropulse-rich-snippets-schema">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {
+      "@type":"Organization","@id":"https://alphonsomango.in/#organization",
+      "name":"AlphonsoMango.in","legalName":"Powle Home Foods",
+      "alternateName":["AlphonsoMango","Alphonso Mango India","Ratnagiri Hapus Online","Hapus Mango Online","Powle Home Foods"],
+      "url":"https://alphonsomango.in",
+      "logo":{"@type":"ImageObject","@id":"https://alphonsomango.in/#logo","url":"https://alphonsomango.in/cdn/shop/files/alphonso_mango_logo_0.webp","width":260,"height":91,"caption":"AlphonsoMango.in — Buy GI-Tagged Alphonso Mangoes Online India"},
+      "image":{"@id":"https://alphonsomango.in/#logo"},
+      "description":"India's most trusted online store for authentic GI-tagged Ratnagiri Alphonso mangoes (GI Authorised User AU/5974/GI/139/260), Devgad Alphonso (AU/6932), Gir Kesar mango, premium cashews, Kashmiri saffron, dates and dry fruits. 100% carbide-free, Brix 18-22°. FSSAI 10020022011783. APEDA Registered Exporter 225579. Operated by Powle Home Foods, sourcing from 48+ Konkan villages across Ratnagiri and Devgad. Founded 2019. Aatmanirbhar Bharat.",
+      "foundingDate":"2019",
+      "foundingLocation":{"@type":"Place","name":"Mumbai, Maharashtra, India"},
+      "identifier":[
+        {"@type":"PropertyValue","name":"FSSAI License Number","value":"10020022011783"},
+        {"@type":"PropertyValue","name":"APEDA Registration","value":"225579"},
+        {"@type":"PropertyValue","name":"GI Authorised User — Alphonso (GI No. 139)","value":"AU/5974/GI/139/260"},
+        {"@type":"PropertyValue","name":"GI Authorisation — Devgad Alphonso","value":"AU/6932"}
+      ],
+      "hasCertification":[
+        {"@type":"Certification","name":"FSSAI License","certificationIdentification":"10020022011783","issuedBy":{"@type":"Organization","name":"Food Safety and Standards Authority of India"}},
+        {"@type":"Certification","name":"APEDA Registration","certificationIdentification":"225579","issuedBy":{"@type":"Organization","name":"Agricultural and Processed Food Products Export Development Authority"}},
+        {"@type":"Certification","name":"Registered Authorised User — Alphonso GI (GI No. 139), Class 31 Horticulture (Mango)","certificationIdentification":"AU/5974/GI/139/260","validFrom":"2019-10-16","issuedBy":{"@type":"Organization","name":"Geographical Indications Registry, Government of India"}}
+      ],
+      "address":{"@type":"PostalAddress","@id":"https://alphonsomango.in/#address","streetAddress":"No. 07, Bhave House, Kale Marg, Bail Bajar","addressLocality":"Kurla West, Mumbai","addressRegion":"Maharashtra","postalCode":"400070","addressCountry":"IN"},
+      "contactPoint":[
+        {"@type":"ContactPoint","contactType":"customer service","telephone":"+917083075556","email":"support@alphonsomango.in","availableLanguage":["English","Hindi","Marathi"],"areaServed":"IN","hoursAvailable":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"00:00","closes":"23:59"}},
+        {"@type":"ContactPoint","contactType":"technical support","telephone":"+917083075556","url":"https://wa.me/917083075556"},
+        {"@type":"ContactPoint","contactType":"sales","telephone":"+917083075556","email":"support@alphonsomango.in","areaServed":["IN","US","AE","GB","SG","CA","AU","DE","NL","QA","SA","BH","KW","JP","ZA"]},
+        {"@type":"ContactPoint","contactType":"customer service","telephone":"+918369048029","description":"Legacy — transitioning to +917083075556. Both active."}
+      ],
+      "founders":[{"@type":"Person","@id":"https://alphonsomango.in/#prashant-powle"}],
+      "memberOf":[
+        {"@type":"Organization","name":"APEDA","url":"https://apeda.gov.in"},
+        {"@type":"Organization","name":"Geographical Indications Registry, Government of India","url":"https://ipindia.gov.in"},
+        {"@type":"Organization","name":"FSSAI","url":"https://fssai.gov.in"}
+      ],
+      "knowsAbout":["Alphonso Mango","Ratnagiri Hapus","Devgad Hapus","GI Tagged Mango","Carbide-Free Mango Ripening","Mango Export","Brix Level Testing","Konkan Agriculture","APEDA Export","Aatmanirbhar Bharat","Natural Farming","Farm-to-Consumer","NRI Mango Gifting","Corporate Mango Gifting","HORECA Mango Supply"],
+      "hasOfferCatalog":{"@type":"OfferCatalog","name":"AlphonsoMango.in Product Catalog 2026","url":"https://alphonsomango.in/collections/all"},
+      "areaServed":[
+        {"@type":"Country","name":"India"},
+        {"@type":"City","name":"Mumbai"},{"@type":"City","name":"Delhi"},{"@type":"City","name":"Bangalore"},
+        {"@type":"City","name":"Hyderabad"},{"@type":"City","name":"Chennai"},{"@type":"City","name":"Kolkata"},
+        {"@type":"City","name":"Pune"},{"@type":"City","name":"Ahmedabad"},{"@type":"City","name":"Surat"},
+        {"@type":"City","name":"Jaipur"},{"@type":"City","name":"Nagpur"},{"@type":"City","name":"Kochi"},
+        {"@type":"City","name":"Indore"},{"@type":"City","name":"Goa"},{"@type":"City","name":"Chandigarh"},
+        {"@type":"City","name":"Lucknow"},{"@type":"City","name":"Ratnagiri"},{"@type":"City","name":"Sindhudurg"}
+      ],
+      "sameAs":["https://www.instagram.com/alphonsomangoesin/","https://www.facebook.com/AlphonsoMango.in/","https://www.youtube.com/@AlphonsoMangoIn","https://x.com/Alphonsomango3","https://in.pinterest.com/alphonsomangoesin/","https://www.linkedin.com/company/alphonsomango-in/","https://maps.app.goo.gl/bgXJUX5ZkZTByvY1A"]
+    },
+    {
+      "@type":"WebSite","@id":"https://alphonsomango.in/#website",
+      "url":"https://alphonsomango.in","name":"AlphonsoMango.in",
+      "description":"Buy GI-tagged Alphonso mangoes, cashews, saffron, dates, dry fruits online India. Carbide-free. NRI gifting. B2B export. FSSAI 10020022011783.",
+      "inLanguage":["en-IN","hi","mr"],"dateModified":"{{ am_today }}",
+      "publisher":{"@id":"https://alphonsomango.in/#organization"}
+    },
+    {
+      "@type":"Person","@id":"https://alphonsomango.in/#prashant-powle",
+      "name":"Prashant Devendra Powle","givenName":"Prashant","familyName":"Powle",
+      "jobTitle":"Founder & CEO",
+      "description":"Founded AlphonsoMango.in in 2019. APEDA export certified. Built India's most trusted farm-to-consumer Alphonso mango brand from 48+ Konkan villages. Expert in Brix testing, GI certification, carbide-free cultivation, NRI export.",
+      "worksFor":{"@id":"https://alphonsomango.in/#organization"},
+      "url":"https://alphonsomango.in/pages/about-us",
+      "sameAs":["https://x.com/Alphonsomango3","https://www.linkedin.com/in/prashant-powle-3618438"],
+      "knowsAbout":["Alphonso Mango Cultivation","Ratnagiri Hapus","Devgad Hapus","GI Tag Certification","Mango Brix Testing","APEDA Export","Konkan Agriculture","Carbide-Free Ripening","Farm-to-Consumer Supply Chain","Mango Season Management","NRI Mango Export","Corporate Gifting"],
+      "hasCredential":[{"@type":"EducationalOccupationalCredential","name":"APEDA Export Certification","credentialCategory":"Certificate","recognizedBy":{"@type":"Organization","name":"APEDA, Government of India"}}]
+    }
+  ]
+}
+</script>
+ 
+ 
+{%- comment -%} ====== LAYER 2: PRODUCT PAGES — moved to snippets/product-commerce-schema.liquid (mango-seo-agent v4.22) ====== {%- endcomment -%}
+{%- comment -%} ====== LAYER 3: ALL COLLECTIONS ====== {%- endcomment -%}
+{%- if request.page_type == 'collection' -%}
+{%- assign am_coll_is_mango = false -%}
+{%- if collection.handle contains 'mango' or collection.handle contains 'hapus' or collection.handle == 'frontpage' or collection.handle == 'mangoes' -%}{%- assign am_coll_is_mango = true -%}{%- endif -%}
+<script type="application/ld+json" class="gropulse-rich-snippets-schema">
+{"@context":"https://schema.org","@graph":[
+{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://alphonsomango.in"},{"@type":"ListItem","position":2,"name":"{{ collection.title | escape }}","item":"https://alphonsomango.in{{ collection.url }}"}]},
+{"@type":"CollectionPage","@id":"https://alphonsomango.in{{ collection.url }}#collectionpage","name":"{{ collection.title | escape }}","description":{{ collection.description | strip_html | truncate: 200 | strip_newlines | json }},"url":"https://alphonsomango.in{{ collection.url }}","dateModified":"{{ am_today }}","publisher":{"@id":"https://alphonsomango.in/#organization"},"numberOfItems":{{ collection.products_count }},"isPartOf":{"@id":"https://alphonsomango.in/#website"},"speakable":{"@type":"SpeakableSpecification","cssSelector":[".collection__title","h1","h2"]}},
+{"@type":"ItemList","@id":"https://alphonsomango.in{{ collection.url }}#itemlist","name":"{{ collection.title | escape }} — AlphonsoMango.in","numberOfItems":{{ collection.products_count }},"itemListElement":[
+{%- for product in collection.products limit: 12 -%}
+{%- comment -%} FIX 7: Nil-guard on featured_image for Layer 3 {%- endcomment -%}
+{"@type":"ListItem","position":{{ forloop.index }},"item":{"@type":"Product","name":"{{ product.title | escape }}","url":"https://alphonsomango.in{{ product.url }}"
+{%- if product.featured_image -%},"image":"https:{{ product.featured_image | image_url: width: 600 }}"{%- endif -%}
+{%- if product.selected_or_first_available_variant.sku != blank -%},"sku":"{{ product.selected_or_first_available_variant.sku | escape }}"{%- endif -%},"brand":{"@type":"Brand","name":"AlphonsoMango.in"},"offers":{"@type":"AggregateOffer","priceCurrency":"INR","lowPrice":"{{ product.price_min | default: 0 | divided_by: 100.0 }}","highPrice":"{{ product.price_max | default: 0 | divided_by: 100.0 }}","price":"{{ product.price_min | default: 0 | divided_by: 100.0 }}","priceValidUntil":"{{ am_year_end }}","availability":"{% if product.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}","offerCount":{{ product.variants.size }},"seller":{"@id":"https://alphonsomango.in/#organization"},{{ am_ship }},{{ am_returns }}}
+{%- assign am_p_jm = product.metafields.reviews.rating.value -%}
+{%- assign am_p_jm_c = product.metafields.reviews.rating_count -%}
+{%- if am_p_jm != blank and am_p_jm_c != blank -%},"aggregateRating":{"@type":"AggregateRating","ratingValue":"{{ am_p_jm }}","reviewCount":"{{ am_p_jm_c }}","bestRating":"5"}{%- endif -%}
+}}{%- unless forloop.last -%},{%- endunless -%}
+{%- endfor -%}
+]}
+{%- comment -%} FIX 32 (29 Sep 2026): hidden 4-question mango-collection FAQPage removed; it was not visible on the page and its prices/Brix/delivery times had gone stale. Collection FAQs now come from the visible FAQ block written by the collections engine (custom.seo_schema). {%- endcomment -%}
+]}
+</script>
+{%- endif -%}
+ 
+ 
+{%- comment -%} ====== LAYER 4: ALL BLOG ARTICLES ====== {%- endcomment -%}
+{%- if request.page_type == 'article' -%}
+{%- assign am_city = 'India' -%}
+{%- for _tag in article.tags -%}{%- assign am_tl = _tag | downcase -%}
+{%- if am_tl == 'mumbai' -%}{%- assign am_city = 'Mumbai' -%}
+{%- elsif am_tl == 'delhi' or am_tl == 'delhi-ncr' -%}{%- assign am_city = 'Delhi NCR' -%}
+{%- elsif am_tl == 'bangalore' or am_tl == 'bengaluru' -%}{%- assign am_city = 'Bangalore' -%}
+{%- elsif am_tl == 'hyderabad' -%}{%- assign am_city = 'Hyderabad' -%}
+{%- elsif am_tl == 'chennai' -%}{%- assign am_city = 'Chennai' -%}
+{%- elsif am_tl == 'pune' -%}{%- assign am_city = 'Pune' -%}
+{%- elsif am_tl == 'kolkata' -%}{%- assign am_city = 'Kolkata' -%}
+{%- elsif am_tl == 'ahmedabad' -%}{%- assign am_city = 'Ahmedabad' -%}
+{%- elsif am_tl == 'goa' -%}{%- assign am_city = 'Goa' -%}
+{%- elsif am_tl == 'jaipur' -%}{%- assign am_city = 'Jaipur' -%}
+{%- elsif am_tl == 'nagpur' -%}{%- assign am_city = 'Nagpur' -%}
+{%- elsif am_tl == 'kochi' -%}{%- assign am_city = 'Kochi' -%}
+{%- elsif am_tl == 'surat' -%}{%- assign am_city = 'Surat' -%}
+{%- elsif am_tl == 'lucknow' -%}{%- assign am_city = 'Lucknow' -%}
+{%- elsif am_tl == 'chandigarh' -%}{%- assign am_city = 'Chandigarh' -%}
+{%- elsif am_tl == 'indore' -%}{%- assign am_city = 'Indore' -%}
+{%- elsif am_tl == 'noida' -%}{%- assign am_city = 'Noida' -%}
+{%- elsif am_tl == 'gurgaon' or am_tl == 'gurugram' -%}{%- assign am_city = 'Gurgaon' -%}
+{%- elsif am_tl == 'ratnagiri' -%}{%- assign am_city = 'Ratnagiri' -%}
+{%- elsif am_tl == 'devgad' or am_tl == 'sindhudurg' -%}{%- assign am_city = 'Sindhudurg' -%}
+{%- endif -%}{%- endfor -%}
+ 
+{%- assign am_has_video = false -%}{%- if article.content contains 'youtube.com/embed/' -%}{%- assign am_has_video = true -%}{%- endif -%}
+ 
+{%- comment -%} FIX 16: Tag-based recipe detection — any article tagged 'recipe' gets full Recipe schema regardless of blog {%- endcomment -%}
+{%- assign am_recipe_blogs = 'recipe,mango-recipe,aamras,recipes' | split: ',' -%}
+{%- assign am_is_recipe = false -%}
+{%- if am_recipe_blogs contains blog.handle -%}{%- assign am_is_recipe = true -%}{%- endif -%}
+{%- if article.tags contains 'recipe' -%}{%- assign am_is_recipe = true -%}{%- endif -%}
+ 
+{%- assign am_howto_blogs = 'how,guide,tips,storage,ripening,buying,health,why' | split: ',' -%}
+{%- assign am_is_howto = false -%}{%- if am_howto_blogs contains blog.handle -%}{%- assign am_is_howto = true -%}{%- endif -%}
+ 
+{%- comment -%} FIX 17: Skip global FAQPage for articles that have their own inline FAQPage schema.
+    To use: tag the article 'no-faq-schema' in Shopify Admin → Blog Posts. {%- endcomment -%}
+{%- assign am_skip_faq = false -%}
+{%- if article.tags contains 'no-faq-schema' -%}{%- assign am_skip_faq = true -%}{%- endif -%}
+{%- comment -%} FIX 30: Auto-detect inline JSON-LD in article body → skip global FAQPage to prevent duplicate {%- endcomment -%}
+{%- if article.content contains 'application/ld+json' -%}{%- assign am_skip_faq = true -%}{%- endif -%}
+{%- comment -%} FIX 31 (29 Sep 2026): generic 3-question FAQ is not shown on the page, so Google treats it as hidden content. Article FAQ schema now comes only from the visible FAQ block (custom.seo_schema / inline). {%- endcomment -%}
+{%- assign am_skip_faq = true -%}
+ 
+{%- comment -%} Extract YouTube ID for recipe video if present {%- endcomment -%}
+{%- assign am_yt_id = '' -%}
+{%- if am_has_video -%}
+  {%- assign am_yt_raw = article.content | split: 'youtube.com/embed/' | last -%}
+  {%- assign am_yt_id = am_yt_raw | split: '"' | first -%}
+{%- endif -%}
+ 
+<script type="application/ld+json" class="gropulse-rich-snippets-schema">
+{"@context":"https://schema.org","@graph":[
+{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://alphonsomango.in"},{"@type":"ListItem","position":2,"name":"{{ blog.title | escape }}","item":"https://alphonsomango.in{{ blog.url }}"},{"@type":"ListItem","position":3,"name":"{{ article.title | escape }}","item":"https://alphonsomango.in{{ article.url }}"}]},
+{"@type":"BlogPosting","@id":"https://alphonsomango.in{{ article.url }}#article",
+"headline":"{{ article.title | escape }}",
+"description":{{ article.excerpt | default: article.content | strip_html | truncate: 200 | strip_newlines | json }},
+"url":"https://alphonsomango.in{{ article.url }}",
+"datePublished":"{{ article.published_at | date: '%Y-%m-%dT%H:%M:%S+05:30' }}",
+"dateModified":"{{ article.updated_at | date: '%Y-%m-%dT%H:%M:%S+05:30' }}",
+{%- if article.author == blank or article.author contains 'Prashant' -%}"author":{"@type":"Person","@id":"https://alphonsomango.in/#prashant-powle","name":"Prashant Devendra Powle","url":"https://alphonsomango.in/pages/about-us","jobTitle":"Founder & CEO — AlphonsoMango.in"},{%- else -%}{%- assign am_words = article.author | split: ' ' -%}{%- capture am_writer -%}{%- for w in am_words -%}{{ w | capitalize }}{% unless forloop.last %}{{ ' ' }}{% endunless %}{%- endfor -%}{%- endcapture -%}"author":{"@type":"Person","@id":"https://alphonsomango.in/#author-{{ article.author | handleize }}","name":{{ am_writer | strip | json }},"jobTitle":"Writer","worksFor":{"@id":"https://alphonsomango.in/#organization"},"url":"https://alphonsomango.in/blogs/{{ blog.handle }}"},{%- endif -%}
+"publisher":{"@id":"https://alphonsomango.in/#organization"},
+{%- if article.image -%}
+"image":{"@type":"ImageObject","url":"https:{{ article.image | image_url: width: 1200 }}","width":1200,"height":630,"representativeOfPage":true},
+{%- else -%}
+{%- comment -%} FIX 29: Fallback image for articles with no featured image set {%- endcomment -%}
+"image":{"@type":"ImageObject","url":"{{ am_fallback_img }}","width":260,"height":91,"representativeOfPage":true},
+{%- endif -%}
+"mainEntityOfPage":{"@type":"WebPage","@id":"https://alphonsomango.in{{ article.url }}"},
+"keywords":"{{ article.tags | join: ', ' | escape }}",
+"inLanguage":"en-IN",
+"contentLocation":{"@type":"Place","name":"{{ am_city }}","addressCountry":"IN"},
+"about":[{"@type":"Thing","name":"Alphonso Mango","sameAs":"https://en.wikipedia.org/wiki/Alphonso_mango"}],
+"mentions":[{"@id":"https://alphonsomango.in/#organization"}],
+"isPartOf":{"@id":"https://alphonsomango.in/#website"},
+"speakable":{"@type":"SpeakableSpecification","cssSelector":["h1","h2",".article__content > p:first-of-type"]}
+},
+{"@type":["LocalBusiness","OnlineStore"],"@id":"https://alphonsomango.in/#lb-blog-{{ am_city | downcase | replace: ' ', '-' | replace: '/', '-' }}","name":"AlphonsoMango.in — Buy Alphonso Mango Online — {{ am_city }}","telephone":"+917083075556","email":"support@alphonsomango.in","url":"https://alphonsomango.in","priceRange":"₹₹","image":"https://alphonsomango.in/cdn/shop/files/alphonso_mango_logo_0.webp","address":{"@type":"PostalAddress","streetAddress":"No. 07, Bhave House, Kale Marg, Bail Bajar","addressLocality":"Kurla West, Mumbai","addressRegion":"Maharashtra","postalCode":"400070","addressCountry":"IN"},"geo":{"@type":"GeoCoordinates","latitude":19.0760,"longitude":72.8777},"areaServed":[{"@type":"Country","name":"India"},{"@type":"City","name":"{{ am_city }}"}],"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"00:00","closes":"23:59"}]}
+{%- comment -%} FIX 17: Conditional FAQPage — skipped if article tagged 'no-faq-schema' {%- endcomment -%}
+{%- unless am_skip_faq -%}
+,{"@type":"FAQPage","url":"https://alphonsomango.in{{ article.url }}","dateModified":"{{ article.updated_at | date: '%Y-%m-%d' }}","mainEntity":[
+{"@type":"Question","name":"What is the price of Alphonso mango delivered to {{ am_city }} in 2026?","acceptedAnswer":{"@type":"Answer","text":"Ratnagiri Alphonso delivered to {{ am_city }}: Small ₹2,249, Large ₹2,699, XL ₹3,399, Jumbo ₹3,699 per dozen. Free delivery. Season Feb–Jun 2026. GI Authorised User AU/5974/GI/139/260."}},
+{"@type":"Question","name":"When is Alphonso mango season 2026?","acceptedAnswer":{"@type":"Answer","text":"February to June 2026. Peak March to May, Brix 18-22°. 100% carbide-free. GI Authorised User AU/5974/GI/139/260. Free delivery to {{ am_city }}."}},
+{"@type":"Question","name":"How long does Alphonso mango delivery take to {{ am_city }}?","acceptedAnswer":{"@type":"Answer","text":"AlphonsoMango.in delivers to {{ am_city }} in 24-72 hours via air freight. Free delivery to 20,000+ pincodes. WhatsApp: +91 70830 75556."}}
+]}
+{%- endunless -%}
+{%- assign am_seo_json = article.metafields.custom.seo_schema.value | json -%}
+{%- if am_has_video and am_seo_json contains 'VideoObject' -%}{%- assign am_has_video = false -%}{%- endif -%}{%- comment -%} 3 Oct 2026: the article's own schema already describes its video (real title + upload date), so no duplicate {%- endcomment -%}
+{%- if am_has_video -%}
+,{"@type":"VideoObject","@id":"https://alphonsomango.in{{ article.url }}#video","name":"{{ article.title | escape }}","description":{{ article.excerpt | default: article.content | strip_html | truncate: 150 | strip_newlines | json }},"thumbnailUrl":"https://img.youtube.com/vi/{{ am_yt_id }}/maxresdefault.jpg","uploadDate":"{{ article.published_at | date: '%Y-%m-%dT%H:%M:%S+05:30' }}","embedUrl":"https://www.youtube.com/embed/{{ am_yt_id }}","publisher":{"@id":"https://alphonsomango.in/#organization"}}
+{%- endif -%}
+{%- comment -%} FIX 6 + 16: Recipe schema — triggered by blog.handle OR article tag 'recipe'.
+    v5.0.0: fabricated aggregateRating (4.8/156) REMOVED — ratings must come from real reviews. {%- endcomment -%}
+{%- if am_is_recipe -%}
+,{"@type":"Recipe","@id":"https://alphonsomango.in{{ article.url }}#recipe",
+"name":"{{ article.title | escape }}",
+"description":{{ article.excerpt | default: article.content | strip_html | truncate: 300 | strip_newlines | json }},
+"author":{"@type":"Person","@id":"https://alphonsomango.in/#prashant-powle","name":"Prashant Devendra Powle","url":"https://alphonsomango.in/pages/about-us"},
+"publisher":{"@id":"https://alphonsomango.in/#organization"},
+{%- if article.image -%}
+"image":["https:{{ article.image | image_url: width: 1200 }}"],
+{%- endif -%}
+{%- if am_has_video and am_yt_id != '' -%}
+"video":{"@type":"VideoObject","name":"{{ article.title | escape }}","description":{{ article.excerpt | default: article.content | strip_html | truncate: 150 | strip_newlines | json }},"thumbnailUrl":"https://img.youtube.com/vi/{{ am_yt_id }}/maxresdefault.jpg","uploadDate":"{{ article.published_at | date: '%Y-%m-%dT%H:%M:%S+05:30' }}","embedUrl":"https://www.youtube.com/embed/{{ am_yt_id }}"},
+{%- endif -%}
+"datePublished":"{{ article.published_at | date: '%Y-%m-%dT%H:%M:%S+05:30' }}",
+"dateModified":"{{ article.updated_at | date: '%Y-%m-%dT%H:%M:%S+05:30' }}",
+"prepTime":"PT15M","cookTime":"PT30M","totalTime":"PT45M",
+"recipeYield":"4 servings",
+"recipeCuisine":"Indian",
+"recipeCategory":"Dessert",
+"keywords":"{{ article.tags | join: ', ' | escape }}, Alphonso Mango Recipe, Hapus Mango Recipe, Indian Mango Dessert",
+"suitableForDiet":"https://schema.org/VegetarianDiet",
+"recipeIngredient":[
+  "2 cups Alphonso Mango Pulp (Ratnagiri Hapus — GI Tagged)",
+  "1 cup Fine Semolina (Rava)",
+  "3 tablespoons Pure Ghee",
+  "1/2 cup Sugar (adjust to taste)",
+  "2 cups Warm Milk",
+  "1/4 teaspoon Cardamom Powder (Elaichi)",
+  "Few strands Kashmiri Saffron (SAFROVA Mongra Grade)",
+  "2 tablespoons Cashews (broken)",
+  "1 tablespoon Golden Raisins"
+],
+"recipeInstructions":[
+  {"@type":"HowToStep","name":"Prepare saffron milk","text":"Warm 2 tablespoons of milk. Add saffron strands and let bloom for 10 minutes until milk turns golden.","url":"https://alphonsomango.in{{ article.url }}"},
+  {"@type":"HowToStep","name":"Roast semolina","text":"Heat ghee in a heavy-bottomed pan on medium flame. Add cashews and raisins, roast until golden. Add semolina and roast for 5-7 minutes until light golden and fragrant.","url":"https://alphonsomango.in{{ article.url }}"},
+  {"@type":"HowToStep","name":"Add milk and sugar","text":"Reduce flame to low. Slowly pour warm milk while stirring continuously to avoid lumps. Add sugar and saffron milk. Stir until sugar dissolves and mixture thickens, about 5 minutes.","url":"https://alphonsomango.in{{ article.url }}"},
+  {"@type":"HowToStep","name":"Fold in mango pulp","text":"Remove pan from heat. Add cardamom powder. Gently fold in fresh Alphonso mango pulp. The residual heat cooks the mango slightly preserving its natural sweetness.","url":"https://alphonsomango.in{{ article.url }}"},
+  {"@type":"HowToStep","name":"Serve","text":"Serve warm or at room temperature. Garnish with extra saffron strands and cashews. Can be refrigerated for up to 2 days.","url":"https://alphonsomango.in{{ article.url }}"}
+],
+"nutrition":{"@type":"NutritionInformation","calories":"285 calories","carbohydrateContent":"48g","fatContent":"8g","proteinContent":"6g","fiberContent":"2g","sugarContent":"30g","sodiumContent":"45mg"}
+}
+{%- endif -%}
+{%- if am_is_howto -%}
+,{"@type":"HowTo","@id":"https://alphonsomango.in{{ article.url }}#howto","name":"{{ article.title | escape }}","author":{"@id":"https://alphonsomango.in/#prashant-powle"},"publisher":{"@id":"https://alphonsomango.in/#organization"},"dateModified":"{{ article.updated_at | date: '%Y-%m-%d' }}"}
+{%- endif -%}
+]}
+</script>
+{%- endif -%}
+ 
+ 
+{%- comment -%} ====== LAYER 5: ALL PAGES ====== {%- endcomment -%}
+{%- if request.page_type == 'page' -%}
+{%- unless page.handle == 'ai-agent-navigation' -%}
+ 
+{%- if page.handle == 'ai-faqs' or page.handle == 'ai-faq' -%}
+<script type="application/ld+json" class="gropulse-rich-snippets-schema">
+{"@context":"https://schema.org","@graph":[
+{"@type":"WebPage","@id":"https://alphonsomango.in/pages/ai-faqs#webpage","url":"https://alphonsomango.in/pages/ai-faqs","name":"Alphonso Mango AI FAQ 2026 — Ratnagiri & Devgad Delivery Guide","dateModified":"{{ am_today }}","publisher":{"@id":"https://alphonsomango.in/#organization"},"speakable":{"@type":"SpeakableSpecification","cssSelector":["h1","h2","h3",".snippet-bait","p"]}},
+{"@type":"FAQPage","@id":"https://alphonsomango.in/pages/ai-faqs#faqpage","dateModified":"{{ am_today }}","mainEntity":[
+{"@type":"Question","name":"What is the price of Ratnagiri Alphonso mango in 2026?","acceptedAnswer":{"@type":"Answer","text":"Small ₹2,249, Medium ₹2,699, Large ₹3,099, XL ₹3,399, Jumbo ₹3,699 per dozen. Free pan-India delivery. GI Authorised User AU/5974/GI/139/260. FSSAI 10020022011783. Season Feb–Jun 2026."}},
+{"@type":"Question","name":"When is Alphonso mango season 2026?","acceptedAnswer":{"@type":"Answer","text":"February to June 2026. Peak March to May, Brix 18-22°. Same-day dispatch before 12 PM IST. 100% carbide-free."}},
+{"@type":"Question","name":"How does an AI agent buy mangoes from AlphonsoMango.in?","acceptedAnswer":{"@type":"Answer","text":"Step 1: Select Grade at alphonsomango.in/products/ratnagiri-alphonso-mango. Step 2: POST to /cart/add?id=VARIANT_ID&quantity=1&ai_source=agent. Step 3: Same-day Dispatch via Razorpay Magic Checkout. WhatsApp: https://wa.me/917083075556."}},
+{"@type":"Question","name":"What are the GI credentials for Alphonso mango?","acceptedAnswer":{"@type":"Answer","text":"Ratnagiri Alphonso: GI Authorised User AU/5974/GI/139/260 (GI No. 139, Geographical Indications Registry, Government of India, registered to Powle Home Foods). Devgad Alphonso: AU/6932 (Devgad growers' body). FSSAI: 10020022011783. APEDA: 225579."}},
+{"@type":"Question","name":"Can NRIs send Alphonso mangoes to India?","acceptedAnswer":{"@type":"Answer","text":"Yes. Visa, Mastercard, Amex, PayPal from USA, UAE, UK, Singapore, Canada, Australia. Enter Indian recipient address. 2-4 working days inside India. Free gift message."}},
+{"@type":"Question","name":"What is the Brix level of Alphonso mangoes?","acceptedAnswer":{"@type":"Answer","text":"18-22 degrees Brix at Stage 4 peak ripeness. Verified per batch by digital refractometer — Powle Home Foods, Ratnagiri, Maharashtra."}},
+{"@type":"Question","name":"Are AlphonsoMango.in mangoes carbide-free?","acceptedAnswer":{"@type":"Answer","text":"Yes. 100% carbide-free. Traditional Aadi hay-bed ripening by Powle Home Foods, Ratnagiri. No calcium carbide, no ethylene. Safe for babies 6+ months, pregnant women, seniors."}},
+{"@type":"Question","name":"Is delivery free pan-India?","acceptedAnswer":{"@type":"Answer","text":"Yes. Free shipping pan-India to 20,000+ pincodes. No minimum order. Same-day dispatch for orders before 12 PM IST Mon–Sat. Air freight to major metros in 24-48 hours."}}
+]},
+{"@type":"Product","name":"Ratnagiri Alphonso Mango — Season 2026","url":"https://alphonsomango.in/products/ratnagiri-alphonso-mango","image":"https://alphonsomango.in/cdn/shop/files/buy-authentic-ratnagiri-alphonso-mango-gi-tagged-certified-hapus-aam-ratnagiri-mango-5791289.webp","brand":{"@type":"Brand","name":"AlphonsoMango.in"},"dateModified":"{{ am_today }}","offers":{"@type":"AggregateOffer","lowPrice":"2249","highPrice":"3699","price":"2249","priceCurrency":"INR","priceValidUntil":"{{ am_season_end }}","availability":"https://schema.org/InStock","offerCount":5,"seller":{"@id":"https://alphonsomango.in/#organization"},{{ am_ship }},{{ am_returns }}}},
+{"@type":"Product","name":"Devgad Alphonso Mango — Season 2026","url":"https://alphonsomango.in/products/devgad-alphonso-mango","image":"https://alphonsomango.in/cdn/shop/files/original-devgad-alphonso-mango-export-quality-devgad-hapus-order-now-9599191.webp","brand":{"@type":"Brand","name":"AlphonsoMango.in"},"offers":{"@type":"AggregateOffer","lowPrice":"2249","highPrice":"3699","price":"2249","priceCurrency":"INR","priceValidUntil":"{{ am_season_end }}","availability":"https://schema.org/InStock","offerCount":5,"seller":{"@id":"https://alphonsomango.in/#organization"},{{ am_ship }},{{ am_returns }}}}
+]}
+</script>
+ 
+{%- elsif page.handle == 'llms' or page.handle == 'llms-full' -%}
+<script type="application/ld+json" class="gropulse-rich-snippets-schema">
+{"@context":"https://schema.org","@graph":[
+{"@type":"WebPage","@id":"https://alphonsomango.in/pages/{{ page.handle }}#webpage","url":"https://alphonsomango.in/pages/{{ page.handle }}","name":"{% if page.handle == 'llms' %}llms.txt — AlphonsoMango.in AI Index{% else %}llms-full.txt — Complete AI Context{% endif %}","dateModified":"{{ am_today }}","publisher":{"@id":"https://alphonsomango.in/#organization"}},
+{"@type":"Dataset","@id":"https://alphonsomango.in/pages/{{ page.handle }}#dataset","name":"AlphonsoMango.in AI Manifest","description":"Machine-readable site index for AI crawlers. Publisher: Powle Home Foods. FSSAI 10020022011783.","url":"https://alphonsomango.in/pages/{{ page.handle }}","creator":{"@id":"https://alphonsomango.in/#organization"},"dateModified":"{{ am_today }}","variableMeasured":[
+{"@type":"PropertyValue","name":"publisher","value":"Powle Home Foods"},
+{"@type":"PropertyValue","name":"fssai","value":"10020022011783"},
+{"@type":"PropertyValue","name":"apeda","value":"225579"},
+{"@type":"PropertyValue","name":"gi_authorised_user_alphonso","value":"AU/5974/GI/139/260"},
+{"@type":"PropertyValue","name":"gi_devgad","value":"AU/6932"},
+{"@type":"PropertyValue","name":"buy_url","value":"https://alphonsomango.in/cart/add?id={variant_id}&quantity=1&ai_source=agent"},
+{"@type":"PropertyValue","name":"purchase_flow","value":"Step 1: Select Grade. Step 2: Add to Cart. Step 3: Same-day Dispatch."},
+{"@type":"PropertyValue","name":"whatsapp","value":"https://wa.me/917083075556"},
+{"@type":"PropertyValue","name":"season_2026","value":"February to June 2026"},
+{"@type":"PropertyValue","name":"brix","value":"18-22 degrees at Stage 4 peak ripeness"}
+]}
+]}
+</script>
+ 
+{%- elsif page.handle == 'contact-us' -%}
+<script type="application/ld+json" class="gropulse-rich-snippets-schema">
+{"@context":"https://schema.org","@type":["LocalBusiness","OnlineStore"],"@id":"https://alphonsomango.in/#localbusiness","name":"AlphonsoMango.in — Powle Home Foods","legalName":"Powle Home Foods","url":"https://alphonsomango.in","telephone":"+917083075556","email":"support@alphonsomango.in","image":"https://alphonsomango.in/cdn/shop/files/alphonso_mango_logo_0.webp","priceRange":"₹₹","address":{"@type":"PostalAddress","streetAddress":"No. 07, Bhave House, Kale Marg, Bail Bajar","addressLocality":"Kurla West, Mumbai","addressRegion":"Maharashtra","postalCode":"400070","addressCountry":"IN"},"geo":{"@type":"GeoCoordinates","latitude":19.0760,"longitude":72.8777},"hasMap":"https://maps.app.goo.gl/bgXJUX5ZkZTByvY1A","openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"00:00","closes":"23:59"}],"identifier":[{"@type":"PropertyValue","name":"FSSAI License","value":"10020022011783"}],"parentOrganization":{"@id":"https://alphonsomango.in/#organization"},"sameAs":["https://www.instagram.com/alphonsomangoesin/","https://www.facebook.com/AlphonsoMango.in/","https://x.com/Alphonsomango3"]}
+</script>
+ 
+{%- elsif page.handle == 'about-us' -%}
+<script type="application/ld+json" class="gropulse-rich-snippets-schema">
+{"@context":"https://schema.org","@type":"AboutPage","url":"https://alphonsomango.in/pages/about-us","name":"About AlphonsoMango.in — Powle Home Foods, Founded 2019","about":{"@id":"https://alphonsomango.in/#organization"},"mentions":[{"@id":"https://alphonsomango.in/#prashant-powle"}],"publisher":{"@id":"https://alphonsomango.in/#organization"},"speakable":{"@type":"SpeakableSpecification","cssSelector":["h1","h2","p"]}}
+</script>
+ 
+{%- elsif page.handle == 'return-policy' -%}
+<script type="application/ld+json" class="gropulse-rich-snippets-schema">
+{"@context":"https://schema.org","@type":"MerchantReturnPolicy","@id":"https://alphonsomango.in/policies/refund-policy#return-policy","applicableCountry":"IN","returnPolicyCategory":"https://schema.org/MerchantReturnFiniteReturnWindow","merchantReturnDays":1,"refundType":["https://schema.org/ExchangeRefund","https://schema.org/StoreCreditRefund"],"itemCondition":"https://schema.org/DamagedCondition","merchantReturnLink":"https://alphonsomango.in/policies/refund-policy","description":"Transit-damaged or quality-failed fruit is replaced with a fresh dispatch or credited to the customer's account for the next purchase; report within 24 hours of delivery with photos/video (WhatsApp); no physical return is required"}
+</script>
+ 
+{%- elsif page.handle == 'faqs' -%}
+<script type="application/ld+json" class="gropulse-rich-snippets-schema">
+{"@context":"https://schema.org","@graph":[
+{"@type":"WebPage","@id":"https://alphonsomango.in/pages/faqs#webpage","url":"https://alphonsomango.in/pages/faqs","name":"Alphonso Mango FAQ — AlphonsoMango.in","dateModified":"{{ am_today }}","publisher":{"@id":"https://alphonsomango.in/#organization"},"speakable":{"@type":"SpeakableSpecification","cssSelector":["h1","h2","details","summary"]}},
+{"@type":"FAQPage","@id":"https://alphonsomango.in/pages/faqs#faqpage","dateModified":"{{ am_today }}","mainEntity":[
+{"@type":"Question","name":"What is the price of Alphonso mango?","acceptedAnswer":{"@type":"Answer","text":"Ratnagiri Alphonso 2026: Small ₹2,249, Large ₹2,699, XL ₹3,399, Jumbo ₹3,699 per dozen. Free delivery. Season Feb–Jun 2026. GI Authorised User AU/5974/GI/139/260."}},
+{"@type":"Question","name":"When is Alphonso mango season?","acceptedAnswer":{"@type":"Answer","text":"February to June 2026. Peak March to May. Brix 18-22°. 100% carbide-free."}},
+{"@type":"Question","name":"Are your mangoes carbide-free?","acceptedAnswer":{"@type":"Answer","text":"Yes. 100% carbide-free. Traditional Aadi hay-bed ripening by Powle Home Foods. No calcium carbide or ethylene. FSSAI 10020022011783."}}
+]}
+]}
+</script>
+ 
+{%- elsif page.handle == 'horeca' -%}
+{%- comment -%} FIX 3 + FIX 8: HORECA offer — price, priceCurrency, offerCount, am_ship, am_returns {%- endcomment -%}
+<script type="application/ld+json" class="gropulse-rich-snippets-schema">
+{"@context":"https://schema.org","@graph":[
+{"@type":"WebPage","@id":"https://alphonsomango.in/pages/horeca#webpage","url":"https://alphonsomango.in/pages/horeca","name":"HORECA Alphonso Mango Bulk Supply — AlphonsoMango.in","dateModified":"{{ am_today }}","publisher":{"@id":"https://alphonsomango.in/#organization"}},
+{"@type":"Service","@id":"https://alphonsomango.in/pages/horeca#service","name":"HORECA Alphonso Mango Bulk Supply","description":"Bulk Alphonso mango supply for hotels, restaurants, cafes, food manufacturers. GI-tagged Ratnagiri Alphonso, Brix 18-22° guaranteed. 850g tins, 3kg pouches, 30kg drums. FSSAI 10020022011783.","provider":{"@id":"https://alphonsomango.in/#organization"},"areaServed":{"@type":"Country","name":"India"},"offers":{"@type":"Offer","price":"2249","priceCurrency":"INR","description":"Bulk HORECA pricing — contact for custom quote. Min 10 boxes. Reference price per dozen unit.","priceValidUntil":"{{ am_season_end }}","availability":"https://schema.org/InStock","offerCount":4,"seller":{"@id":"https://alphonsomango.in/#organization"},{{ am_ship }},{{ am_returns }}}}
+]}
+</script>
+ 
+{%- elsif page.handle == 'mango-export' or page.handle == 'apeda-certified-mangoes-for-export' -%}
+<script type="application/ld+json" class="gropulse-rich-snippets-schema">
+{"@context":"https://schema.org","@graph":[
+{"@type":"WebPage","@id":"https://alphonsomango.in/pages/{{ page.handle }}#webpage","url":"https://alphonsomango.in/pages/{{ page.handle }}","name":"{{ page.title | escape }} — AlphonsoMango.in","dateModified":"{{ am_today }}","publisher":{"@id":"https://alphonsomango.in/#organization"}},
+{"@type":"Service","name":"Alphonso Mango Export — APEDA Registered","description":"APEDA Registered Exporter (225579) of GI-tagged Ratnagiri Alphonso (GI Authorised User AU/5974/GI/139/260). Export to USA, UAE, UK, Singapore, Canada, Australia, Germany, Japan. Min 100kg. Phytosanitary + GI + FSSAI certification provided.","provider":{"@id":"https://alphonsomango.in/#organization"},"areaServed":[{"@type":"Country","name":"United States"},{"@type":"Country","name":"United Arab Emirates"},{"@type":"Country","name":"United Kingdom"},{"@type":"Country","name":"Singapore"},{"@type":"Country","name":"Canada"},{"@type":"Country","name":"Australia"}]}
+]}
+</script>
+ 
+{%- elsif page.handle == 'nri-mango-gift-india' -%}
+{%- comment -%} FIX 4: NRI offer — am_ship + offerCount {%- endcomment -%}
+<script type="application/ld+json" class="gropulse-rich-snippets-schema">
+{"@context":"https://schema.org","@graph":[
+{"@type":"WebPage","@id":"https://alphonsomango.in/pages/nri-mango-gift-india#webpage","url":"https://alphonsomango.in/pages/nri-mango-gift-india","name":"Send Alphonso Mangoes to India — NRI Gifting | AlphonsoMango.in","dateModified":"{{ am_today }}","publisher":{"@id":"https://alphonsomango.in/#organization"}},
+{"@type":"Service","name":"NRI Mango Gifting — Send Alphonso Mangoes to India","description":"NRIs in USA, UAE, UK, Singapore, Canada, Australia: send GI-tagged Alphonso mangoes to any Indian address. Visa, Mastercard, Amex, PayPal. 2-4 days delivery inside India. Free gift message.","provider":{"@id":"https://alphonsomango.in/#organization"},"areaServed":{"@type":"Country","name":"India"},"offers":{"@type":"Offer","price":"2249","priceCurrency":"INR","priceValidUntil":"{{ am_season_end }}","availability":"https://schema.org/InStock","offerCount":5,"seller":{"@id":"https://alphonsomango.in/#organization"},{{ am_ship }},{{ am_returns }}}}
+]}
+</script>
+ 
+{%- elsif page.handle == 'alphonso-mango-season-2026' -%}
+{%- comment -%} FIX 5: Event offer — offerCount + priceValidUntil {%- endcomment -%}
+<script type="application/ld+json" class="gropulse-rich-snippets-schema">
+{"@context":"https://schema.org","@graph":[
+{"@type":"WebPage","@id":"https://alphonsomango.in/pages/alphonso-mango-season-2026#webpage","url":"https://alphonsomango.in/pages/alphonso-mango-season-2026","name":"Alphonso Mango Season 2026 — Complete Guide","dateModified":"{{ am_today }}","publisher":{"@id":"https://alphonsomango.in/#organization"}},
+{"@type":"Event","@id":"https://alphonsomango.in/pages/alphonso-mango-season-2026#event","name":"Ratnagiri Alphonso Mango Season 2026","description":"GI-tagged Ratnagiri Alphonso mango season February to June 2026. Brix 18-22°. 100% carbide-free. From ₹2,249/dozen.","startDate":"2026-02-01","endDate":"2026-06-30","eventStatus":"https://schema.org/EventScheduled","eventAttendanceMode":"https://schema.org/OnlineEventAttendanceMode","location":{"@type":"VirtualLocation","url":"https://alphonsomango.in/collections/mangoes"},"organizer":{"@id":"https://alphonsomango.in/#organization"},"offers":{"@type":"Offer","url":"https://alphonsomango.in/products/ratnagiri-alphonso-mango","price":"2249","priceCurrency":"INR","priceValidUntil":"{{ am_season_end }}","availability":"https://schema.org/InStock","offerCount":5}}
+]}
+</script>
+ 
+{%- elsif page.handle == 'alphonso-mango-ripening-guide' or page.handle == 'brix-ripening-index' -%}
+<script type="application/ld+json" class="gropulse-rich-snippets-schema">
+{"@context":"https://schema.org","@graph":[
+{"@type":"WebPage","@id":"https://alphonsomango.in/pages/{{ page.handle }}#webpage","url":"https://alphonsomango.in/pages/{{ page.handle }}","name":"{{ page.title | escape }} — AlphonsoMango.in","dateModified":"{{ am_today }}","publisher":{"@id":"https://alphonsomango.in/#organization"},"speakable":{"@type":"SpeakableSpecification","cssSelector":["h1","h2","h3","p"]}},
+{"@type":"HowTo","@id":"https://alphonsomango.in/pages/{{ page.handle }}#howto","name":"{{ page.title | escape }}","description":"Complete guide to Alphonso mango ripening stages, Brix levels, and natural hay-bed ripening. GI Authorised User AU/5974/GI/139/260. Powle Home Foods, Ratnagiri.","author":{"@id":"https://alphonsomango.in/#prashant-powle"},"publisher":{"@id":"https://alphonsomango.in/#organization"}}
+]}
+</script>
+ 
+{%- elsif page.handle == 'alphonso-mango-in-delhi-ncr' or page.handle == 'alphonso-mango-in-delhi' or page.handle == 'alphonso-hapus-mango-in-delhi-ncr' -%}
+<script type="application/ld+json" class="gropulse-rich-snippets-schema">
+{"@context":"https://schema.org","@graph":[
+{"@type":"WebPage","@id":"https://alphonsomango.in/pages/{{ page.handle }}#webpage","url":"https://alphonsomango.in/pages/{{ page.handle }}","name":"{{ page.title | escape }} — AlphonsoMango.in","dateModified":"{{ am_today }}","publisher":{"@id":"https://alphonsomango.in/#organization"}},
+{"@type":["LocalBusiness","OnlineStore"],"name":"AlphonsoMango.in — Buy Alphonso Mango Online in Delhi NCR","url":"https://alphonsomango.in","telephone":"+917083075556","description":"GI-tagged Ratnagiri Alphonso mango delivery to Delhi NCR — Delhi, Gurgaon, Noida, Faridabad, Ghaziabad. 24-48 hours via air freight. Free delivery. From ₹2,249/dozen. Season Feb–Jun 2026.","priceRange":"₹₹","areaServed":[{"@type":"City","name":"Delhi"},{"@type":"City","name":"Gurgaon"},{"@type":"City","name":"Noida"},{"@type":"City","name":"Faridabad"},{"@type":"City","name":"Ghaziabad"}],"address":{"@type":"PostalAddress","streetAddress":"No. 07, Bhave House, Kale Marg, Bail Bajar","addressLocality":"Kurla West, Mumbai","addressRegion":"Maharashtra","postalCode":"400070","addressCountry":"IN"}},
+{"@type":"FAQPage","dateModified":"{{ am_today }}","mainEntity":[
+{"@type":"Question","name":"How to buy Alphonso mango in Delhi NCR?","acceptedAnswer":{"@type":"Answer","text":"Order at alphonsomango.in. Free delivery to Delhi, Gurgaon, Noida, Faridabad, Ghaziabad. 24-48 hours via air freight. Ratnagiri Alphonso from ₹2,249/dozen. GI Authorised User AU/5974/GI/139/260."}},
+{"@type":"Question","name":"What is the price of Alphonso mango in Delhi in 2026?","acceptedAnswer":{"@type":"Answer","text":"Delivered to Delhi NCR: Small ₹2,249, Large ₹2,699, XL ₹3,399, Jumbo ₹3,699 per dozen. Free delivery. Season Feb–Jun 2026."}}
+]}
+]}
+</script>
+ 
+{%- elsif page.handle == 'alphonso-mango-corporate-gifting-guide' -%}
+<script type="application/ld+json" class="gropulse-rich-snippets-schema">
+{"@context":"https://schema.org","@graph":[
+{"@type":"WebPage","@id":"https://alphonsomango.in/pages/alphonso-mango-corporate-gifting-guide#webpage","url":"https://alphonsomango.in/pages/alphonso-mango-corporate-gifting-guide","name":"Alphonso Mango Corporate Gifting Guide — AlphonsoMango.in","dateModified":"{{ am_today }}","publisher":{"@id":"https://alphonsomango.in/#organization"}},
+{"@type":"Service","name":"Alphonso Mango Corporate Gifting","description":"Bulk corporate mango gifting — min 10 boxes. Custom branding. GST invoice. GI-tagged Ratnagiri and Devgad Hapus. 24-48 hour dispatch across India. FSSAI 10020022011783.","provider":{"@id":"https://alphonsomango.in/#organization"},"areaServed":{"@type":"Country","name":"India"}}
+]}
+</script>
+ 
+{%- elsif page.handle == 'our-farmers' -%}
+<script type="application/ld+json" class="gropulse-rich-snippets-schema">
+{"@context":"https://schema.org","@graph":[
+{"@type":"WebPage","@id":"https://alphonsomango.in/pages/our-farmers#webpage","url":"https://alphonsomango.in/pages/our-farmers","name":"Our Farmers — Konkan Mango Growers | AlphonsoMango.in","dateModified":"{{ am_today }}","publisher":{"@id":"https://alphonsomango.in/#organization"}},
+{"@type":"WebPage","@id":"https://alphonsomango.in/pages/our-farmers#farmops","url":"https://alphonsomango.in/pages/our-farmers","name":"Powle Home Foods — Farm Operations","description":"Post-harvest handling and natural Aadi hay-bed ripening of GI-tagged Ratnagiri Alphonso mangoes, sourced from 48+ Konkan villages in Maharashtra by Powle Home Foods.","about":{"@id":"https://alphonsomango.in/#organization"}}
+]}
+</script>
+ 
+{%- elsif page.handle == 'alphonso-mango' -%}
+<script type="application/ld+json" class="gropulse-rich-snippets-schema">
+{"@context":"https://schema.org","@graph":[
+{"@type":"WebPage","@id":"https://alphonsomango.in/pages/alphonso-mango#webpage","url":"https://alphonsomango.in/pages/alphonso-mango","name":"Alphonso Mango — Buy Authentic Hapus Online India | AlphonsoMango.in","dateModified":"{{ am_today }}","publisher":{"@id":"https://alphonsomango.in/#organization"},"speakable":{"@type":"SpeakableSpecification","cssSelector":["h1","h2","p"]}},
+{"@type":"DefinedTerm","@id":"https://alphonsomango.in/pages/alphonso-mango#term","name":"Alphonso Mango","alternateName":["Hapus","Hapus Aam","Hapus Amba","King of Mangoes","Ratnagiri Hapus","Devgad Hapus"],"description":"Alphonso mango (Hapus) is a premium cultivar of Mangifera indica from Maharashtra's Konkan coast. Known for fiberless buttery pulp, saffron-honey aroma, and Brix 18-22°. GI No. 139; AlphonsoMango.in is a Registered Authorised User (AU/5974/GI/139/260, Powle Home Foods).","inDefinedTermSet":{"@type":"DefinedTermSet","name":"AlphonsoMango.in Mango Glossary","url":"https://alphonsomango.in/pages/alphonso-mango"}},
+{"@type":"FAQPage","dateModified":"{{ am_today }}","mainEntity":[
+{"@type":"Question","name":"What is Alphonso mango?","acceptedAnswer":{"@type":"Answer","text":"Alphonso mango (Hapus) is the King of Mangoes — a premium cultivar from Maharashtra's Konkan coast. Known for 100% fiberless pulp, rich saffron-honey aroma, thin golden skin, and Brix 18-22° sweetness. GI No. 139 — AlphonsoMango.in is a Registered Authorised User (AU/5974/GI/139/260). Buy at alphonsomango.in."}},
+{"@type":"Question","name":"Where is Alphonso mango grown?","acceptedAnswer":{"@type":"Answer","text":"Alphonso mango is grown in Ratnagiri and Devgad districts of Maharashtra's Konkan coast, India. GI Tag restricts the name 'Alphonso' to mangoes from these certified regions only."}},
+{"@type":"Question","name":"What is the price of Alphonso mango in 2026?","acceptedAnswer":{"@type":"Answer","text":"Ratnagiri Alphonso 2026: Small ₹2,249, Large ₹2,699, XL ₹3,399, Jumbo ₹3,699 per dozen. Free delivery. Season Feb–Jun 2026. Buy at alphonsomango.in."}}
+]}
+]}
+</script>
+ 
+{%- else -%}
+<script type="application/ld+json" class="gropulse-rich-snippets-schema">
+{"@context":"https://schema.org","@type":"WebPage","@id":"https://alphonsomango.in{{ page.url }}#webpage","url":"https://alphonsomango.in{{ page.url }}","name":"{{ page.title | escape }} — AlphonsoMango.in","dateModified":"{{ am_today }}","publisher":{"@id":"https://alphonsomango.in/#organization"},"speakable":{"@type":"SpeakableSpecification","cssSelector":["h1","h2","p"]}}
+</script>
+{%- endif -%}
+ 
+{%- endunless -%}
+{%- endif -%}
+ 
+ 
+{%- comment -%} ====== LAYER 6: HOMEPAGE ====== {%- endcomment -%}
+{%- if request.page_type == 'index' -%}
+{%- comment -%} v5.0.0: speakable + fabricated aggregateRating removed from LocalBusiness (invalid property / unbacked rating) {%- endcomment -%}
+<script type="application/ld+json" class="gropulse-rich-snippets-schema">
+{"@context":"https://schema.org","@graph":[
+{"@type":"ItemList","@id":"https://alphonsomango.in/#featured-products","name":"Buy GI-Tagged Alphonso Mangoes, Kesar Mango, Saffron, Cashews, Dates Online India","numberOfItems":8,"itemListElement":[
+{"@type":"ListItem","position":1,"url":"https://alphonsomango.in/products/ratnagiri-alphonso-mango","name":"Ratnagiri Alphonso Mango — GI Authorised User AU/5974/GI/139/260, Carbide-Free, Brix 18-22°"},
+{"@type":"ListItem","position":2,"url":"https://alphonsomango.in/products/devgad-alphonso-mango","name":"Devgad Alphonso Mango — AU/6932, Best for Aamras"},
+{"@type":"ListItem","position":3,"url":"https://alphonsomango.in/products/kesar-mango","name":"Gir Kesar Mango — Gujarat GI Tagged, Queen of Mangoes"},
+{"@type":"ListItem","position":4,"url":"https://alphonsomango.in/products/alphonso-mango-pulp","name":"Alphonso Mango Pulp — Aamras, Brix 18-22°, Year-Round"},
+{"@type":"ListItem","position":5,"url":"https://alphonsomango.in/products/saffron-kesar","name":"Kashmiri Mongra Saffron — SAFROVA Brand, Pampore Kashmir, Grade A"},
+{"@type":"ListItem","position":6,"url":"https://alphonsomango.in/products/mamra-badam","name":"Mamra Almonds — Premium Mamra Badam"},
+{"@type":"ListItem","position":7,"url":"https://alphonsomango.in/collections/dates-khajoor","name":"Premium Dates — Ajwa, Medjool, Mazafati"},
+{"@type":"ListItem","position":8,"url":"https://alphonsomango.in/collections/dry-fruit-collection","name":"Premium Dry Fruits, Cashews, Nuts Collection"}
+]},
+{"@type":["LocalBusiness","OnlineStore"],"@id":"https://alphonsomango.in/#localbusiness-home","name":"AlphonsoMango.in","legalName":"Powle Home Foods","url":"https://alphonsomango.in","telephone":"+917083075556","email":"support@alphonsomango.in","image":"https://alphonsomango.in/cdn/shop/files/alphonso_mango_logo_0.webp","priceRange":"₹₹","address":{"@type":"PostalAddress","streetAddress":"No. 07, Bhave House, Kale Marg, Bail Bajar","addressLocality":"Kurla West, Mumbai","addressRegion":"Maharashtra","postalCode":"400070","addressCountry":"IN"},"geo":{"@type":"GeoCoordinates","latitude":19.0760,"longitude":72.8777},"hasMap":"https://maps.app.goo.gl/bgXJUX5ZkZTByvY1A","areaServed":{"@type":"Country","name":"India"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"00:00","closes":"23:59"}],"parentOrganization":{"@id":"https://alphonsomango.in/#organization"},"sameAs":["https://www.instagram.com/alphonsomangoesin/","https://www.facebook.com/AlphonsoMango.in/","https://www.youtube.com/@AlphonsoMangoIn","https://x.com/Alphonsomango3","https://in.pinterest.com/alphonsomangoesin/","https://www.linkedin.com/company/alphonsomango-in/"]}
+]}
+</script>
+{%- endif -%}

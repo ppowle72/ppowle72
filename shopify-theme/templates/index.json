@@ -1,0 +1,720 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "slideshow_rHwdfJ": {
+      "type": "slideshow",
+      "blocks": {
+        "slide_gUt7gh": {
+          "type": "slide",
+          "disabled": true,
+          "settings": {
+            "image_desktop": "shopify://shop_images/premium_alphonso_mango_-_alphonsomango.in_2.webp",
+            "image_mobile": "shopify://shop_images/premium_alphonso_mango_-_alphonsomango.in.webp",
+            "url": "shopify://collections/frontpage",
+            "overlay_position": "justify-start items-center",
+            "overlay_text_align": "text-start",
+            "mob_center_text": false,
+            "subheading": "",
+            "heading": "",
+            "heading_size": "h4",
+            "heading_h1": false,
+            "text": "",
+            "enlarge_text": true,
+            "button_1_label": "",
+            "button_1_link": "",
+            "button_1_style": "btn btn--primary",
+            "button_2_label": "",
+            "button_2_link": "",
+            "button_2_style": "btn btn--secondary",
+            "transparent_content_color": "#ffffff",
+            "countdown_show": false,
+            "countdown_end_date": "",
+            "countdown_end_time": "",
+            "countdown_end_text": "",
+            "enlarge_end_text": false,
+            "countdown_hide_on_end": false,
+            "countdown_border_radius": 6,
+            "use_custom_colors": false,
+            "count_color": "#ffffff",
+            "count_border_color": "",
+            "bg_color": "#070707",
+            "bg_grad": ""
+          }
+        },
+        "slide_qREqbk": {
+          "type": "slide",
+          "settings": {
+            "image_desktop": "shopify://shop_images/Buy_premium_alphonso_mango_ratnagiri_1.jpg",
+            "image_mobile": "shopify://shop_images/Buy_premium_alphonso_mango_ratnagiri.jpg",
+            "url": "shopify://collections/mangoes",
+            "overlay_position": "justify-start items-center",
+            "overlay_text_align": "text-start",
+            "mob_center_text": true,
+            "subheading": "Online — Farm Fresh, Delivered Across India",
+            "heading": "Buy GI Tagged Alphonso Mango",
+            "heading_size": "h4",
+            "heading_h1": true,
+            "text": "",
+            "enlarge_text": true,
+            "button_1_label": "SHOP NOW",
+            "button_1_link": "shopify://collections/mangoes",
+            "button_1_style": "btn btn--primary",
+            "button_2_label": "GIFT MANGO",
+            "button_2_link": "shopify://pages/gifting",
+            "button_2_style": "btn btn--secondary",
+            "transparent_content_color": "#ffffff",
+            "countdown_show": false,
+            "countdown_end_date": "",
+            "countdown_end_time": "",
+            "countdown_end_text": "",
+            "enlarge_end_text": false,
+            "countdown_hide_on_end": false,
+            "countdown_border_radius": 6,
+            "use_custom_colors": true,
+            "count_color": "#333333",
+            "count_border_color": "",
+            "bg_color": "#fcca2c",
+            "bg_grad": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_gUt7gh",
+        "slide_qREqbk"
+      ],
+      "settings": {
+        "height_mode": "auto",
+        "fixed_height_desktop": 480,
+        "fixed_height_mobile": 420,
+        "mobile_stacked": true,
+        "nav_style": "slideshow_nav_dots",
+        "pagination_color": "#ffffff",
+        "nav_position": "justify-center",
+        "transition": "slide-fade",
+        "autoplay": true,
+        "slider_pause": false,
+        "autoplay_speed": 3,
+        "color_scheme": "white",
+        "full_width": true,
+        "tint_color": "#6dae1e",
+        "tint_opacity": 0,
+        "accessibility_info": "",
+        "prevent_animation": true
+      }
+    },
+    "icons_with_text_akY7TF": {
+      "type": "icons-with-text",
+      "blocks": {
+        "item_i9BPPA": {
+          "type": "item",
+          "settings": {
+            "icon": "box",
+            "use_custom_icon_color": true,
+            "icon_color": "#fcca2c",
+            "heading": "Fresh From Farms",
+            "text": "<p>No chemical used for alphonso mango.</p>",
+            "link": "shopify://collections/ratnagiri-alphonso-mango"
+          }
+        },
+        "item_C6nDmA": {
+          "type": "item",
+          "settings": {
+            "icon": "award",
+            "use_custom_icon_color": true,
+            "icon_color": "#fcca2c",
+            "heading": "Chat With Us",
+            "text": "<p>Talk to our team via chat</p>",
+            "link": "shopify://pages/contact-us"
+          }
+        },
+        "item_H4WVmq": {
+          "type": "item",
+          "settings": {
+            "icon": "check_mark_in_circle",
+            "use_custom_icon_color": true,
+            "icon_color": "#fcca2c",
+            "heading": "Fast Delivery",
+            "text": "<p>Shipping time would be 1-2 days in metro's</p>",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "item_i9BPPA",
+        "item_C6nDmA",
+        "item_H4WVmq"
+      ],
+      "settings": {
+        "heading": "",
+        "heading_align": "text-center",
+        "icon_size": 32,
+        "title_type_scale": "small",
+        "text_type_scale": "small",
+        "icon_position": "beside",
+        "mobile_stack": true,
+        "section_height": "medium",
+        "color_scheme": "2",
+        "full_width": true,
+        "dividers": "none",
+        "prevent_animation": true
+      }
+    },
+    "countdown_timer_EFeFQf": {
+      "type": "countdown-timer",
+      "blocks": {
+        "heading_MpgbB9": {
+          "type": "heading",
+          "settings": {
+            "heading": "Mango Offer Ending Soon 🥭",
+            "heading_size": "h4",
+            "heading_h1": false
+          }
+        },
+        "text_zMUP4X": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Enjoy fresh Ratnagiri & Devgad Alphonso mangoes straight from the farms.<br/>Order now before the best lots sell out!<br/></p>",
+            "enlarge_text": false
+          }
+        },
+        "countdown_7F3YCV": {
+          "type": "countdown",
+          "settings": {
+            "end_date": "2026-06-03",
+            "end_time": "",
+            "end_text": "",
+            "enlarge_end_text": false,
+            "hide_on_end": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_MpgbB9",
+        "text_zMUP4X",
+        "countdown_7F3YCV"
+      ],
+      "disabled": true,
+      "name": "Countdown timer",
+      "settings": {
+        "height_mode": "fixed",
+        "fixed_height_desktop": 480,
+        "fixed_height_mobile": 350,
+        "overlay_position": "justify-center items-center",
+        "text_align": "text-center",
+        "mob_center_text": false,
+        "countdown_size": "21",
+        "countdown_border_radius": 4,
+        "use_custom_colors": false,
+        "count_color": "#ffffff",
+        "count_border_color": "",
+        "bg_color": "#070707",
+        "bg_grad": "",
+        "color_scheme": "1",
+        "full_width": true,
+        "tint_color": "#333333",
+        "tint_opacity": 45
+      }
+    },
+    "featured_collection_bdKRhH": {
+      "type": "featured-collection",
+      "custom_css": [],
+      "name": "Featured collection",
+      "settings": {
+        "title": "Buy Alphonso Mangoes Online India: Ratnagiri & Devgad GI Tagged",
+        "heading_align": "text-start",
+        "show_view_all": true,
+        "collection": "mangoes",
+        "layout": "grid",
+        "card_size_mobile": "small",
+        "card_size": "medium",
+        "products_to_show": 10,
+        "color_scheme": "none",
+        "card_contain": false,
+        "full_width": true
+      }
+    },
+    "collection-list": {
+      "type": "collection-list",
+      "blocks": {
+        "collection-0": {
+          "type": "collection",
+          "settings": {
+            "collection": "frontpage",
+            "image": "shopify://shop_images/alphonso_mangoes_in_mumbai_388d9b17-48a5-4c6f-a103-54a7fc3c0953.webp"
+          }
+        },
+        "collection-1": {
+          "type": "collection",
+          "settings": {
+            "collection": "cashew-nuts",
+            "image": "shopify://shop_images/flavorful-delight-cashew-nuts_fc229d6d-0e07-485a-a361-d65df500d9fb.webp"
+          }
+        },
+        "collection-2": {
+          "type": "collection",
+          "settings": {
+            "collection": "mango-products",
+            "image": "shopify://shop_images/mango-products-aamras-aam-papad_4293f903-3261-4263-aabe-e6efccf0ab72.webp"
+          }
+        },
+        "collection_BDhAaX": {
+          "type": "collection",
+          "settings": {
+            "collection": "dry-fruits",
+            "image": "shopify://shop_images/kashmiri-kesar-buy-saffron-online-keshar.webp"
+          }
+        },
+        "collection-3": {
+          "type": "collection",
+          "settings": {
+            "collection": "imported-fruits",
+            "image": "shopify://shop_images/Exotic_Fruits_Online.webp"
+          }
+        }
+      },
+      "block_order": [
+        "collection-0",
+        "collection-1",
+        "collection-2",
+        "collection_BDhAaX",
+        "collection-3"
+      ],
+      "settings": {
+        "title": "Shop by Categories",
+        "heading_align": "text-start",
+        "button_label": "View all",
+        "button_link": "shopify://collections",
+        "layout": "grid",
+        "card_size": "small",
+        "use_product_image": true,
+        "circle_image": true,
+        "show_border": false,
+        "color_scheme": "1",
+        "full_width": true
+      }
+    },
+    "rich_text_yLRffX": {
+      "type": "rich-text",
+      "blocks": {
+        "text_RbiV4j": {
+          "type": "text",
+          "settings": {
+            "text": "<h3>Buy Premium Ratnagiri Alphonso Mango Online | Fresh Hapus Aam Delivery<br/></h3>",
+            "enlarge_text": false
+          }
+        }
+      },
+      "block_order": [
+        "text_RbiV4j"
+      ],
+      "custom_css": [],
+      "name": "Rich text",
+      "settings": {
+        "text_position": "justify-center",
+        "text_align": "text-center",
+        "mob_center_text": true,
+        "color_scheme": "3",
+        "full_width": true,
+        "prevent_animation": true
+      }
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Our Dates Collection",
+        "heading_align": "text-start",
+        "show_view_all": true,
+        "collection": "dates-khajoor",
+        "layout": "grid",
+        "card_size_mobile": "small",
+        "card_size": "small",
+        "products_to_show": 16,
+        "color_scheme": "none",
+        "card_contain": true,
+        "full_width": true
+      }
+    },
+    "countdown_timer_HAdw7m": {
+      "type": "countdown-timer",
+      "blocks": {
+        "text_iz7ztL": {
+          "type": "text",
+          "settings": {
+            "text": "<h2>100% authentic Ratnagiri Alphonso Mangoes</h2>",
+            "enlarge_text": false
+          }
+        },
+        "button_ahGArY": {
+          "type": "button",
+          "settings": {
+            "button_1_label": "Shop Now",
+            "button_1_link": "shopify://collections/frontpage",
+            "button_1_style": "btn btn--primary",
+            "button_2_label": "",
+            "button_2_link": "",
+            "button_2_style": "btn btn--primary"
+          }
+        }
+      },
+      "block_order": [
+        "text_iz7ztL",
+        "button_ahGArY"
+      ],
+      "custom_css": [
+        ".media-with-text h3 {font-size: 20px !important;}",
+        ".media-with-text h4 {font-size: 16px !important;}"
+      ],
+      "settings": {
+        "height_mode": "fixed",
+        "fixed_height_desktop": 600,
+        "fixed_height_mobile": 350,
+        "overlay_position": "justify-center items-center",
+        "text_align": "text-center",
+        "mob_center_text": false,
+        "countdown_size": "18",
+        "countdown_border_radius": 8,
+        "use_custom_colors": true,
+        "count_color": "#333333",
+        "count_border_color": "",
+        "bg_color": "#fcca2c",
+        "bg_grad": "",
+        "color_scheme": "3",
+        "full_width": true,
+        "tint_color": "#000000",
+        "tint_opacity": 0
+      }
+    },
+    "media_with_text_Gq4rRa": {
+      "type": "media-with-text",
+      "blocks": {
+        "heading_XRxQgH": {
+          "type": "heading",
+          "settings": {
+            "heading": "Why Buy Alphonso Mangoes from AlphonsoMango.in?",
+            "heading_size": "h4",
+            "heading_h1": false
+          }
+        },
+        "text_E6zBpL": {
+          "type": "text",
+          "settings": {
+            "text": "<ul><li>100% Naturally Grown: Pure, chemical-free goodness.<br/><br/></li><li>Ethically Sourced: Supporting local farmers with every bite.<br/><br/></li><li>Handpicked Quality: Certified purity, delivered from farm to table.<br/><br/></li><li>Sustainable Choice: Your purchase preserves the environment.</li></ul>",
+            "enlarge_text": false
+          }
+        },
+        "button_LXnPED": {
+          "type": "button",
+          "settings": {
+            "button_label": "BUY NOW",
+            "button_link": "shopify://collections/ratnagiri-alphonso-mango",
+            "button_style": "btn btn--primary"
+          }
+        }
+      },
+      "block_order": [
+        "heading_XRxQgH",
+        "text_E6zBpL",
+        "button_LXnPED"
+      ],
+      "custom_css": [
+        ".media-with-text h4 {font-size: 20px !important;}",
+        ".media-with-text h4 {font-size: 16px !important;}"
+      ],
+      "name": "Media with text",
+      "settings": {
+        "image": "shopify://shop_images/alphonso_mangoes_in_mumbai_876ae051-bfdd-487c-9a98-8feaf524c1c5.webp",
+        "video_external": "",
+        "video_description": "",
+        "video_autoplay": false,
+        "layout": "left",
+        "image_fit": "contain",
+        "media_width": 50,
+        "media_scale": 100,
+        "text_align": "text-start",
+        "color_scheme": "none",
+        "only_content_color_scheme": false
+      }
+    },
+    "e8b8d348-f44f-42ad-8fa1-804ba2f728e9": {
+      "type": "media-with-text",
+      "blocks": {
+        "template--16154615972040__e8b8d348-f44f-42ad-8fa1-804ba2f728e9-heading-1": {
+          "type": "heading",
+          "settings": {
+            "heading": "We serve hundreds of new customers every week.",
+            "heading_size": "h4",
+            "heading_h1": false
+          }
+        },
+        "template--16154615972040__e8b8d348-f44f-42ad-8fa1-804ba2f728e9-text-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Buy Authentic Alphonso Mangoes Direct from the Farm</p><p>Buy Authentic Alphonso Mangoes Direct from the Farm<br/>The Original Hapus Experience: Savor the unparalleled sweetness and rich aroma of genuine Hapus mangoes, the undisputed \"King of Mangoes</p><ul><li>Elite Sourcing: Our premium alphonso mangoes are hand-selected directly from the sun-soaked orchards of Ratnagiri and Devgad.<br/><br/></li><li>Guaranteed Freshness: We deliver the exquisite taste of fresh mangoes straight to your doorstep, ensuring perfect quality in every bite.<br/><br/></li><li>Trusted by Thousands: Join the hundreds of new customers who trust us every week for the finest alphonso selection in India.</li></ul>",
+            "enlarge_text": false
+          }
+        },
+        "template--16154615972040__e8b8d348-f44f-42ad-8fa1-804ba2f728e9-button-1": {
+          "type": "button",
+          "settings": {
+            "button_label": "Buy alphonso mango",
+            "button_link": "shopify://products/alphonso-mango-order-online",
+            "button_style": "btn btn--primary"
+          }
+        }
+      },
+      "block_order": [
+        "template--16154615972040__e8b8d348-f44f-42ad-8fa1-804ba2f728e9-heading-1",
+        "template--16154615972040__e8b8d348-f44f-42ad-8fa1-804ba2f728e9-text-1",
+        "template--16154615972040__e8b8d348-f44f-42ad-8fa1-804ba2f728e9-button-1"
+      ],
+      "custom_css": [
+        ".media-with-text h5 {font-size: 20px !important;}",
+        ".media-with-text h5 {font-size: 16px !important;}"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/premium_alphonso_mangoes.webp",
+        "video_external": "",
+        "video_description": "",
+        "video_autoplay": false,
+        "layout": "right",
+        "image_fit": "cover",
+        "media_width": 50,
+        "media_scale": 88,
+        "text_align": "text-center",
+        "color_scheme": "1",
+        "only_content_color_scheme": false
+      }
+    },
+    "747f5bec-2c63-4259-aa6c-b06cf8f3ed13": {
+      "type": "testimonials",
+      "blocks": {
+        "template--16154615972040__747f5bec-2c63-4259-aa6c-b06cf8f3ed13-testimonial-1": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "<p>Would highly recommend this place for buying Authentic Kashmiri Saffron & blindly trust about other products as well.</p>",
+            "author": "SNEHA. K",
+            "author_info": "",
+            "show_star_rating": true,
+            "star_rating": 5
+          }
+        },
+        "template--16154615972040__747f5bec-2c63-4259-aa6c-b06cf8f3ed13-testimonial-2": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "<p>Being a Delhi person we were often sold Karnataka mangoes in the name of Alphonso mangoes. After ordering mangoes from here, my whole perspective has been changed about mangoes & Alphonso. The sweetness and aroma is the thing which you will fall in love about these mangoes from maharashtra.</p>",
+            "author": "AMIT. N",
+            "author_info": "",
+            "show_star_rating": true,
+            "star_rating": 4
+          }
+        },
+        "template--16154615972040__747f5bec-2c63-4259-aa6c-b06cf8f3ed13-testimonial-3": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "<p>Totally reliable, trustworthy website and people. Received a nice discount on my mangoes. It was nicely packed and also got it delivered in time. So far, I have purchased 15 dozen mangoes from this website. 2-3 mangoes were spoilt but that’s very unpredictable what’s inside. Overall satisfied with my purchase</p>",
+            "author": "GAURAV. S",
+            "author_info": "",
+            "show_star_rating": true,
+            "star_rating": 5
+          }
+        },
+        "testimonial_URAT4Y": {
+          "type": "testimonial",
+          "settings": {
+            "testimonial": "<p>I ordered 2 dozens of Devgad mangoes from them out of which 4 mangoes were in bad condition. As my responsibility I informed them about this without expecting a refund. They were kind enough to add extra 4 mangoes in my next order.</p>",
+            "author": "TRUSHITA. P",
+            "author_info": "",
+            "show_star_rating": true,
+            "star_rating": 5
+          }
+        }
+      },
+      "block_order": [
+        "template--16154615972040__747f5bec-2c63-4259-aa6c-b06cf8f3ed13-testimonial-1",
+        "template--16154615972040__747f5bec-2c63-4259-aa6c-b06cf8f3ed13-testimonial-2",
+        "template--16154615972040__747f5bec-2c63-4259-aa6c-b06cf8f3ed13-testimonial-3",
+        "testimonial_URAT4Y"
+      ],
+      "disabled": true,
+      "settings": {
+        "heading": "",
+        "show_quotes": false,
+        "testimonial_size": "h4",
+        "testimonial_font": "body",
+        "text_position": "justify-center",
+        "text_align": "text-center justify-center",
+        "nav_style": "arrows",
+        "transition": "slide-fade",
+        "autoplay": true,
+        "slider_pause": true,
+        "autoplay_speed": 7,
+        "color_scheme": "default",
+        "star_color": "#fcbc23",
+        "full_width": true
+      }
+    },
+    "17739951318b27cb92": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_testimonials_carousel_AgUTea": {
+          "type": "shopify://apps/judge-me-reviews/blocks/testimonials_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "show_sample_reviews": true,
+            "reviews_selection": "all",
+            "products": [
+              "alphonso-mango-order-online",
+              "devgad-alphonso-mango",
+              "kesar-mango"
+            ],
+            "star_rating": "4_to_5_star",
+            "max_reviews": 20,
+            "quote_marks_size": "small",
+            "product_name_text_size": "small",
+            "verified_badge_style": "icon",
+            "card_height": "medium",
+            "text_size": "small",
+            "stars_size": "medium",
+            "arrows_position": "bottom",
+            "max_width": 1100,
+            "corner_styling": "soft",
+            "quote_marks_style": "serif",
+            "card_color": "#f9f9f9",
+            "stars_and_quote_marks_color": "#d9a63d",
+            "text_color": "#000000",
+            "arrows_color": "#000000",
+            "show_border": false,
+            "border_color": "#108474",
+            "show_drop_shadow": false,
+            "transition_speed": 5,
+            "header_text": "Customers are saying",
+            "show_average_rating": true
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_testimonials_carousel_AgUTea"
+      ],
+      "settings": {
+        "full_width": false,
+        "show_space": true
+      }
+    },
+    "rich_text_DzNhRn": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_crkBwJ": {
+          "type": "heading",
+          "settings": {
+            "heading": "Alphonso Mango Recipes & Exclusive Community Offers",
+            "heading_size": "h4",
+            "heading_h1": false
+          }
+        },
+        "text_8CVJfb": {
+          "type": "text",
+          "settings": {
+            "text": "",
+            "enlarge_text": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_crkBwJ",
+        "text_8CVJfb"
+      ],
+      "settings": {
+        "text_position": "justify-center",
+        "text_align": "text-center",
+        "mob_center_text": true,
+        "color_scheme": "none",
+        "full_width": true,
+        "prevent_animation": true
+      }
+    },
+    "740976f7-da72-4c51-94a6-4a535f8d08d5": {
+      "type": "featured-blog",
+      "settings": {
+        "title": "Blogs",
+        "heading_align": "text-start",
+        "show_view_all": true,
+        "blog": "alphonso",
+        "layout": "grid",
+        "posts_to_show": 6,
+        "show_featured_image": true,
+        "show_tags": false,
+        "show_excerpt": true,
+        "show_author": false,
+        "show_date": false,
+        "show_button": false,
+        "color_scheme": "none",
+        "image_ratio": "1.77"
+      }
+    },
+    "newsletter_daNhNG": {
+      "type": "newsletter",
+      "blocks": {
+        "text_QbcpFb": {
+          "type": "text",
+          "settings": {
+            "text": "<h3>Join our community to get exclusive offers, original recipes</h3>",
+            "enlarge_text": false
+          }
+        },
+        "form_6U7rL8": {
+          "type": "form",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "text_QbcpFb",
+        "form_6U7rL8"
+      ],
+      "settings": {
+        "overlay_position": "justify-center",
+        "text_align": "text-center",
+        "color_scheme": "default",
+        "full_width": true,
+        "transparent_content_color": "#ffffff",
+        "tint_color": "#000000",
+        "tint_opacity": 0
+      }
+    },
+    "home_direct_answer": {
+      "type": "home-direct-answer",
+      "settings": {}
+    },
+    "home_seo_content": {
+      "type": "home-seo-content",
+      "settings": {
+        "last_reviewed": "2026-10-04"
+      }
+    }
+  },
+  "order": [
+    "slideshow_rHwdfJ",
+    "home_direct_answer",
+    "icons_with_text_akY7TF",
+    "countdown_timer_EFeFQf",
+    "featured_collection_bdKRhH",
+    "collection-list",
+    "rich_text_yLRffX",
+    "featured-collection",
+    "countdown_timer_HAdw7m",
+    "media_with_text_Gq4rRa",
+    "e8b8d348-f44f-42ad-8fa1-804ba2f728e9",
+    "home_seo_content",
+    "747f5bec-2c63-4259-aa6c-b06cf8f3ed13",
+    "17739951318b27cb92",
+    "rich_text_DzNhRn",
+    "740976f7-da72-4c51-94a6-4a535f8d08d5",
+    "newsletter_daNhNG"
+  ]
+}

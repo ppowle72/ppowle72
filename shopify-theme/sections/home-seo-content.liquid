@@ -1,0 +1,147 @@
+{%- comment -%}
+  Homepage narrative block: purchase steps, Ratnagiri vs Devgad comparison, live price table,
+  delivery and reach, entity/E-E-A-T, visible FAQ and matching JSON-LD.
+
+  Honesty rules baked in:
+  - Prices are read live from the product variants (no hard-coded rupee values to go stale).
+  - Operating entity is Powle Home Foods (FSSAI 10020022011783, APEDA 225579,
+    GI AU/5974/GI/139/260). Proveda Superfoods is NOT named: it is a separate entity whose
+    FSSAI/GST are pending (see global-schema.liquid header).
+  - dateModified comes from the "Content last reviewed" setting. Update it each quarter when
+    prices/season copy are actually re-checked. It is not auto-set to today's date.
+{%- endcomment -%}
+{%- assign rp = all_products['ratnagiri-alphonso-mango'] -%}
+{%- assign dg = all_products['devgad-alphonso-mango'] -%}
+{%- assign pulp = all_products['alphonso-mango-pulp'] -%}
+
+{%- comment -%} 1-dozen variant prices, in size order {%- endcomment -%}
+{%- assign r_prices = '' -%}{%- assign d_prices = '' -%}{%- assign size_names = '' -%}
+{%- for v in rp.variants -%}
+  {%- if v.title contains '1 Dozen' -%}
+    {%- assign sz = v.title | split: ' / ' | last | split: ' Grams' | first | replace: ' But tasty', '' -%}
+    {%- capture size_names -%}{{ size_names }}{{ sz }}|{%- endcapture -%}
+    {%- capture r_prices -%}{{ r_prices }}{{ v.price | money_without_trailing_zeros }}{% unless v.available %} (sold out){% endunless %}|{%- endcapture -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- for v in dg.variants -%}
+  {%- if v.title contains '1 Dozen' -%}
+    {%- capture d_prices -%}{{ d_prices }}{{ v.price | money_without_trailing_zeros }}{% unless v.available %} (sold out){% endunless %}|{%- endcapture -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign size_arr = size_names | split: '|' -%}
+{%- assign r_arr = r_prices | split: '|' -%}
+{%- assign d_arr = d_prices | split: '|' -%}
+{%- assign min_dozen = rp.price_min | money_without_trailing_zeros -%}
+
+{%- assign faq_html = '' -%}
+{%- capture faq_json -%}
+[
+{%- for i in (1..6) -%}
+  {%- case i -%}
+    {%- when 1 -%}{%- assign q = 'What is an Alphonso mango?' -%}{%- assign a = 'Alphonso (Hapus or Aam) is a mango variety grown on the Konkan coast of Maharashtra. It is known for saffron-orange pulp, low fibre and a rich aroma, and it carries a Geographical Indication (GI No. 139). AlphonsoMango.in sells GI-tagged Ratnagiri and Devgad Alphonso.' -%}
+    {%- when 2 -%}{%- assign q = 'Where is Alphonso mango from?' -%}{%- assign a = 'The most prized Alphonso comes from Ratnagiri and Devgad (Sindhudurg district) in the Konkan region of Maharashtra, India. Our mangoes are sourced from Konkan farms and sold by Powle Home Foods, Mumbai.' -%}
+    {%- when 3 -%}{%- assign q = 'What is the Alphonso mango price per dozen in India?' -%}{%- capture a -%}Ratnagiri and Devgad Alphonso start from {{ min_dozen }} per dozen (small) and go up with size. Prices are shown live in the table on this page. Delivery is free across India.{%- endcapture -%}
+    {%- when 4 -%}{%- assign q = 'When is Alphonso mango season?' -%}{%- assign a = 'Alphonso season runs from February to June, peaking from March to May. Outside this window fresh fruit is sold out, so we offer Alphonso mango pulp all year and list fresh fruit again when the new season begins.' -%}
+    {%- when 5 -%}{%- assign q = 'Do you deliver Alphonso mangoes to Mumbai, Bangalore, Chennai, Kolkata, Delhi and Hyderabad?' -%}{%- assign a = 'Yes. We deliver free to Mumbai, Bangalore, Chennai, Kolkata, Delhi and Hyderabad and to thousands of other pincodes. Metro deliveries typically take 1 to 3 days. Check your pincode on the product page.' -%}
+    {%- when 6 -%}{%- assign q = 'How do I know the Alphonso mango is authentic and carbide-free?' -%}{%- assign a = 'We are a registered GI Authorised User for Alphonso (AU/5974/GI/139/260) and hold FSSAI licence 10020022011783 and APEDA registration 225579. Fruit is ripened naturally in hay beds without calcium carbide.' -%}
+  {%- endcase -%}
+  {%- capture faq_item -%}<details class="home-seo__faq"><summary>{{ q | escape }}</summary><p>{{ a | escape }}</p></details>{%- endcapture -%}
+  {%- assign faq_html = faq_html | append: faq_item -%}
+  {"@type":"Question","name":{{ q | json }},"acceptedAnswer":{"@type":"Answer","text":{{ a | json }}}}{% unless i == 6 %},{% endunless %}
+{%- endfor -%}
+]
+{%- endcapture -%}
+
+<div class="section home-seo" id="home-seo">
+  <div class="container">
+    <div class="reading-width">
+
+      <h2 class="h3 home-seo__h">How to buy Alphonso mango online in 3 steps</h2>
+      <ol class="home-seo__steps">
+        <li><strong>Step 1: Select Grade.</strong> Choose Ratnagiri or Devgad Alphonso and a size, from small (150 to 180 g) to jumbo (275 to 300 g), in 1 or 2 dozen boxes.</li>
+        <li><strong>Step 2: Add to Cart.</strong> Pay securely with UPI, cards, net banking or wallets. Delivery is free across India.</li>
+        <li><strong>Step 3: Same-day Dispatch.</strong> In season, orders placed before 12 noon IST are dispatched the same day, Monday to Saturday, with 1 to 3 day delivery to metros.</li>
+      </ol>
+
+      <h2 class="h3 home-seo__h">Ratnagiri vs Devgad Alphonso: price and comparison</h2>
+      <p>Ratnagiri mango and Devgad Hapus mango are the two GI-tagged Indian Alphonso mango origins on the Konkan coast. Our Alphonso mangoes for sale in India come from both and are graded by size. Prices below are read live from our store.</p>
+      <div class="home-seo__scroll">
+        <table class="home-seo__table">
+          <caption>Alphonso mango price per dozen in India by size</caption>
+          <thead><tr><th scope="col">Size (per mango)</th><th scope="col">Ratnagiri Alphonso (per dozen)</th><th scope="col">Devgad Alphonso (per dozen)</th></tr></thead>
+          <tbody>
+            {%- for sz in size_arr -%}
+              {%- if sz != blank -%}
+              <tr><th scope="row">{{ sz }} g</th><td>{{ r_arr[forloop.index0] }}</td><td>{{ d_arr[forloop.index0] }}</td></tr>
+              {%- endif -%}
+            {%- endfor -%}
+          </tbody>
+        </table>
+      </div>
+      <div class="home-seo__scroll">
+        <table class="home-seo__table">
+          <caption>Ratnagiri Alphonso vs Devgad Alphonso</caption>
+          <thead><tr><th scope="col">Feature</th><th scope="col">Ratnagiri Alphonso</th><th scope="col">Devgad Alphonso</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Origin</th><td>Ratnagiri, Konkan, Maharashtra</td><td>Devgad, Sindhudurg, Konkan, Maharashtra</td></tr>
+            <tr><th scope="row">Our GI authorisation</th><td>GI Authorised User AU/5974/GI/139/260</td><td>AU/6932</td></tr>
+            <tr><th scope="row">Best for</th><td>Eating fresh, gifting</td><td>Aamras, milkshakes, desserts</td></tr>
+            <tr><th scope="row">Sizes</th><td>150 to 300 g, 1 or 2 dozen</td><td>150 to 300 g, 1 or 2 dozen</td></tr>
+            <tr><th scope="row">Season</th><td>February to June</td><td>February to June</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        <a class="btn btn--primary" href="/products/ratnagiri-alphonso-mango">Buy Ratnagiri Alphonso</a>
+        <a class="btn btn--secondary" href="/products/devgad-alphonso-mango">Buy Devgad Alphonso</a>
+        {%- if pulp != blank %} <a class="btn btn--secondary" href="{{ pulp.url }}">Order mango pulp (all year)</a>{% endif %}
+      </p>
+
+      <h2 class="h3 home-seo__h">Order mangoes online in Mumbai, Bangalore, Chennai, Kolkata, Delhi and Hyderabad</h2>
+      <p>Looking to buy mango online in India? AlphonsoMango.in ships Alphonso mango India-wide, with free delivery to Mumbai, Bangalore, Chennai, Kolkata, Delhi and Hyderabad. You can order mangoes online in India for your home or as a gift: Ratnagiri mangoes, Devgad Alphonso and Gir Kesar, fresh mango fruit online across India in season. Enter your pincode on any product page to check delivery time. Living abroad? NRIs can pay with an international card and send mangoes to family in India.</p>
+
+      <h2 class="h3 home-seo__h">Who sells these mangoes</h2>
+      <p>AlphonsoMango.in is operated by Powle Home Foods, Kurla West, Mumbai. We are a registered GI Authorised User for Alphonso mango (GI No. 139), with FSSAI licence 10020022011783 and APEDA registration 225579. Read more <a href="/pages/about-us">about us</a> or see our <a href="/pages/fssai">FSSAI licence</a>.</p>
+
+      <h2 class="h3 home-seo__h">Alphonso mango FAQ</h2>
+      {{ faq_html }}
+      <p class="home-seo__reviewed">Content last reviewed: <time datetime="{{ section.settings.last_reviewed }}">{{ section.settings.last_reviewed | date: '%d %B %Y' }}</time></p>
+    </div>
+  </div>
+</div>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"WebPage","@id":"https://alphonsomango.in/#webpage","url":"https://alphonsomango.in/","name":"Buy Alphonso Mango Online India | GI Tagged Ratnagiri & Devgad Hapus","isPartOf":{"@id":"https://alphonsomango.in/#website"},"about":{"@id":"https://alphonsomango.in/#organization"},"dateModified":{{ section.settings.last_reviewed | json }},"inLanguage":"en-IN","speakable":{"@type":"SpeakableSpecification","cssSelector":[".home-answer__text"]},"potentialAction":[{"@type":"OrderAction","target":{"@type":"EntryPoint","urlTemplate":"https://alphonsomango.in/products/ratnagiri-alphonso-mango","actionPlatform":["https://schema.org/DesktopWebPlatform","https://schema.org/MobileWebPlatform"]},"deliveryMethod":"http://purl.org/goodrelations/v1#DeliveryModeParcelService"},{"@type":"ViewAction","name":"View cart","target":"https://alphonsomango.in/cart"}]},
+{"@type":"FAQPage","@id":"https://alphonsomango.in/#faq","isPartOf":{"@id":"https://alphonsomango.in/#webpage"},"mainEntity":{{ faq_json | strip }}}
+]}
+</script>
+
+<style>
+  .home-seo { padding: 1.5rem 0; }
+  .home-seo__h { margin: 2rem 0 .75rem; }
+  .home-seo__h:first-child { margin-top: 0; }
+  .home-seo__steps { padding-left: 1.25rem; margin: 0 0 1rem; }
+  .home-seo__steps li { margin-bottom: .5rem; }
+  .home-seo__scroll { overflow-x: auto; margin: 0 0 1.25rem; }
+  .home-seo__table { width: 100%; border-collapse: collapse; min-width: 480px; }
+  .home-seo__table caption { text-align: left; font-weight: 600; padding-bottom: .4rem; }
+  .home-seo__table th, .home-seo__table td { border: 1px solid rgba(128,128,128,.35); padding: .5rem .65rem; text-align: left; vertical-align: top; }
+  .home-seo__table thead th { background: rgba(128,128,128,.12); }
+  .home-seo__faq { border-bottom: 1px solid rgba(128,128,128,.35); padding: .6rem 0; }
+  .home-seo__faq summary { cursor: pointer; font-weight: 600; }
+  .home-seo__faq p { margin: .5rem 0 0; }
+  .home-seo__reviewed { margin-top: 1.5rem; font-size: .85em; opacity: .75; }
+</style>
+
+{% schema %}
+{
+  "name": "Home SEO content",
+  "tag": "section",
+  "class": "home-seo-content",
+  "settings": [
+    { "type": "text", "id": "last_reviewed", "label": "Content last reviewed (YYYY-MM-DD)", "info": "Update every quarter after re-checking prices and season copy. Feeds the page's dateModified.", "default": "2026-10-04" }
+  ],
+  "presets": [ { "name": "Home SEO content", "category": "Text" } ]
+}
+{% endschema %}
