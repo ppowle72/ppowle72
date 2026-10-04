@@ -15,10 +15,21 @@
 {%- assign pulp = all_products['alphonso-mango-pulp'] -%}
 
 {%- comment -%} 1-dozen variant prices, in size order {%- endcomment -%}
-{%- assign r_prices = '' -%}{%- assign d_prices = '' -%}{%- assign size_names = '' -%}
+{%- assign pk_list = '' -%}{%- assign pk_disp = '' -%}{%- assign r_prices = '' -%}{%- assign d_prices = '' -%}{%- assign size_names = '' -%}
 {%- for v in rp.variants -%}
   {%- if v.title contains '1 Dozen' -%}
     {%- assign sz = v.title | split: ' / ' | last | split: ' Grams' | first | replace: ' But tasty', '' -%}
+    {%- assign wds = sz | split: ' ' -%}
+    {%- assign g_max = wds | last | plus: 0 -%}
+    {%- assign g_idx = wds.size | minus: 3 -%}
+    {%- assign g_min = wds[g_idx] | plus: 0 -%}
+    {%- assign g_avg = g_min | plus: g_max | divided_by: 2.0 -%}
+    {%- assign pk_val = 0 -%}
+    {%- if g_avg > 0 -%}
+      {%- assign pk_val = v.price | divided_by: 100.0 | times: 1000 | divided_by: 12 | divided_by: g_avg | round -%}
+    {%- endif -%}
+    {%- capture pk_list -%}{{ pk_list }}{{ pk_val | append: '' | prepend: '000000' | slice: -6, 6 }}|{%- endcapture -%}
+    {%- capture pk_disp -%}{{ pk_disp }}{% if pk_val > 0 %}about {{ pk_val | times: 100 | money_without_trailing_zeros }}{% endif %}|{%- endcapture -%}
     {%- capture size_names -%}{{ size_names }}{{ sz }}|{%- endcapture -%}
     {%- capture r_prices -%}{{ r_prices }}{{ v.price | money_without_trailing_zeros }}{% unless v.available %} (sold out){% endunless %}|{%- endcapture -%}
   {%- endif -%}
@@ -31,6 +42,15 @@
 {%- assign size_arr = size_names | split: '|' -%}
 {%- assign r_arr = r_prices | split: '|' -%}
 {%- assign d_arr = d_prices | split: '|' -%}
+{%- assign pkd_arr = pk_disp | split: '|' -%}
+{%- assign pk_sorted = pk_list | split: '|' | sort -%}
+{%- assign pk_lo = 0 -%}{%- assign pk_hi = 0 -%}
+{%- for x in pk_sorted -%}
+  {%- if x != blank -%}
+    {%- if pk_lo == 0 -%}{%- assign pk_lo = x | plus: 0 -%}{%- endif -%}
+    {%- assign pk_hi = x | plus: 0 -%}
+  {%- endif -%}
+{%- endfor -%}
 {%- assign min_dozen = rp.price_min | money_without_trailing_zeros -%}
 
 {%- assign faq_html = '' -%}
@@ -40,12 +60,12 @@
   {%- case i -%}
     {%- when 1 -%}{%- assign q = 'What is an Alphonso mango?' -%}{%- assign a = 'Alphonso (Hapus or Aam) is a mango variety grown on the Konkan coast of Maharashtra. It is known for saffron-orange pulp, low fibre and a rich aroma, and it carries a Geographical Indication (GI No. 139). AlphonsoMango.in sells GI-tagged Ratnagiri and Devgad Alphonso.' -%}
     {%- when 2 -%}{%- assign q = 'Where is Alphonso mango from?' -%}{%- assign a = 'The most prized Alphonso comes from Ratnagiri and Devgad (Sindhudurg district) in the Konkan region of Maharashtra, India. Our mangoes are sourced from Konkan farms and sold by Powle Home Foods, Mumbai.' -%}
-    {%- when 3 -%}{%- assign q = 'What is the Alphonso mango price per dozen in India?' -%}{%- capture a -%}Ratnagiri and Devgad Alphonso start from {{ min_dozen }} per dozen (small) and go up with size. Prices are shown live in the table on this page. Delivery is free across India.{%- endcapture -%}
+    {%- when 3 -%}{%- assign q = 'What is the Alphonso mango price per dozen and per kg in India?' -%}{%- capture a -%}Ratnagiri and Devgad Alphonso start from {{ min_dozen }} per dozen (small) and go up with size. {% if pk_lo > 0 %}That is roughly {{ pk_lo | times: 100 | money_without_trailing_zeros }} to {{ pk_hi | times: 100 | money_without_trailing_zeros }} per kg depending on size. {% endif %}Prices are shown live in the table on this page. Delivery is free across India.{%- endcapture -%}
     {%- when 4 -%}{%- assign q = 'When is Alphonso mango season?' -%}{%- assign a = 'Alphonso season runs from February to June, peaking from March to May. Outside this window fresh fruit is sold out, so we offer Alphonso mango pulp all year and list fresh fruit again when the new season begins.' -%}
     {%- when 5 -%}{%- assign q = 'Do you deliver Alphonso mangoes to Bangalore, Mumbai, Delhi, Hyderabad, Chennai, Kolkata and Pune?' -%}{%- assign a = 'Yes. We deliver free to Bangalore, Mumbai, Delhi NCR (including Gurgaon and Noida), Hyderabad, Chennai, Kolkata, Pune and Jaipur, and to thousands of other pincodes. Metro deliveries typically take 1 to 3 days. Check your pincode on the product page.' -%}
     {%- when 6 -%}{%- assign q = 'How do I know the Alphonso mango is authentic and carbide-free?' -%}{%- assign a = 'We are a registered GI Authorised User for Alphonso (AU/5974/GI/139/260) and hold FSSAI licence 10020022011783 and APEDA registration 225579. Fruit is ripened naturally in hay beds without calcium carbide.' -%}
     {%- when 7 -%}{%- assign q = 'Which is better, Ratnagiri or Devgad Alphonso?' -%}{%- assign a = 'Both are GI-tagged Hapus mangoes. Ratnagiri is commonly described as a balance of sweet and tangy, and Devgad as sweeter and creamier. We suggest Ratnagiri for eating fresh and gifting, and Devgad for aamras and milkshakes. Compare sizes and prices in the table on this page.' -%}
-    {%- when 8 -%}{%- assign q = 'Is Hapus the same as Alphonso?' -%}{%- assign a = 'Yes. Hapus, Hafus and Hapoos are regional names for the Alphonso mango, known in Hindi as Alphonso Aam. All of them refer to the same variety.' -%}
+    {%- when 8 -%}{%- assign q = 'Is Hapus the same as Alphonso?' -%}{%- assign a = 'Yes. Hapus, Hafus and Hapoos are regional names for the Alphonso mango, known in Hindi as Alphonso Aam. Spellings such as Alfonso, Alphanso and Alphonse also refer to the same variety.' -%}
     {%- when 9 -%}{%- assign q = 'How can I tell real Konkan Alphonso from Alphonso grown elsewhere?' -%}{%- assign a = 'Alphonso grown outside the Konkan GI region can be sold under the same name. Ask the seller for origin and GI authorisation details. Ours are GI Authorised User AU/5974/GI/139/260 for Alphonso and AU/6932 for Devgad Alphonso, with FSSAI licence 10020022011783.' -%}
     {%- when 10 -%}{%- assign q = 'What if my mangoes arrive damaged?' -%}{%- assign a = 'Report transit damage or a quality problem within 24 hours of delivery, with photos or video, on WhatsApp at +91 70830 75556. We replace the fruit with a fresh dispatch or credit your account for your next purchase.' -%}
   {%- endcase -%}
@@ -60,7 +80,7 @@
   <div class="container">
     <div class="reading-width">
 
-      <h2 class="h3 home-seo__h">How to buy Alphonso mango online in 3 steps</h2>
+      <h2 class="h3 home-seo__h">How to order Alphonso mango online in 3 steps</h2>
       <ol class="home-seo__steps">
         <li><strong>Step 1: Select Grade.</strong> Choose Ratnagiri or Devgad Alphonso and a size, from small (150 to 180 g) to jumbo (275 to 300 g), in 1 or 2 dozen boxes.</li>
         <li><strong>Step 2: Add to Cart.</strong> Pay securely with UPI, cards, net banking or wallets. Delivery is free across India.</li>
@@ -68,15 +88,15 @@
       </ol>
 
       <h2 class="h3 home-seo__h">Ratnagiri vs Devgad Alphonso: price and comparison</h2>
-      <p>Ratnagiri mango and Devgad Hapus mango are the two GI-tagged Indian Alphonso mango origins on the Konkan coast. Our Alphonso mangoes for sale in India come from both and are graded by size. Prices below are read live from our store.</p>
+      <p>Alphonso is sold by the dozen. The per-kg column divides the Ratnagiri dozen price by the mid-weight of each size band, so treat it as a guide. Ratnagiri mango and Devgad Hapus mango are the two GI-tagged Indian Alphonso mango origins on the Konkan coast. Our Alphonso mangoes for sale in India come from both and are graded by size. Prices below are read live from our store.</p>
       <div class="home-seo__scroll">
         <table class="home-seo__table">
           <caption>Alphonso mango price per dozen in India by size</caption>
-          <thead><tr><th scope="col">Size (per mango)</th><th scope="col">Ratnagiri Alphonso (per dozen)</th><th scope="col">Devgad Alphonso (per dozen)</th></tr></thead>
+          <thead><tr><th scope="col">Size (per mango)</th><th scope="col">Ratnagiri Alphonso (per dozen)</th><th scope="col">Devgad Alphonso (per dozen)</th><th scope="col">Ratnagiri price per kg (approx.)</th></tr></thead>
           <tbody>
             {%- for sz in size_arr -%}
               {%- if sz != blank -%}
-              <tr><th scope="row">{{ sz }} g</th><td>{{ r_arr[forloop.index0] }}</td><td>{{ d_arr[forloop.index0] }}</td></tr>
+              <tr><th scope="row">{{ sz }} g</th><td>{{ r_arr[forloop.index0] }}</td><td>{{ d_arr[forloop.index0] }}</td><td>{{ pkd_arr[forloop.index0] }}</td></tr>
               {%- endif -%}
             {%- endfor -%}
           </tbody>
@@ -102,7 +122,7 @@
       </p>
 
       <h2 class="h3 home-seo__h">Order mangoes online in Bangalore, Mumbai, Delhi NCR, Hyderabad, Chennai, Pune and Kolkata</h2>
-      <p>Looking to buy mango online in India? AlphonsoMango.in ships Alphonso mango India-wide, with free delivery to Bangalore, Mumbai, Delhi, Gurgaon, Noida, Hyderabad, Chennai, Pune, Kolkata, Jaipur and Ahmedabad. You can order mangoes online in India for your home or as a gift: Ratnagiri mangoes, Devgad Alphonso and Gir Kesar, fresh mango fruit online across India in season. Enter your pincode on any product page to check delivery time. Living abroad? NRIs can pay with an international card and send mangoes to family in India.</p>
+      <p>Looking to buy mango online in India? AlphonsoMango.in ships Alphonso mango India-wide, with free delivery to Bangalore, Mumbai, Delhi, Gurgaon, Noida, Hyderabad, Chennai, Pune, Kolkata, Jaipur and Ahmedabad. You can order mangoes online in India for your home or as a gift: Ratnagiri mangoes, Devgad Alphonso, Gir Kesar and Pairi (Payari), fresh mango fruit online across India in season. Enter your pincode on any product page to check delivery time. Living abroad? NRIs can pay with an international card and send mangoes to family in India.</p>
 
       <h2 class="h3 home-seo__h">Who sells these mangoes</h2>
       <p>AlphonsoMango.in is operated by Powle Home Foods, Kurla West, Mumbai. We are a registered GI Authorised User for Alphonso mango (GI No. 139), with FSSAI licence 10020022011783 and APEDA registration 225579. Read more <a href="/pages/about-us">about us</a> or see our <a href="/pages/fssai">FSSAI licence</a>.</p>
