@@ -125,3 +125,52 @@ By state: Maharashtra 949, Karnataka 918, Delhi 438, Haryana 367, Uttar Pradesh 
    `ratnagirihapus.store`, `rqdfarm.in`, `aamrai.com`, `foodwalas.com`, `devgadmango.com`, `ratnagirialphonsomango.com`, `ratnagirifarms.com`, `agrophonics.com`, the Dhanshi Farms domain, and `developers.google.com`. Add `www.` variants if a site redirects to them.
 3. Save. Docs: https://code.claude.com/docs/en/cloud-environments#network-access
 4. **Start a new session** (or restart this one) so the container picks up the change. A test in this session right after your edit still showed every competitor domain blocked, so the new setting probably applies only to a fresh container. Then ask me to re-run the comparison.
+
+
+---
+
+## Update: SEMrush data for aamrai.com and dhanshefarm.com (homepage keywords)
+Correction: the Dhanshe Farm domain is **dhanshefarm.com** (the earlier "dhanshifarms.com" was wrong). Source: the two SEMrush organic-position exports you uploaded (aamrai.com: 931 rows, dated Jul-Oct 2026; dhanshefarm.com: 320 rows, Sep 2026). I filtered to homepage URLs, matched them to our homepage positions (SEMrush organic and Ahrefs), and saved the full tables:
+`competitor-homepage-keywords-aamrai.csv`, `competitor-homepage-keywords-dhanshefarm.csv`, `keyword-gaps-vs-aamrai.csv`, `keyword-gaps-vs-dhanshefarm.csv`.
+
+Still not possible: reading either homepage (blocked), so their headings (H1 to H6), word counts and schema remain unverified.
+
+### How the homepages compare on shared keywords
+| | aamrai.com | dhanshefarm.com |
+|---|---|---|
+| Homepage organic keywords in the export | 102 | 61 |
+| Homepage organic traffic (SEMrush est.) | about 900 | about 1,190 |
+| Keywords where our homepage ranks higher | 44 | 30 |
+| Keywords where they rank higher | 6 (mostly brand and tiny terms) | 9 |
+| Keywords they rank for and we don't rank for on the homepage | 13 (mostly brand terms: amrai, mr mango; and raw/collector mango) | 8 (brand terms: savani farms, farmse) |
+| Their best single homepage keyword | its brand term "amrai" (pos 3, about 310 visits) drives most of it; among buying terms, "order alphonso mangoes online" is pos 2 and about 50 visits | **hapus mango online, pos 1 (about 750 est. visits)** |
+
+Dhanshe Farm's homepage earns most of its traffic from a few buying-intent Hapus phrases at positions 1-3. It is a small, focused page, and it outranks our homepage on those phrases.
+
+### Where they beat our homepage (real buying keywords, not brand terms)
+| Keyword | Volume | Their homepage pos | Our homepage pos | Our best page |
+|---|---|---|---|---|
+| hapus mango online | 1,600 | 1 (Dhanshe) / 7 (Aamrai) | not ranking | pos 1 on another URL |
+| buy hapus mango | 590 | 1 (Dhanshe) | not ranking | pos 2 on another URL |
+| order alphonso mangoes online | 590 | 1 (Dhanshe) / 2 (Aamrai) | not ranking | pos 4 on another URL |
+| ratnagiri hapus | 1,300 | 3 (Dhanshe) | 8 | pos 1 on another URL |
+| order mangoes online | 1,300 | 14 (Dhanshe) | 18 | pos 10 |
+| best place to buy mangoes online | 320 | 11 (Dhanshe) | 17 | 17 |
+| online mango delivery | 320 | 13 (Dhanshe) | 16 | 16 |
+| farm fresh mangoes | 480 | 3 (Dhanshe) | not ranking | pos 65 |
+| fresh alphonso mango | 210 | 1 (Dhanshe) | 2 | 2 |
+| best alphonso mangoes in india | 140 | 3 (Dhanshe) | 7 | 7 |
+| devgad hapoos | 1,900 | 6 (Dhanshe category page) | not ranking | 37 |
+
+**What we added for these** (staged on the unpublished theme): "Hapus mango" in the order-steps heading, "buy Hapus mango online" and "best place to buy mangoes online in India" in the delivery paragraph, "online mango delivery", "premium Alphonso mangoes", and "Devgad Hapoos" in the comparison intro. The homepage should now compete for these instead of leaving them to other pages.
+
+**What we did not add:** "organic mango" and "organic mangoes online" (390 to 1,900 searches). Our theme says chemical-free and carbide-free, not certified organic, and Aamrai holds organic certifications. Claiming organic without certification is a compliance risk. Also skipped: brand terms and tree/farm terms.
+
+### Gaps that are not homepage work (site-wide, they rank top 10 for 500+ searches; we rank nowhere in the top 30)
+- Aamrai: other varieties (chausa/chaunsa 8,100 and 4,400, malihabad and malihabadi 1,300 and 590, bambaiya aam 590) and non-mango products (cape gooseberry 14,800, Mahabaleshwar strawberry 3,600). These are range decisions, not copy fixes. If you sell or plan to sell Chausa or Dasheri, a collection page is the route.
+- Dhanshe Farm: only one gap, "devgad hapoos" (1,900). It ranks at 37 for us; the comparison intro now names it.
+
+### What this changes about the plan
+1. We already lead on most core buying terms ("alphonso mango online", "buy alphonso mango", "mango online india", "mango fruit online"). Protect those, do not rewrite them.
+2. Dhanshe Farm shows the value of a tight page. Its homepage is category-led (Ratnagiri and Devgad pages as `/products?category=...`) and ranks 1 for "hapus mango online" and "order alphonso mangoes online". We rank 1 and 4 for those on other pages, so the fix is to make the homepage carry the same wording and to internally link the better-ranking page, not to add a new page.
+3. Check Hapus-phrase positions at 2, 4 and 8 weeks after publishing.

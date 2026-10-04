@@ -27,7 +27,7 @@ Verified source: ratnagirihapus.store homepage (see `competitor-analysis.md`).
 | "Alphonso Mango in Cities" hub page | Build a cities hub and city pages (order: Bangalore, Delhi NCR/Gurgaon, Mumbai/Thane, Hyderabad, Chennai, Pune, Kolkata, Jaipur) |
 | We have, they lack | FAQ + FAQPage schema, direct answer, order steps, comparison table, price-per-kg, H1 aligned to the main keyword |
 
-Dhanshi Farms (dhanshifarms.com), RQD Farm, AAMRAI, Foodwalas, Devgad Mango: **not analysed** (blocked). RQD's size-grade product pages and city URLs, and AAMRAI's buying-guide blog posts, are seen only in search results.
+Dhanshi Farms (dhanshefarm.com), RQD Farm, AAMRAI, Foodwalas, Devgad Mango: **not analysed** (blocked). RQD's size-grade product pages and city URLs, and AAMRAI's buying-guide blog posts, are seen only in search results.
 
 ## 4. What was added to the homepage (all staged on the unpublished "HOME SEO v1" theme)
 1. ~45-word direct answer under the hero (live stock and season line).
@@ -51,6 +51,6 @@ Dhanshi Farms (dhanshifarms.com), RQD Farm, AAMRAI, Foodwalas, Devgad Mango: **n
 ## 6. Allowing the competitor domains
 There is no command to run. Per the environment docs this is a settings screen: cloud environment menu in the session title bar, Edit, Network access, Custom, then Allowed domains. Paste this list (keep the default package managers):
 
-`ratnagirihapus.store, www.ratnagirihapus.store, dhanshifarms.com, www.dhanshifarms.com, rqdfarm.in, www.rqdfarm.in, aamrai.com, www.aamrai.com, foodwalas.com, www.foodwalas.com, devgadmango.com, www.devgadmango.com, ratnagirialphonsomango.com, ratnagirifarms.com, agrophonics.com, developers.google.com`
+`ratnagirihapus.store, www.ratnagirihapus.store, dhanshefarm.com, www.dhanshefarm.com, rqdfarm.in, www.rqdfarm.in, aamrai.com, www.aamrai.com, foodwalas.com, www.foodwalas.com, devgadmango.com, www.devgadmango.com, ratnagirialphonsomango.com, ratnagirifarms.com, agrophonics.com, developers.google.com`
 
 Then start a new session. The setting did not take effect inside this running session.
