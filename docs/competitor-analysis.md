@@ -102,8 +102,8 @@ Source: ShopifyQL on the connected store. Billing city is not always delivery ci
 
 | Rank | City / cluster | Orders | Notes |
 |---|---|---|---|
-| 1 | **Bengaluru / Bangalore** | 740 | 636 "Bengaluru" + 104 "Bangalore"; far ahead of every other city |
-| 2 | **Delhi NCR** (Delhi, Gurgaon/Gurugram, Noida, Ghaziabad, Faridabad) | 741 across areas | New/South/West/South West Delhi and Delhi 313; Gurgaon + Gurugram 256; Gautam Buddha Nagar 69; Ghaziabad 62; Faridabad 41. Billing records split NCR into many labels, which hides how big it is |
+| 1 (tie) | **Bengaluru / Bangalore** | 740 | 636 "Bengaluru" + 104 "Bangalore"; the largest single city, level with the whole Delhi NCR cluster below |
+| 1 (tie) | **Delhi NCR** (Delhi, Gurgaon/Gurugram, Noida, Ghaziabad, Faridabad) | 741 across areas | New/South/West/South West Delhi and Delhi 313; Gurgaon + Gurugram 256; Gautam Buddha Nagar 69; Ghaziabad 62; Faridabad 41. Billing records split NCR into many labels, which hides how big it is |
 | 3 | **Mumbai + Thane** | 530 | Mumbai 357, Thane 108, Mumbai Suburban 65 |
 | 4 | Hyderabad | 182 | |
 | 5 | Chennai (+ Kanchipuram) | 143 (+45) | |
@@ -115,7 +115,7 @@ Source: ShopifyQL on the connected store. Billing city is not always delivery ci
 
 By state: Maharashtra 949, Karnataka 918, Delhi 438, Haryana 367, Uttar Pradesh 343, Tamil Nadu 310, Telangana 295, West Bengal 208, Rajasthan 191, Gujarat 169.
 
-**What changed because of this:** the homepage delivery text and FAQ now name Bangalore, Mumbai, Delhi NCR (Gurgaon, Noida), Hyderabad, Chennai, Kolkata, Pune, Jaipur and Ahmedabad, not just the six in the original brief. Gurgaon/NCR and Pune were missing, and Bangalore leads the list.
+**What changed because of this:** the homepage delivery text and FAQ now name Bangalore, Mumbai, Delhi NCR (Gurgaon, Noida), Hyderabad, Chennai, Kolkata, Pune, Jaipur and Ahmedabad, not just the six in the original brief. Gurgaon/NCR and Pune were missing, and Bangalore and Delhi NCR are the two biggest markets.
 
 **City-page build order (best revenue first):** Bangalore, Delhi NCR/Gurgaon, Mumbai/Thane, Hyderabad, Chennai, Pune, Kolkata, Jaipur.
 
