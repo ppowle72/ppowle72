@@ -36,7 +36,7 @@
 {%- assign faq_html = '' -%}
 {%- capture faq_json -%}
 [
-{%- for i in (1..6) -%}
+{%- for i in (1..10) -%}
   {%- case i -%}
     {%- when 1 -%}{%- assign q = 'What is an Alphonso mango?' -%}{%- assign a = 'Alphonso (Hapus or Aam) is a mango variety grown on the Konkan coast of Maharashtra. It is known for saffron-orange pulp, low fibre and a rich aroma, and it carries a Geographical Indication (GI No. 139). AlphonsoMango.in sells GI-tagged Ratnagiri and Devgad Alphonso.' -%}
     {%- when 2 -%}{%- assign q = 'Where is Alphonso mango from?' -%}{%- assign a = 'The most prized Alphonso comes from Ratnagiri and Devgad (Sindhudurg district) in the Konkan region of Maharashtra, India. Our mangoes are sourced from Konkan farms and sold by Powle Home Foods, Mumbai.' -%}
@@ -44,10 +44,14 @@
     {%- when 4 -%}{%- assign q = 'When is Alphonso mango season?' -%}{%- assign a = 'Alphonso season runs from February to June, peaking from March to May. Outside this window fresh fruit is sold out, so we offer Alphonso mango pulp all year and list fresh fruit again when the new season begins.' -%}
     {%- when 5 -%}{%- assign q = 'Do you deliver Alphonso mangoes to Mumbai, Bangalore, Chennai, Kolkata, Delhi and Hyderabad?' -%}{%- assign a = 'Yes. We deliver free to Mumbai, Bangalore, Chennai, Kolkata, Delhi and Hyderabad and to thousands of other pincodes. Metro deliveries typically take 1 to 3 days. Check your pincode on the product page.' -%}
     {%- when 6 -%}{%- assign q = 'How do I know the Alphonso mango is authentic and carbide-free?' -%}{%- assign a = 'We are a registered GI Authorised User for Alphonso (AU/5974/GI/139/260) and hold FSSAI licence 10020022011783 and APEDA registration 225579. Fruit is ripened naturally in hay beds without calcium carbide.' -%}
+    {%- when 7 -%}{%- assign q = 'Which is better, Ratnagiri or Devgad Alphonso?' -%}{%- assign a = 'Both are GI-tagged Hapus mangoes. Ratnagiri is commonly described as a balance of sweet and tangy, and Devgad as sweeter and creamier. We suggest Ratnagiri for eating fresh and gifting, and Devgad for aamras and milkshakes. Compare sizes and prices in the table on this page.' -%}
+    {%- when 8 -%}{%- assign q = 'Is Hapus the same as Alphonso?' -%}{%- assign a = 'Yes. Hapus, Hafus and Hapoos are regional names for the Alphonso mango, known in Hindi as Alphonso Aam. All of them refer to the same variety.' -%}
+    {%- when 9 -%}{%- assign q = 'How can I tell real Konkan Alphonso from Alphonso grown elsewhere?' -%}{%- assign a = 'Alphonso grown outside the Konkan GI region can be sold under the same name. Ask the seller for origin and GI authorisation details. Ours are GI Authorised User AU/5974/GI/139/260 for Alphonso and AU/6932 for Devgad Alphonso, with FSSAI licence 10020022011783.' -%}
+    {%- when 10 -%}{%- assign q = 'What if my mangoes arrive damaged?' -%}{%- assign a = 'Report transit damage or a quality problem within 24 hours of delivery, with photos or video, on WhatsApp at +91 70830 75556. We replace the fruit with a fresh dispatch or credit your account for your next purchase.' -%}
   {%- endcase -%}
   {%- capture faq_item -%}<details class="home-seo__faq"><summary>{{ q | escape }}</summary><p>{{ a | escape }}</p></details>{%- endcapture -%}
   {%- assign faq_html = faq_html | append: faq_item -%}
-  {"@type":"Question","name":{{ q | json }},"acceptedAnswer":{"@type":"Answer","text":{{ a | json }}}}{% unless i == 6 %},{% endunless %}
+  {"@type":"Question","name":{{ q | json }},"acceptedAnswer":{"@type":"Answer","text":{{ a | json }}}}{% unless i == 10 %},{% endunless %}
 {%- endfor -%}
 ]
 {%- endcapture -%}

@@ -23,7 +23,7 @@ The three tools disagree because they use different locations, devices and dates
 | buy mango online | 14 | 1,300 | 30 | order flow + city paragraph (added) |
 | ratnagiri hapus | 8 | 1,300 | 40 | comparison table |
 
-**AI Overview / question keywords (21 homepage keywords trigger an AI Overview):** what is alphonso mango, where is alphonso mango from, alphonso mango price per dozen, season, delivery. All six are now visible FAQ answers with matching FAQPage schema.
+**AI Overview / question keywords (21 homepage keywords trigger an AI Overview):** what is alphonso mango, where is alphonso mango from, alphonso mango price per dozen, season, delivery. All are now visible FAQ answers with matching FAQPage schema.
 
 ## 2. Gaps found on the live homepage template
 
@@ -31,12 +31,12 @@ Text in `templates/index.json` is about 630 words. Before this change: no prices
 
 ## 3. Changes made (staged, not published)
 
-Staged on unpublished theme "Copy of AI READY v12 - blog schema fix (Claude)". Source copies are in `shopify-theme/`.
+Applied to unpublished theme "HOME SEO v1 - direct answer, FAQ, live prices (Claude, 4 Oct)", a duplicate of the live theme, so nothing else differs from live. Source copies are in `shopify-theme/`. See also `competitor-analysis.md` and `schema-aeo-geo-matrix.md`.
 
 | File | Change |
 |---|---|
 | `sections/home-direct-answer.liquid` (new) | ~45-word direct answer under the hero, H2, live stock/season line |
-| `sections/home-seo-content.liquid` (new) | 3-step buy flow, live price table (reads variant prices), Ratnagiri vs Devgad table, six-city delivery paragraph, entity paragraph, 6-question visible FAQ, WebPage + FAQPage JSON-LD |
+| `sections/home-seo-content.liquid` (new) | 3-step buy flow, live price table (reads variant prices), Ratnagiri vs Devgad table, six-city delivery paragraph, entity paragraph, 10-question visible FAQ, WebPage + FAQPage JSON-LD |
 | `templates/index.json` | adds both sections; replaces the "2026 Season" heading with an evergreen one |
 | `snippets/global-schema.liquid` | removes the stale homepage `Event` and hidden `FAQPage` (the visible FAQ now owns FAQPage) |
 
@@ -53,7 +53,7 @@ The hero already renders the H1; new sections start at H2.
 ## 5. Still to do (not possible from this environment)
 
 1. **Title and meta description** are set in Shopify admin (Online Store, Preferences). Suggested title: `Buy Alphonso Mango Online India | GI Tagged Ratnagiri & Devgad Hapus` (≤60 chars). Description: `Buy GI-tagged Ratnagiri & Devgad Alphonso mangoes online in India. Carbide-free, free delivery to Mumbai, Bangalore, Delhi & more. FSSAI licensed.`
-2. **Preview, then publish.** The staging theme differs from live in three files I did not touch (`config/settings_data.json`, `snippets/free-shipping-notice.liquid`, and the old `global-schema.liquid`). Safest route: duplicate the live theme in admin, then re-apply the four files above to the duplicate (ask me to do it).
+2. **Preview, then publish** the "HOME SEO v1" theme from Shopify admin (publishing is blocked from this environment).
 3. **Product grid images at 350w with srcset, LCP < 1.5 s:** the field data in the theme notes shows LCP 2.3 s and CLS 0.27 (failing). I could not measure the site from here (the egress proxy blocks alphonsomango.in). Run PageSpeed on the preview URL; the new sections contain no images so they add no LCP or CLS risk.
 4. **Mismatched facts to confirm:** the product pages' own schema and FAQ still quote 2026 prices elsewhere (`global-schema.liquid` article FAQ: ₹2,249-3,699). Refresh them when the 2027 season prices are set.
 5. **Track:** pick one rank source, record baseline, and check at 4 and 8 weeks. Off-season traffic will dip regardless; compare year over year.
