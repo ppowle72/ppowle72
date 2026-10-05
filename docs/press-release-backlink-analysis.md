@@ -43,3 +43,14 @@ Absence from Ahrefs/SEMrush is not proof there is no link: these tools miss page
 - **Search Console:** Manual actions and Security issues both show "No issues detected" (user screenshots). No link clean-up is needed for penalty reasons. Disavow only if rankings or a notice change.
 - **ratnagirihapus.shop and ratnagirimango.in** are run by the owner's team. They link to alphonsomango.in with "Proveda Superfoods Pvt Ltd" anchors. Do not disavow them. Ahrefs's spam flag on them is not a problem to act on. `ratnagirihapus.store` is a competitor.
 - **ThePrint** added to the homepage press section (block `link_13`, after LatestLY) in the staged theme. The page was not opened from here (blocked).
+
+## Verified by opening the pages (5 Oct 2026, after the press domains were allowed)
+| Page | Result |
+|---|---|
+| ANI (aninews.in) | 2 live links to `https://alphonsomango.in/`: anchors "Order Your Alphonso Mango Online Direct to your Home" and "Https://alphonsomango.in". `rel="noopener"` only (no nofollow, no sponsored). Not in the Ahrefs or SEMrush exports. |
+| ThePrint (ANI press release) | Same 2 live links, `rel="noopener"`, `target="_blank"`. Not in either export. |
+| LatestLY | Names AlphonsoMango.in 7 times, but the URL and the order anchor are plain text, not hyperlinks. It ends with an advertorial disclaimer ("press release provided by VMP..."). No backlink. Ask LatestLY to hyperlink the brand name. |
+| mid-day (brand-media) | The URL returns 404 and the saved page does not contain the article. Cannot be verified; do not rely on it. |
+| BNN Breaking | Returns an empty page to an automated browser. Unverified; open it manually and search the source for `alphonsomango.in`. |
+
+ANI and ThePrint are real links that the two backlink tools have not seen yet. Their pages are the highest-authority links in the whole release, so they are worth protecting (do not ask to remove or nofollow them).
