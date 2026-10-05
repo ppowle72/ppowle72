@@ -36,12 +36,12 @@ Not mango competitors, ignore for benchmarking: konkanfoodbazar.com (Konkan snac
 | Cities named | 11 (from your order data) | rqdfarm 16, devgadmango 15, kriparam 12 |
 | Schema | Organization, WebSite, LocalBusiness, ItemList, WebPage, FAQPage | Product and AggregateRating only at rqdfarm and kriparamfruitwala |
 | Press logos, video testimonials, customer-count trust band | **no** | ratnagirihapus.store (press, video), dhanshefarm ("2,500+"), kriparam ("20k+", "40 years") |
-| Gifting / bulk / corporate section on the homepage | being added | rqdfarm, kriparam, ratnagirihapus.store |
+| Gifting / bulk / corporate section on the homepage | yes (added) | rqdfarm, kriparam, ratnagirihapus.store |
 
 ## What was added because of this comparison
 1. **"How to identify original Alphonso mango"** section (origin and licence, aroma, colour, feel and size, pulp), as aamrai and devgadmango do. Uses your own GI and FSSAI numbers.
 2. **H1 changed** to "Buy GI Tagged Alphonso Mango Online in India" (staged).
-3. A gifting and bulk-orders block (next upload).
+3. A short "Gifting and bulk orders" block linking the gifting, business-partnership and reseller pages (all three exist).
 
 ## What I did not add, and why
 - **"Organic" claims.** Aamrai says GAP-certified and uses "organic" 16 times. Your theme says chemical-free and carbide-free only. Do not say organic without certification.
