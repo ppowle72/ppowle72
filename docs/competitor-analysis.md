@@ -1,4 +1,65 @@
-# Competitor homepage comparison: what was verified and what was not
+# Competitor homepage comparison (verified 5 Oct 2026)
+
+**Update:** network access to competitor sites now works, so this section replaces the earlier "blocked/unverified" notes. Every homepage below was loaded in a headless browser (JavaScript executed) and its headings, word count, schema and on-page elements were read directly. Full H1 to H6 outlines for all 16 sites: `competitor-homepage-headings.md`. Keyword positions from your SEMrush exports are in the second half of this file.
+
+Not reachable: aamwalla.com (origin error 522), konkanbag.com, ratnagirimango.com, ratnagirihapus.in, madhurambruhat.com, kokanheart.com, and `ratnagirhapus.store` (typo; the real site is ratnagirihapus.store). mangobazar.in is a parked domain. `ratnagirialphonso.com` is **your own blog** (author Prashant Powle), not a competitor.
+
+Not mango competitors, ignore for benchmarking: konkanfoodbazar.com (Konkan snacks), foodwalas.com (sweets marketplace), agrophonics.com (imported frozen fruit).
+
+## What each direct competitor's homepage does
+| Site | H1 | Words | Schema found | Notable on-page elements |
+|---|---|---|---|---|
+| **rqdfarm.in** (strongest) | Buy Fresh Alphonso Mangoes Online Directly from the Farm | 2,075 | Product, AggregateRating, FAQPage, LocalBusiness, Organization, WebSite | 28 H2s, order steps, FAQ, 16 cities named, "no carbide" and "naturally ripened" repeated (11 times each), GI mentioned 10 times; H3 sections for Ratnagiri, Devgad, gift boxes, bulk and corporate orders, mango products; also sells Dasheri and Gir Kesar |
+| **aamrai.com** | Buy Organic Alphonso Mangoes Online, Order the Best Ratnagiri Alphonso (Hapus) Mango with Home Delivery across India | 938 | Article, WebPage, Organization (minimal) | H2 "How to Identify Original Alphonso Mango" with H3s "Chemically Ripened Mango" and "Naturally Ripened Alphonso"; "organic" used 16 times; meta mentions GAP-certified farms |
+| **ratnagirihapus.store** | Alphonso Mango Pulp | 1,107 | Organization, WebSite, SiteNavigationElement | 52 H2s (mostly product titles), prices and star ratings on cards, press logos, 10 video testimonials, 10% first-order code |
+| **dhanshefarm.com** | Get Your Aam Directly From Farm (the H1 appears twice) | 556 | none found | JavaScript app; H2s: Choose Your Perfect Pack, First-Time User Offer, Taste the Real Alphonso This Season, Loved by Customers, Ethical & Responsible Farming; H3 "2,500+ Happy Customers"; title tag is just "Dhanshe's Farm" |
+| **devgadmango.com** | 100% Authentic Devgad Alphonso Mangoes | 557 | none | H2 "100 + Cities We Serve, all over India" naming 15 cities; H3 "How to Identify Original Devgad Alphonso Mango?"; no meta description |
+| **ratnagirifarms.com** | The Real Alphonso. Straight From Our Farm. | 343 | none | "Grown with Care, Not with Chemicals"; FSSAI mentioned; no schema |
+| **kriparamfruitwala.com** | no H1 | 1,177 | Product, AggregateRating, GroceryStore, MerchantReturnPolicy | H3 "40 Years of Service", "20k+ customers", corporate clients, gift baskets, 12 cities named |
+| **devgadhapoosamba.com** | From. Farms of Devgad Jamsande! | 548 | Article, Organization (minimal) | Boxes by the dozen ("10 Dozen (120 Fruits)", minimum 5 dozen), H3 delivery to Mumbai, Navi Mumbai, Thane, Kalyan Dombivli |
+| **thehapusamba.com** | The King of Mangoes | 144 | none | Peti boxes of 5 to 8 dozen listed by fruit size (251 g down to 175 g) |
+| madovermangoes.in | none | 121 | Organization, WebSite | Thin page; "Chemical free mangoes", "Original Alphonso" |
+| ratnagirialphonsomango.com | none | 619 | Organization, WebPage | Generic store; GI mentioned 6 times |
+| maldamango.com | none | 972 | FAQPage, LocalBusiness | Noida store, long educational H2s, 22 H4 FAQ questions; not Alphonso-focused |
+
+## Where alphonsomango.in stands after this PR (our figures are from the theme source, not a render)
+| Element | alphonsomango.in | Competitor range |
+|---|---|---|
+| H1 matches the buying keyword | "Buy GI Tagged Alphonso Mango Online in India" (staged) | rqdfarm, aamrai, devgadmango do; ratnagirihapus.store does not |
+| Words on homepage | about 1,750 (template text plus new sections, excluding product cards) | 121 to 2,075; only rqdfarm is comparable |
+| Direct-answer block | yes | none have one |
+| FAQ with FAQPage schema | 10 questions, markup matches the page | rqdfarm, maldamango, agrophonics only |
+| Order steps | yes (3 steps) | rqdfarm only |
+| Live price table / per-kg | yes | none |
+| Ratnagiri vs Devgad comparison table | yes | none |
+| "How to identify original Alphonso" | yes (added) | aamrai and devgadmango |
+| Cities named | 11 (from your order data) | rqdfarm 16, devgadmango 15, kriparam 12 |
+| Schema | Organization, WebSite, LocalBusiness, ItemList, WebPage, FAQPage | Product and AggregateRating only at rqdfarm and kriparamfruitwala |
+| Press logos, video testimonials, customer-count trust band | **no** | ratnagirihapus.store (press, video), dhanshefarm ("2,500+"), kriparam ("20k+", "40 years") |
+| Gifting / bulk / corporate section on the homepage | being added | rqdfarm, kriparam, ratnagirihapus.store |
+
+## What was added because of this comparison
+1. **"How to identify original Alphonso mango"** section (origin and licence, aroma, colour, feel and size, pulp), as aamrai and devgadmango do. Uses your own GI and FSSAI numbers.
+2. **H1 changed** to "Buy GI Tagged Alphonso Mango Online in India" (staged).
+3. A gifting and bulk-orders block (next upload).
+
+## What I did not add, and why
+- **"Organic" claims.** Aamrai says GAP-certified and uses "organic" 16 times. Your theme says chemical-free and carbide-free only. Do not say organic without certification.
+- **Customer-count trust band.** Your Shopify data supports it (8,215 orders and 5,896 customers over the last three years, 8,163 of those orders in India), but counts can include repeat orders and gifts. Tell me the wording you want ("5,800+ customers" or similar) and I will add it.
+- **Press logos and video testimonials.** Need real material from you.
+- **Offer codes** (ratnagirihapus.store's 10% code, Dhanshe's first-time offer). Your decision.
+
+## One finding that doesn't fit the on-page story
+dhanshefarm.com ranks first for "hapus mango online" (about 750 est. visits), yet its page is a JavaScript app with a one-word title ("Dhanshe's Farm"), no schema and 556 words. On-page work cannot explain that rank. Backlinks, brand searches or other off-page signals probably do, and I cannot check those here. Check the referring domains for dhanshefarm.com in Ahrefs before copying anything from it.
+
+## Your own site: ratnagirialphonso.com
+Its homepage uses H6 for 88 post titles and H4 for 22 other items, with only two H2s. That is a heading-structure problem worth fixing in that theme, but it is outside this PR.
+
+---
+
+# Earlier work (kept for reference)
+
+## Earlier notes (superseded where they say "blocked")
 
 ## Read this first
 Update: the homepage of **ratnagirihapus.store is now verified** from the page source you pasted (cached by the site on 3 Oct 2026). The other competitors are still unverified because the cloud environment's network policy blocks every competitor domain (rqdfarm.in, aamrai.com, foodwalas.com, devgadmango.com, ratnagirialphonsomango.com, ratnagirifarms.com) and Google's developer docs. Both `WebFetch` and `curl` were denied, and `WebSearch` returns only summaries, not People Also Ask boxes or AI Overview citations.
