@@ -58,7 +58,7 @@
             "overlay_position": "justify-start items-center",
             "overlay_text_align": "text-start",
             "mob_center_text": true,
-            "subheading": "Online — Farm Fresh, Delivered Across India",
+            "subheading": "Online \u2014 Farm Fresh, Delivered Across India",
             "heading": "Buy GI Tagged Alphonso Mango Online in India",
             "heading_size": "h4",
             "heading_h1": true,
@@ -173,7 +173,7 @@
         "heading_MpgbB9": {
           "type": "heading",
           "settings": {
-            "heading": "Mango Offer Ending Soon 🥭",
+            "heading": "Mango Offer Ending Soon \ud83e\udd6d",
             "heading_size": "h4",
             "heading_h1": false
           }
@@ -519,7 +519,7 @@
         "template--16154615972040__747f5bec-2c63-4259-aa6c-b06cf8f3ed13-testimonial-3": {
           "type": "testimonial",
           "settings": {
-            "testimonial": "<p>Totally reliable, trustworthy website and people. Received a nice discount on my mangoes. It was nicely packed and also got it delivered in time. So far, I have purchased 15 dozen mangoes from this website. 2-3 mangoes were spoilt but that’s very unpredictable what’s inside. Overall satisfied with my purchase</p>",
+            "testimonial": "<p>Totally reliable, trustworthy website and people. Received a nice discount on my mangoes. It was nicely packed and also got it delivered in time. So far, I have purchased 15 dozen mangoes from this website. 2-3 mangoes were spoilt but that\u2019s very unpredictable what\u2019s inside. Overall satisfied with my purchase</p>",
             "author": "GAURAV. S",
             "author_info": "",
             "show_star_rating": true,
@@ -795,6 +795,14 @@
             "title": "Ratnagiri Alphonso Mangoes - Incredible India feature",
             "url": "https://www.facebook.com/inbministry/posts/no-other-words-just-stunningdid-you-know-ratnagiri-is-home-to-the-world-famous-a/996613179166104/"
           }
+        },
+        "link_13": {
+          "type": "link",
+          "settings": {
+            "source": "ThePrint (ANI press release)",
+            "title": "Summer Delights Delivered: Experience Ratnagiri and Devgad Alphonso Mangoes at Your Doorstep",
+            "url": "https://theprint.in/ani-press-releases/summer-delights-delivered-experience-ratnagiri-and-devgad-alphonso-mangoes-at-your-doorstep/1987656/"
+          }
         }
       },
       "block_order": [
@@ -803,6 +811,7 @@
         "link_03",
         "link_04",
         "link_05",
+        "link_13",
         "link_06",
         "link_07",
         "link_08",

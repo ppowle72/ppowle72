@@ -38,3 +38,8 @@ Absence from Ahrefs/SEMrush is not proof there is no link: these tools miss page
 - For ANI, ThePrint, LatestLY, mid-day and BNN: open each page, confirm the link to alphonsomango.in exists and which anchor it uses. If missing, ask the publisher to link the brand name.
 - Optional: allow aninews.in, theprint.in, latestly.com, bnnbreaking.com and mid-day.com in the environment network settings (one domain per line) and start a new session, and I will check each page.
 - ThePrint is a real ANI-syndicated page in the PDF and can be added to the homepage press section once you confirm it names the brand. ANI and LatestLY are already there.
+
+## Update (5 Oct 2026)
+- **Search Console:** Manual actions and Security issues both show "No issues detected" (user screenshots). No link clean-up is needed for penalty reasons. Disavow only if rankings or a notice change.
+- **ratnagirihapus.shop and ratnagirimango.in** are run by the owner's team. They link to alphonsomango.in with "Proveda Superfoods Pvt Ltd" anchors. Do not disavow them. Ahrefs's spam flag on them is not a problem to act on. `ratnagirihapus.store` is a competitor.
+- **ThePrint** added to the homepage press section (block `link_13`, after LatestLY) in the staged theme. The page was not opened from here (blocked).
