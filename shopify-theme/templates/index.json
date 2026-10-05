@@ -696,6 +696,126 @@
       "settings": {
         "last_reviewed": "2026-10-04"
       }
+    },
+    "home_press": {
+      "type": "home-press",
+      "blocks": {
+        "link_01": {
+          "type": "link",
+          "settings": {
+            "source": "NDTV Food",
+            "title": "Do The Mangoes You Eat Contain Carbide? 4 Easy Tips To Find Out",
+            "url": "https://food.ndtv.com/food-drinks/do-the-mangoes-you-eat-contain-carbide-4-easy-tips-to-find-out-5462129"
+          }
+        },
+        "link_02": {
+          "type": "link",
+          "settings": {
+            "source": "NDTV Web Stories",
+            "title": "How To Check Carbide In Mangoes",
+            "url": "https://food.ndtv.com/webstories/food/how-to-check-carbide-in-mangoes-36776"
+          }
+        },
+        "link_03": {
+          "type": "link",
+          "settings": {
+            "source": "The Economic Times",
+            "title": "Famous alphonso mango is facing existential crisis this year",
+            "url": "https://m.economictimes.indiatimes.com/news/india/famous-alphonso-mango-is-facing-existential-crisis-this-year/articleshow/131440484.cms"
+          }
+        },
+        "link_04": {
+          "type": "link",
+          "settings": {
+            "source": "ANI News",
+            "title": "Summer Delights Delivered: Experience Ratnagiri and Devgad Alphonso Mangoes at Your Doorstep",
+            "url": "https://www.aninews.in/news/business/summer-delights-delivered-experience-ratnagiri-and-devgad-alphonso-mangoes-at-your-doorstep20240304150643/"
+          }
+        },
+        "link_05": {
+          "type": "link",
+          "settings": {
+            "source": "LatestLY",
+            "title": "Summer Delights Delivered: Experience Ratnagiri and Devgad Alphonso Mangoes at Your Doorstep",
+            "url": "https://www.latestly.com/agency-news/business-news-summer-delights-delivered-experience-ratnagiri-and-devgad-alphonso-mangoes-at-your-doorstep-5798437.html"
+          }
+        },
+        "link_06": {
+          "type": "link",
+          "settings": {
+            "source": "The Better India",
+            "title": "Order Organic Mangoes From Farms Across India Using 8 Online Platforms",
+            "url": "https://thebetterindia.com/347512/order-mangoes-ratnagiri-devgadh-alphonso-jardalu-online-in-mumbai-bengaluru-delhi-pune/"
+          }
+        },
+        "link_07": {
+          "type": "link",
+          "settings": {
+            "source": "The Better India (web story)",
+            "title": "8 Online Platforms That Deliver Organic Mangoes From Farms",
+            "url": "https://thebetterindia.com/web-stories/mango-delivery-online-farm-fresh-organic-pesticide-free-mangoes-alphonso-devgad-hapus-india/"
+          }
+        },
+        "link_08": {
+          "type": "link",
+          "settings": {
+            "source": "Fructidor",
+            "title": "Early picking and surplus crop drive mango prices down in India",
+            "url": "https://fructidor.com/en/news/news-detail/f550167e-5300-48db-8b8c-9b29226ac70d"
+          }
+        },
+        "link_09": {
+          "type": "link",
+          "settings": {
+            "source": "Inc42",
+            "title": "Alphonsomango company profile",
+            "url": "https://inc42.com/company/alphonsomango/latest/"
+          }
+        },
+        "link_10": {
+          "type": "link",
+          "settings": {
+            "source": "LBB",
+            "title": "Alphonsomango.in - Fresh Mango Delivery in Mumbai",
+            "url": "https://lbb.in/mumbai/alphonsomangoin-01e485/"
+          }
+        },
+        "link_11": {
+          "type": "link",
+          "settings": {
+            "source": "LBB",
+            "title": "Order Mangoes Online This Summer - Mumbai Guide",
+            "url": "https://lbb.in/mumbai/order-mangoes-online-mumbai/"
+          }
+        },
+        "link_12": {
+          "type": "link",
+          "settings": {
+            "source": "Ministry of Information and Broadcasting (Facebook)",
+            "title": "Ratnagiri Alphonso Mangoes - Incredible India feature",
+            "url": "https://www.facebook.com/inbministry/posts/no-other-words-just-stunningdid-you-know-ratnagiri-is-home-to-the-world-famous-a/996613179166104/"
+          }
+        }
+      },
+      "block_order": [
+        "link_01",
+        "link_02",
+        "link_03",
+        "link_04",
+        "link_05",
+        "link_06",
+        "link_07",
+        "link_08",
+        "link_09",
+        "link_10",
+        "link_11",
+        "link_12"
+      ],
+      "disabled": true,
+      "settings": {
+        "heading": "Press and media",
+        "intro": ""
+      }
     }
   },
   "order": [
@@ -711,6 +831,7 @@
     "media_with_text_Gq4rRa",
     "e8b8d348-f44f-42ad-8fa1-804ba2f728e9",
     "home_seo_content",
+    "home_press",
     "747f5bec-2c63-4259-aa6c-b06cf8f3ed13",
     "17739951318b27cb92",
     "rich_text_DzNhRn",

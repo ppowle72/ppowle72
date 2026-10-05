@@ -1,0 +1,54 @@
+{%- comment -%}
+  Press and media links. Ships DISABLED in templates/index.json. Turn it on in the theme editor
+  only after confirming that each linked page really mentions AlphonsoMango.in or its founder.
+  Links open in a new tab. No schema is emitted, so nothing here claims "mentions" to search engines.
+{%- endcomment -%}
+{%- if section.blocks.size > 0 -%}
+<div class="section home-press" id="home-press">
+  <div class="container">
+    <div class="reading-width">
+      <h2 class="h3 home-press__h">{{ section.settings.heading | escape }}</h2>
+      {%- if section.settings.intro != blank -%}<p>{{ section.settings.intro | escape }}</p>{%- endif -%}
+      <ul class="home-press__list">
+        {%- for block in section.blocks -%}
+          {%- if block.settings.url != blank and block.settings.title != blank -%}
+            <li {{ block.shopify_attributes }}>
+              {%- if block.settings.source != blank -%}<strong>{{ block.settings.source | escape }}:</strong> {% endif -%}
+              <a href="{{ block.settings.url }}" target="_blank" rel="noopener noreferrer">{{ block.settings.title | escape }}</a>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </div>
+  </div>
+</div>
+<style>
+  .home-press { padding: 1.5rem 0; }
+  .home-press__h { margin: 0 0 .75rem; }
+  .home-press__list { padding-left: 1.25rem; margin: 0; }
+  .home-press__list li { margin-bottom: .5rem; }
+</style>
+{%- endif -%}
+{% schema %}
+{
+  "name": "Press and media (SEO)",
+  "tag": "section",
+  "class": "home-press-section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Press and media" },
+    { "type": "textarea", "id": "intro", "label": "Intro (optional)" }
+  ],
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Press link",
+      "settings": [
+        { "type": "text", "id": "source", "label": "Publication", "default": "Publication" },
+        { "type": "text", "id": "title", "label": "Article title", "default": "Article title" },
+        { "type": "url", "id": "url", "label": "Article link" }
+      ]
+    }
+  ],
+  "presets": [ { "name": "Press and media (SEO)", "category": "Text" } ]
+}
+{% endschema %}

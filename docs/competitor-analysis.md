@@ -49,8 +49,30 @@ Not mango competitors, ignore for benchmarking: konkanfoodbazar.com (Konkan snac
 - **Press logos and video testimonials.** Need real material from you.
 - **Offer codes** (ratnagirihapus.store's 10% code, Dhanshe's first-time offer). Your decision.
 
+
+## Dhanshe Farm backlink profile (Ahrefs export, 5 Oct 2026)
+Source: your `dhanshefarm.com-backlinks-subdomains` export (1,146 backlinks, each from a different referring host). Decoded from the damaged export; classification below is my heuristic (anchor text and page titles that mention backlinks, guest posts, DR/DA, PBN, SEO services, plus link-seller domains), so treat the percentages as approximate. Lists: `dhanshefarm-backlink-domains.csv` (all hosts) and `dhanshefarm-backlinks-nonspam.csv` (the 39 non-spam links).
+
+| Measure | Result |
+|---|---|
+| Backlinks | 1,146 from 1,146 different hosts |
+| Pointing at the homepage | 1,140 (99.5%) |
+| Link-seller / auto-generated "domain report" pages | about 1,107 (97%), median Domain Rating 0.7 |
+| Other links | 39 |
+| HTTP status of linking pages | 964 OK, 175 redirects, 4 not found |
+
+**What the 39 real links are:** app-store and app-directory listings (appbrain.com, indusappstore.com, chrome-stats.com, appshunter.io), brand and store directories (brandfetch.com, storeleads.app, "Wix Stores in Nagpur"), a scam-checker page (scam-detector.com), a Google link (google.co.in, DR 91), a wedding-menu article (weddingaffair.co.in) and a Hindi film article (thereviewgeek.com, probably an unrelated mention), plus a few domain-listing sites. There is **no news, press, blog or editorial coverage** of dhanshefarm.com in the profile.
+
+**What the spam links look like:** pages from SEO-service sites (SEOExpress, many `.shop` and `.click` domains with names like "ranklinkpro" and "buyseobacklinks") whose text is a template with the site's name inserted ("Grow Organic Search Traffic with High Quality SEO Links dhanshefarm.com", a fake testimonial repeated 342 times). Those are not links Dhanshe chose; they appear when a site's name is submitted to or scraped by link-selling tools. Some of them may have been bought. Either way they carry almost no value and can carry risk.
+
+**What this means for us**
+1. Dhanshe Farm's #1 position for "hapus mango online" is **not** explained by a strong editorial link profile. Its real links are app-store listings and directories. Possible helpers I cannot verify from here: its app, Google Business Profile or local signals (it is based in Nagpur), brand searches, and low competition for that exact phrase (keyword difficulty 22).
+2. Do **not** copy its link-building. Bulk link-seller pages are exactly what Google's spam systems discount or penalise.
+3. Our link position is better in kind if the press coverage you listed is real and links to us: editorial links from news sites are worth more than all of Dhanshe's 1,107 junk links. Verify those, and see what Ahrefs shows for alphonsomango.in's own referring domains (not uploaded yet; send that export and I will compare the two properly).
+4. Cheap, real wins that Dhanshe's genuine profile suggests: an Android/iOS app listing if you have an app, brand-asset listings (Brandfetch), and complete business-directory profiles.
+
 ## One finding that doesn't fit the on-page story
-dhanshefarm.com ranks first for "hapus mango online" (about 750 est. visits), yet its page is a JavaScript app with a one-word title ("Dhanshe's Farm"), no schema and 556 words. On-page work cannot explain that rank. Backlinks, brand searches or other off-page signals probably do, and I cannot check those here. Check the referring domains for dhanshefarm.com in Ahrefs before copying anything from it.
+dhanshefarm.com ranks first for "hapus mango online" (about 750 est. visits), yet its page is a JavaScript app with a short title ("Dhanshe's Farm"), no schema and 556 words. Its backlink profile (section above) is 97% link-seller spam plus a few app and directory listings, so neither on-page work nor links clearly explains the rank. Treat it as unexplained and do not copy its tactics.
 
 ## Your own site: ratnagirialphonso.com
 Its homepage uses H6 for 88 post titles and H4 for 22 other items, with only two H2s. That is a heading-structure problem worth fixing in that theme, but it is outside this PR.
