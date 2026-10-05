@@ -33,3 +33,12 @@ Suggested: keep one guide (`buy-ratnagiri-hapus-online`, refreshed for 2027), re
 
 ## llms.txt
 Fixed on the staged theme: entity and GI number now match the schema, the stale price range is gone, logistics partners and the 2027 season start are added, and broken city links point to real posts. Still unverified: the WhatsApp number in `llms.txt` (+91 83690 48029) differs from the one on the site (+91 70830 75556); the "Brix 18 to 22 verified per batch" claim; `/blogs/guide/identify-fake-mango`, `/blogs/recipes/authentic-aamras-recipe` and `/blogs/healthy-mango/mango-glycemic-index` (not found in the article list); the `/pages/llms-full` template still names Proveda and an old founding year.
+
+## Redirect file (5 Oct 2026)
+`docs/shopify-redirects-price-posts.csv` (Shopify format, columns "Redirect from" and "Redirect to"): 7 generic Ratnagiri/Hapus price posts go to `/blogs/ratnagiri-hapus/buy-ratnagiri-hapus-online`; 3 Mumbai price posts go to `/blogs/buy/mango-online-mumbai`. Left out on purpose: `alphonso-mango-price-in-india` and `alphonso-mango-1kg-price` (they may rank for price and 1 kg terms). Check Search Console clicks per URL before importing, and hide or delete each old post first, because Shopify only applies a redirect when the old address would otherwise return a 404.
+
+## Press allowlists
+`docs/press-allowlist-core.txt` (ANI, ThePrint, LatestLY, BNN Breaking, mid-day) and `docs/press-allowlist-all-pdf-sites.txt` (every site in the ANI distribution PDF: 204 hosts).
+
+## Media Kit page
+Previous body saved in `docs/media-kit-page-previous-body.html`; new body in `docs/media-kit-page-new-body.html`. The old text said "47,000+ customers"; the homepage says 12,000+ and the ANI release says 35,000+. The new page uses 12,000+. Pick one number and use it everywhere.
