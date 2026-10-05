@@ -50,26 +50,24 @@ Not mango competitors, ignore for benchmarking: konkanfoodbazar.com (Konkan snac
 - **Offer codes** (ratnagirihapus.store's 10% code, Dhanshe's first-time offer). Your decision.
 
 
-## Dhanshe Farm backlink profile (Ahrefs export, 5 Oct 2026)
-Source: your `dhanshefarm.com-backlinks-subdomains` export (1,146 backlinks, each from a different referring host). Decoded from the damaged export; classification below is my heuristic (anchor text and page titles that mention backlinks, guest posts, DR/DA, PBN, SEO services, plus link-seller domains), so treat the percentages as approximate. Lists: `dhanshefarm-backlink-domains.csv` (all hosts) and `dhanshefarm-backlinks-nonspam.csv` (the 39 non-spam links).
+## Dhanshe Farm backlink profile (revised Ahrefs export, 5 Oct 2026)
+Source: the revised `dhanshefarm.com-backlinks-subdomains` export (1,146 backlinks from 1,146 different hosts). This version includes Ahrefs' own "Is spam" flag, so the figures below use that flag, not my earlier heuristic. Lists: `dhanshefarm-backlink-domains.csv` and `dhanshefarm-backlinks-nonspam.csv`. Side-by-side with our profile: `backlink-profile-comparison.md`.
 
 | Measure | Result |
 |---|---|
-| Backlinks | 1,146 from 1,146 different hosts |
-| Pointing at the homepage | 1,140 (99.5%) |
-| Link-seller / auto-generated "domain report" pages | about 1,107 (97%), median Domain Rating 0.7 |
-| Other links | 39 |
-| HTTP status of linking pages | 964 OK, 175 redirects, 4 not found |
+| Backlinks | 1,146 (1,142 point at the homepage) |
+| Flagged spam by Ahrefs | 1,099 (96%) |
+| Not flagged | 47 (17 with Domain Rating 20 or more, 13 with 40 or more, 6 with 60 or more, 1 with 80 or more) |
+| Nofollow among the 47 | about 30% |
 
-**What the 39 real links are:** app-store and app-directory listings (appbrain.com, indusappstore.com, chrome-stats.com, appshunter.io), brand and store directories (brandfetch.com, storeleads.app, "Wix Stores in Nagpur"), a scam-checker page (scam-detector.com), a Google link (google.co.in, DR 91), a wedding-menu article (weddingaffair.co.in) and a Hindi film article (thereviewgeek.com, probably an unrelated mention), plus a few domain-listing sites. There is **no news, press, blog or editorial coverage** of dhanshefarm.com in the profile.
+**The 47 real links** are app-store and app-directory listings (appbrain.com, indusappstore.com, chrome-stats.com, appshunter.io), brand and store directories (brandfetch.com, storeleads.app), a scam-checker page (scam-detector.com), a Google link (google.co.in), a case-study page (charusolutions.com) and a few unrelated articles. There is no news, press or editorial coverage of dhanshefarm.com in the profile.
 
-**What the spam links look like:** pages from SEO-service sites (SEOExpress, many `.shop` and `.click` domains with names like "ranklinkpro" and "buyseobacklinks") whose text is a template with the site's name inserted ("Grow Organic Search Traffic with High Quality SEO Links dhanshefarm.com", a fake testimonial repeated 342 times). Those are not links Dhanshe chose; they appear when a site's name is submitted to or scraped by link-selling tools. Some of them may have been bought. Either way they carry almost no value and can carry risk.
+**The spam links** are pages from SEO-service sites (SEOExpress and many `.shop`, `.click` and `.store` domains) whose text is a template with the site's name inserted, including a fake testimonial repeated hundreds of times. They appear when a site name is submitted to or scraped by link-selling tools, so they are not necessarily links Dhanshe chose.
 
 **What this means for us**
-1. Dhanshe Farm's #1 position for "hapus mango online" is **not** explained by a strong editorial link profile. Its real links are app-store listings and directories. Possible helpers I cannot verify from here: its app, Google Business Profile or local signals (it is based in Nagpur), brand searches, and low competition for that exact phrase (keyword difficulty 22).
-2. Do **not** copy its link-building. Bulk link-seller pages are exactly what Google's spam systems discount or penalise.
-3. Our link position is better in kind if the press coverage you listed is real and links to us: editorial links from news sites are worth more than all of Dhanshe's 1,107 junk links. Verify those, and see what Ahrefs shows for alphonsomango.in's own referring domains (not uploaded yet; send that export and I will compare the two properly).
-4. Cheap, real wins that Dhanshe's genuine profile suggests: an Android/iOS app listing if you have an app, brand-asset listings (Brandfetch), and complete business-directory profiles.
+1. Dhanshe Farm's #1 position for "hapus mango online" is not explained by its links, which are almost all spam plus app and directory listings. Possible helpers I cannot verify: its app, Google Business Profile and local signals (it is based in Nagpur), brand searches, and low competition for that phrase (keyword difficulty 22).
+2. Do not copy its link-building.
+3. Our own profile is stronger in real links: 685 non-spam links against its 47. See `backlink-profile-comparison.md` for that and for the risks in ours.
 
 ## One finding that doesn't fit the on-page story
 dhanshefarm.com ranks first for "hapus mango online" (about 750 est. visits), yet its page is a JavaScript app with a short title ("Dhanshe's Farm"), no schema and 556 words. Its backlink profile (section above) is 97% link-seller spam plus a few app and directory listings, so neither on-page work nor links clearly explains the rank. Treat it as unexplained and do not copy its tactics.
