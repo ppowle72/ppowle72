@@ -58,6 +58,12 @@
     {%- endif -%}
   {%- elsif variant.title != 'Default Title' -%}
     {%- assign size_value = variant.title -%}
+  {%- elsif variant.metafields.custom.net_content != blank -%}
+    {%- assign size_value = variant.metafields.custom.net_content.value -%}
+  {%- elsif variant.weight > 0 -%}
+    {%- assign size_value = variant.weight | append: ' g' -%}
+  {%- else -%}
+    {%- assign size_value = 'Standard pack' -%}
   {%- endif -%}
   {%- capture variant_props -%}
     {%- if variant.metafields.custom.pack_quantity != blank -%}{"@type":"PropertyValue","name":"Pack quantity","value":{{ variant.metafields.custom.pack_quantity.value | json }}}@@SEP@@{%- endif -%}
