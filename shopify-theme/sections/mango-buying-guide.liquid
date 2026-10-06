@@ -1,0 +1,61 @@
+{%- comment -%}
+  mango-buying-guide.liquid (6 Oct 2026)
+  Price, sizes, season and delivery block with a short FAQ for the product pages listed in the setting.
+  Prices, options and stock are read live from the product, so nothing needs updating by hand. Renders nothing on other products.
+{%- endcomment -%}
+{%- assign am_bg_handles = section.settings.handles | split: ',' -%}
+{%- if product and am_bg_handles contains product.handle -%}
+  {%- assign am_bg_price = product.price_min | money_without_currency | remove: '.00' | prepend: '₹' -%}
+  <section class="am-buying-guide section section--template" id="price-season-delivery">
+    <div class="container">
+      <div class="reading-width mx-auto rte">
+        <h2>{{ product.title | escape }}: price, sizes, season and delivery</h2>
+        <h3>Price and sizes</h3>
+        <div class="scrollable-table"><table style="width:100%;border-collapse:collapse;margin:8px 0 24px;">
+          <thead><tr><th style="text-align:left;padding:8px;border:1px solid #ddd;">Option</th><th style="text-align:left;padding:8px;border:1px solid #ddd;">Price (INR)</th><th style="text-align:left;padding:8px;border:1px solid #ddd;">Status</th></tr></thead>
+          <tbody>
+          {%- for am_v in product.variants limit: 15 -%}
+            {%- assign am_fs = am_v.metafields.custom.fulfillment_status.value | default: '' | downcase -%}
+            {%- if am_fs == 'in_stock' -%}{%- assign am_st = 'In stock' -%}
+            {%- elsif am_fs == 'preorder' -%}{%- assign am_st = 'Pre-order' -%}
+            {%- elsif am_fs == 'backorder' -%}{%- assign am_st = 'Backorder' -%}
+            {%- elsif am_fs == 'out_of_stock' -%}{%- assign am_st = 'Out of stock (seasonal)' -%}
+            {%- elsif am_v.available -%}{%- assign am_st = 'In stock' -%}
+            {%- else -%}{%- assign am_st = 'Out of stock' -%}{%- endif -%}
+            <tr><td style="padding:8px;border:1px solid #ddd;">{% if am_v.title == 'Default Title' %}Standard pack{% else %}{{ am_v.title | escape }}{% endif %}</td><td style="padding:8px;border:1px solid #ddd;">{{ am_v.price | money_without_currency | remove: '.00' | prepend: '₹' }}</td><td style="padding:8px;border:1px solid #ddd;">{{ am_st }}</td></tr>
+          {%- endfor -%}
+          </tbody>
+        </table></div>
+        <h3>Season</h3>
+        <p>{{ section.settings.season_note | escape }}</p>
+        <h3>Delivery</h3>
+        <p>{{ section.settings.delivery | escape }}</p>
+        <h3>Frequently asked questions</h3>
+        <p><strong>What is the price of {{ product.title | escape }}?</strong><br>
+        {%- if product.price_min == product.price_max -%}
+          The price is {{ am_bg_price }}.
+        {%- else -%}
+          Prices start from {{ am_bg_price }} depending on the option you choose.
+        {%- endif -%}{{ ' ' }}The table above shows the current price of every option.</p>
+        <p><strong>Is {{ product.title | escape }} available now?</strong><br>
+        {%- if product.available -%}
+          Yes, it is in stock. Choose your option and order online.
+        {%- else -%}
+          It is out of stock right now because mangoes are seasonal. {{ section.settings.season_note | escape }}
+        {%- endif -%}</p>
+        <p><strong>How is {{ product.title | escape }} delivered?</strong><br>{{ section.settings.delivery | escape }}</p>
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Mango buying guide",
+  "settings": [
+    { "type": "text", "id": "handles", "label": "Product handles to show on (comma separated)", "default": "pairi-mango,dasheri-mango-online,totapuri-mango,malgova-mango,salem-mango,malawi-mango" },
+    { "type": "textarea", "id": "season_note", "label": "Season note", "default": "Fresh mangoes are seasonal. The 2027 mango season starts on 1 February 2027. Stock status on this page is live." },
+    { "type": "textarea", "id": "delivery", "label": "Delivery text", "default": "Orders placed before 12 noon IST (Monday to Saturday) are dispatched the same day. Delivery takes 1 to 3 days for most PIN codes and 1 to 2 days to most metros, depending on your PIN code. Fresh mangoes are delivered by Blue Dart to more than 4,700 PIN codes." }
+  ]
+}
+{% endschema %}

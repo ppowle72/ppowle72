@@ -15,7 +15,7 @@
 {%- endcomment -%}
 {%- assign am_text = content -%}
 {%- if am_text contains '[[am:' -%}
-  {%- assign am_handles = 'ratnagiri-alphonso-mango,devgad-alphonso-mango,kesar-mango,alphonso-mango-order-online,alphonso-mango-pulp,alphonso-mango-cubes' | split: ',' -%}
+  {%- assign am_handles = 'ratnagiri-alphonso-mango,devgad-alphonso-mango,kesar-mango,alphonso-mango-order-online,alphonso-mango-pulp,alphonso-mango-cubes,pairi-mango,dasheri-mango-online,totapuri-mango,malgova-mango,salem-mango,malawi-mango,aamras-ambyacha-ras' | split: ',' -%}
   {%- for am_h in am_handles -%}
     {%- assign am_p = all_products[am_h] -%}
     {%- if am_p != blank and am_p.variants.size > 0 -%}

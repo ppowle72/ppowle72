@@ -55,7 +55,7 @@
         {%- capture am_clean -%}{{ am_parts[0] }}{%- for am_p in am_parts offset: 1 -%}{%- assign am_after = am_p | split: '</script>' -%}{%- for am_seg in am_after offset: 1 -%}{{ am_seg }}{%- unless forloop.last -%}</script>{%- endunless -%}{%- endfor -%}{%- endfor -%}{%- endcapture -%}
         {%- assign am_body = am_clean -%}
       {%- endif -%}
-      {{ am_body }}
+      {% render 'am-live-tokens', content: am_body %}
     </div>
 
     <div class="reading-width justify-between article-width flex flex-col md:pb-4 md:flex-row gap-8">
