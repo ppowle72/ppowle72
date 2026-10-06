@@ -1,0 +1,190 @@
+{%- comment -%}
+  product-commerce-schema.liquid v1.2.0 (6 Oct 2026)
+  ONE ProductGroup -> hasVariant -> Product -> Offer graph per product page, built only from live Shopify data.
+  Rendered from layout/theme.liquid for request.page_type == 'product'.
+  v1.2.0 changes vs v1.1.0:
+    - every variant Product now carries "size" (metafield-based label for fresh mangoes, otherwise the variant's option value),
+      and variesBy is the supported URI https://schema.org/size when the product has more than one variant. v1.1.0 listed
+      custom PropertyValue entries in variesBy and left size empty on many variants (GSC: "Missing field 'size'").
+    - seller, shipping and return policy are written inline in every Offer (Google does not resolve an @id that is defined in a
+      different script block).
+    - cutoffTime aligned to 12:00 IST (homepage and global-schema both say 12 noon).
+    - Offer.areaServed = India; short description on every variant.
+  Availability: variant metafield custom.fulfillment_status (in_stock | out_of_stock | preorder | backorder), falling back to variant.available.
+  No GTIN is invented: gtin8/12/13/14 only from variant.barcode by length, else mpn (custom.mpn or SKU).
+  Ratings: Judge.me product metafields reviews.rating and reviews.rating_count, on the ProductGroup only, and only when real.
+{%- endcomment -%}
+{%- if request.page_type == 'product' and product -%}
+{%- assign product_url = shop.url | append: product.url -%}
+{%- assign group_id = product_url | append: '#product-group' -%}
+{%- assign brand_name = product.vendor | default: shop.name -%}
+{%- assign return_policy_id = shop.url | append: '/policies/refund-policy#return-policy' -%}
+{%- assign currency = cart.currency.iso_code | default: shop.currency -%}
+{%- assign has_many = false -%}
+{%- if product.variants.size > 1 -%}{%- assign has_many = true -%}{%- endif -%}
+{%- assign short_desc = product.description | strip_html | strip_newlines | strip | truncate: 300 -%}
+{%- capture product_props -%}
+    {%- if product.metafields.custom.cultivar != blank -%}{"@type":"PropertyValue","name":"Cultivar","value":{{ product.metafields.custom.cultivar.value | json }}}@@SEP@@{%- endif -%}
+    {%- if product.metafields.custom.origin_district != blank -%}{"@type":"PropertyValue","name":"Origin district","value":{{ product.metafields.custom.origin_district.value | json }}}@@SEP@@{%- endif -%}
+    {%- if product.metafields.custom.origin_state != blank -%}{"@type":"PropertyValue","name":"Origin state","value":{{ product.metafields.custom.origin_state.value | json }}}@@SEP@@{%- endif -%}
+    {%- if product.metafields.custom.gi_status != blank -%}{"@type":"PropertyValue","name":"GI status","value":{{ product.metafields.custom.gi_status.value | json }}}@@SEP@@{%- endif -%}
+    {%- if product.metafields.custom.gi_registration_reference != blank -%}{"@type":"PropertyValue","name":"GI registration reference","value":{{ product.metafields.custom.gi_registration_reference.value | json }}}@@SEP@@{%- endif -%}
+    {%- if product.metafields.custom.harvest_season != blank -%}{"@type":"PropertyValue","name":"Harvest season","value":{{ product.metafields.custom.harvest_season.value | json }}}@@SEP@@{%- endif -%}
+    {%- if product.metafields.custom.storage_instruction != blank -%}{"@type":"PropertyValue","name":"Storage instruction","value":{{ product.metafields.custom.storage_instruction.value | json }}}@@SEP@@{%- endif -%}
+    {%- if product.metafields.custom.ripening_instruction != blank -%}{"@type":"PropertyValue","name":"Ripening guidance","value":{{ product.metafields.custom.ripening_instruction.value | json }}}@@SEP@@{%- endif -%}
+    {%- if product.metafields.custom.shelf_life != blank -%}{"@type":"PropertyValue","name":"Shelf life","value":{{ product.metafields.custom.shelf_life.value | json }}}@@SEP@@{%- endif -%}
+    {%- if product.metafields.custom.ingredients != blank -%}{"@type":"PropertyValue","name":"Ingredients","value":{{ product.metafields.custom.ingredients.value | json }}}@@SEP@@{%- endif -%}
+    {%- if product.metafields.custom.allergen_statement != blank -%}{"@type":"PropertyValue","name":"Allergen information","value":{{ product.metafields.custom.allergen_statement.value | json }}}@@SEP@@{%- endif -%}
+    {%- if product.metafields.custom.package_type != blank -%}{"@type":"PropertyValue","name":"Package type","value":{{ product.metafields.custom.package_type.value | json }}}@@SEP@@{%- endif -%}
+    {%- if product.metafields.custom.fssai_license_reference != blank -%}{"@type":"PropertyValue","name":"FSSAI licence","value":{{ product.metafields.custom.fssai_license_reference.value | json }}}@@SEP@@{%- endif -%}
+    {%- if product.metafields.custom.delivery_restrictions != blank -%}{"@type":"PropertyValue","name":"Delivery restrictions","value":{{ product.metafields.custom.delivery_restrictions.value | json }}}@@SEP@@{%- endif -%}
+    {%- if product.metafields.custom.shelf_life_after_delivery != blank -%}{"@type":"PropertyValue","name":"Shelf life after delivery","value":{{ product.metafields.custom.shelf_life_after_delivery.value | json }}}@@SEP@@{%- endif -%}
+{%- endcapture -%}
+{%- capture variants_json -%}
+{%- for variant in product.variants -%}
+  {%- assign variant_url = product_url | append: '?variant=' | append: variant.id -%}
+  {%- assign fs = variant.metafields.custom.fulfillment_status.value | default: '' | downcase -%}
+  {%- if fs == 'preorder' -%}{%- assign availability = 'https://schema.org/PreOrder' -%}
+  {%- elsif fs == 'backorder' -%}{%- assign availability = 'https://schema.org/BackOrder' -%}
+  {%- elsif fs == 'out_of_stock' -%}{%- assign availability = 'https://schema.org/OutOfStock' -%}
+  {%- elsif fs == 'in_stock' or variant.available -%}{%- assign availability = 'https://schema.org/InStock' -%}
+  {%- else -%}{%- assign availability = 'https://schema.org/OutOfStock' -%}{%- endif -%}
+  {%- comment -%} size label: fresh-mango metafields first, else the variant's own option text {%- endcomment -%}
+  {%- assign size_value = '' -%}
+  {%- if variant.metafields.custom.pack_quantity != blank and variant.metafields.custom.fruit_size_label != blank -%}
+    {%- assign size_value = variant.metafields.custom.pack_quantity.value | append: ', ' | append: variant.metafields.custom.fruit_size_label.value -%}
+    {%- if variant.metafields.custom.fruit_size_range != blank -%}
+      {%- assign size_value = size_value | append: ' (' | append: variant.metafields.custom.fruit_size_range.value | append: ')' -%}
+    {%- endif -%}
+  {%- elsif variant.title != 'Default Title' -%}
+    {%- assign size_value = variant.title -%}
+  {%- endif -%}
+  {%- capture variant_props -%}
+    {%- if variant.metafields.custom.pack_quantity != blank -%}{"@type":"PropertyValue","name":"Pack quantity","value":{{ variant.metafields.custom.pack_quantity.value | json }}}@@SEP@@{%- endif -%}
+    {%- if variant.metafields.custom.fruit_count != blank -%}{"@type":"PropertyValue","name":"Fruit count","value":{{ variant.metafields.custom.fruit_count.value | json }}}@@SEP@@{%- endif -%}
+    {%- if variant.metafields.custom.fruit_grade != blank -%}{"@type":"PropertyValue","name":"Fruit grade","value":{{ variant.metafields.custom.fruit_grade.value | json }}}@@SEP@@{%- endif -%}
+    {%- if variant.metafields.custom.fruit_size_range != blank -%}{"@type":"PropertyValue","name":"Fruit size range","value":{{ variant.metafields.custom.fruit_size_range.value | json }}}@@SEP@@{%- endif -%}
+    {%- if variant.metafields.custom.expected_net_weight != blank -%}{"@type":"PropertyValue","name":"Expected net weight","value":{{ variant.metafields.custom.expected_net_weight.value | json }}}@@SEP@@{%- endif -%}
+    {%- if variant.metafields.custom.dispatch_ripeness != blank -%}{"@type":"PropertyValue","name":"Ripeness at dispatch","value":{{ variant.metafields.custom.dispatch_ripeness.value | json }}}@@SEP@@{%- endif -%}
+    {%- if variant.metafields.custom.net_content != blank -%}{"@type":"PropertyValue","name":"Net content","value":{{ variant.metafields.custom.net_content.value | json }}}@@SEP@@{%- endif -%}
+  {%- endcapture -%}
+  {%- assign all_props_raw = variant_props | append: product_props | split: '@@SEP@@' -%}
+  {%- assign first_prop = true -%}
+  {%- capture all_props -%}{%- for pr in all_props_raw -%}{%- assign prs = pr | strip -%}{%- if prs != blank -%}{%- unless first_prop -%},{%- endunless -%}{{ prs }}{%- assign first_prop = false -%}{%- endif -%}{%- endfor -%}{%- endcapture -%}
+  {%- assign image_src = variant.featured_image | default: product.featured_image -%}
+  {
+    "@type": "Product",
+    "@id": {{ variant_url | append: '#product' | json }},
+    "name": {{ product.title | append: ' – ' | append: variant.title | json }},
+    "description": {{ short_desc | json }},
+    "url": {{ variant_url | json }},
+    {%- if variant.sku != blank %}
+    "sku": {{ variant.sku | json }},
+    {%- endif -%}
+    {%- if variant.barcode != blank -%}
+      {%- assign bl = variant.barcode | strip | size -%}
+      {%- if bl == 8 %}
+    "gtin8": {{ variant.barcode | strip | json }},
+      {%- elsif bl == 12 %}
+    "gtin12": {{ variant.barcode | strip | json }},
+      {%- elsif bl == 13 %}
+    "gtin13": {{ variant.barcode | strip | json }},
+      {%- elsif bl == 14 %}
+    "gtin14": {{ variant.barcode | strip | json }},
+      {%- elsif variant.metafields.custom.mpn != blank %}
+    "mpn": {{ variant.metafields.custom.mpn.value | json }},
+      {%- endif -%}
+    {%- elsif variant.metafields.custom.mpn != blank %}
+    "mpn": {{ variant.metafields.custom.mpn.value | json }},
+    {%- elsif variant.sku != blank %}
+    "mpn": {{ variant.sku | json }},
+    {%- endif %}
+    "brand": { "@type": "Brand", "name": {{ brand_name | json }} },
+    "isVariantOf": { "@id": {{ group_id | json }} },
+    {%- if product.metafields.custom.origin_country != blank %}
+    "countryOfOrigin": {{ product.metafields.custom.origin_country.value | json }},
+    {%- endif -%}
+    {%- if product.type != blank %}
+    "category": {{ product.type | json }},
+    {%- endif -%}
+    {%- if size_value != blank %}
+    "size": {{ size_value | json }},
+    {%- endif -%}
+    {%- if image_src %}
+    "image": [ {{ image_src | image_url: width: 1600 | prepend: 'https:' | json }} ],
+    {%- endif -%}
+    {%- if variant.weight > 0 %}
+    "weight": { "@type": "QuantitativeValue", "value": {{ variant.weight | json }}, "unitCode": "GRM" },
+    {%- endif -%}
+    {%- if all_props != blank %}
+    "additionalProperty": [ {{ all_props }} ],
+    {%- endif %}
+    "offers": {
+      "@type": "Offer",
+      "@id": {{ variant_url | append: '#offer' | json }},
+      "url": {{ variant_url | json }},
+      "priceCurrency": {{ currency | json }},
+      "price": {{ variant.price | divided_by: 100.0 | json }},
+      "availability": {{ availability | json }},
+      "itemCondition": "https://schema.org/NewCondition",
+      {%- if variant.sku != blank %}
+      "sku": {{ variant.sku | json }},
+      {%- endif %}
+      "areaServed": { "@type": "Country", "name": "India" },
+      "seller": { "@type": "Organization", "@id": {{ shop.url | append: '/#organization' | json }}, "name": "AlphonsoMango.in", "url": {{ shop.url | json }} },
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "IN" },
+        "shippingRate": { "@type": "MonetaryAmount", "value": 0, "currency": "INR" },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": { "@type": "QuantitativeValue", "minValue": 0, "maxValue": 1, "unitCode": "DAY" },
+          "transitTime": { "@type": "QuantitativeValue", "minValue": 1, "maxValue": 3, "unitCode": "DAY" },
+          "cutoffTime": "12:00:00+05:30",
+          "businessDays": { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"] }
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "@id": {{ return_policy_id | json }},
+        "applicableCountry": "IN",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 1,
+        "refundType": ["https://schema.org/ExchangeRefund", "https://schema.org/StoreCreditRefund"],
+        "returnMethod": "https://schema.org/ReturnByMail",
+        "returnFees": "https://schema.org/FreeReturn",
+        "merchantReturnLink": {{ shop.url | append: '/policies/refund-policy' | json }}
+      }
+    }
+  }{%- unless forloop.last -%},{%- endunless -%}
+{%- endfor -%}
+{%- endcapture -%}
+<script type="application/ld+json" class="gropulse-rich-snippets-schema" data-source="product-commerce-schema v1.2.0">
+{
+  "@context": "https://schema.org",
+  "@type": "ProductGroup",
+  "@id": {{ group_id | json }},
+  "name": {{ product.title | json }},
+  "description": {{ product.description | strip_html | strip_newlines | truncate: 5000 | json }},
+  "url": {{ product_url | json }},
+  "productGroupID": {{ product.id | json }},
+  "brand": { "@type": "Brand", "name": {{ brand_name | json }} },
+  {%- if product.featured_image %}
+  "image": [
+    {%- for image in product.images limit: 8 -%}
+    {{ image | image_url: width: 1600 | prepend: 'https:' | json }}{%- unless forloop.last -%},{%- endunless -%}
+    {%- endfor -%}
+  ],
+  {%- endif -%}
+  {%- if product.metafields.reviews.rating != blank and product.metafields.reviews.rating_count.value > 0 %}
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": {{ product.metafields.reviews.rating.value.rating | json }}, "reviewCount": {{ product.metafields.reviews.rating_count.value | json }}, "bestRating": {{ product.metafields.reviews.rating.value.scale_max | default: 5 | json }}, "worstRating": {{ product.metafields.reviews.rating.value.scale_min | default: 1 | json }} },
+  {%- endif -%}
+  {%- if has_many %}
+  "variesBy": [ "https://schema.org/size" ],
+  {%- endif %}
+  "hasVariant": [
+{{ variants_json }}
+  ]
+}
+</script>
+{%- endif -%}
