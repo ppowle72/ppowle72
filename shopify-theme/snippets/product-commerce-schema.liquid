@@ -1,7 +1,8 @@
 {%- comment -%}
-  product-commerce-schema.liquid v1.3.0 (6 Oct 2026)
+  product-commerce-schema.liquid v1.3.1 (6 Oct 2026)
   ONE ProductGroup -> hasVariant -> Product -> Offer graph per product page, built only from live Shopify data.
   Rendered from layout/theme.liquid for request.page_type == 'product'.
+  v1.3.1: custom.grade and custom.origin_country as additionalProperty.
   v1.3.0: size fallback for single-variant products; areaServed lists states + cities for fresh-mango products.
   v1.2.0 changes vs v1.1.0:
     - every variant Product now carries "size" (metafield-based label for fresh mangoes, otherwise the variant's option value),
@@ -29,6 +30,8 @@
 {%- assign short_desc = product.description | strip_html | strip_newlines | strip | truncate: 300 -%}
 {%- capture product_props -%}
     {%- if product.metafields.custom.cultivar != blank -%}{"@type":"PropertyValue","name":"Cultivar","value":{{ product.metafields.custom.cultivar.value | json }}}@@SEP@@{%- endif -%}
+    {%- if product.metafields.custom.grade != blank -%}{"@type":"PropertyValue","name":"Grade","value":{{ product.metafields.custom.grade.value | json }}}@@SEP@@{%- endif -%}
+    {%- if product.metafields.custom.origin_country != blank -%}{"@type":"PropertyValue","name":"Country of origin","value":{{ product.metafields.custom.origin_country.value | json }}}@@SEP@@{%- endif -%}
     {%- if product.metafields.custom.origin_district != blank -%}{"@type":"PropertyValue","name":"Origin district","value":{{ product.metafields.custom.origin_district.value | json }}}@@SEP@@{%- endif -%}
     {%- if product.metafields.custom.origin_state != blank -%}{"@type":"PropertyValue","name":"Origin state","value":{{ product.metafields.custom.origin_state.value | json }}}@@SEP@@{%- endif -%}
     {%- if product.metafields.custom.gi_status != blank -%}{"@type":"PropertyValue","name":"GI status","value":{{ product.metafields.custom.gi_status.value | json }}}@@SEP@@{%- endif -%}
