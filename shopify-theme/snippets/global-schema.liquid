@@ -336,9 +336,6 @@
 "nutrition":{"@type":"NutritionInformation","calories":"285 calories","carbohydrateContent":"48g","fatContent":"8g","proteinContent":"6g","fiberContent":"2g","sugarContent":"30g","sodiumContent":"45mg"}
 }
 {%- endif -%}
-{%- if am_is_howto -%}
-,{"@type":"HowTo","@id":"https://alphonsomango.in{{ article.url }}#howto","name":"{{ article.title | escape }}","author":{"@id":"https://alphonsomango.in/#prashant-powle"},"publisher":{"@id":"https://alphonsomango.in/#organization"},"dateModified":"{{ article.updated_at | date: '%Y-%m-%d' }}"}
-{%- endif -%}
 ]}
 </script>
 {%- endif -%}
@@ -451,8 +448,7 @@
 {%- elsif page.handle == 'alphonso-mango-ripening-guide' or page.handle == 'brix-ripening-index' -%}
 <script type="application/ld+json" class="gropulse-rich-snippets-schema">
 {"@context":"https://schema.org","@graph":[
-{"@type":"WebPage","@id":"https://alphonsomango.in/pages/{{ page.handle }}#webpage","url":"https://alphonsomango.in/pages/{{ page.handle }}","name":"{{ page.title | escape }} — AlphonsoMango.in","dateModified":"{{ am_today }}","publisher":{"@id":"https://alphonsomango.in/#organization"},"speakable":{"@type":"SpeakableSpecification","cssSelector":["h1","h2","h3","p"]}},
-{"@type":"HowTo","@id":"https://alphonsomango.in/pages/{{ page.handle }}#howto","name":"{{ page.title | escape }}","description":"Complete guide to Alphonso mango ripening stages, Brix levels, and natural hay-bed ripening. GI Authorised User AU/5974/GI/139/260. Powle Home Foods, Ratnagiri.","author":{"@id":"https://alphonsomango.in/#prashant-powle"},"publisher":{"@id":"https://alphonsomango.in/#organization"}}
+{"@type":"WebPage","@id":"https://alphonsomango.in/pages/{{ page.handle }}#webpage","url":"https://alphonsomango.in/pages/{{ page.handle }}","name":"{{ page.title | escape }} — AlphonsoMango.in","dateModified":"{{ am_today }}","publisher":{"@id":"https://alphonsomango.in/#organization"},"speakable":{"@type":"SpeakableSpecification","cssSelector":["h1","h2","h3","p"]}}
 ]}
 </script>
  
