@@ -1,13 +1,13 @@
 # Article cleanup list (8 Oct 2026)
 
 Compiled from the reports of every agent that edited articles in the "pre-order and 48 villages" pass.
-Batches B23, B26, B27 and B28 were still running when this list was written; their findings will be appended.
+Batches B23, B26 and B27 are included below. Batch B28 (last batch) was still running when this version was written and will be appended when it reports.
 
 ## What the pass changed (done, live on Shopify)
 - Pre-order, pre-book, pre-season booking and waitlist sentences about fresh mangoes became: "The 2027 mango season starts on 1 February 2027, and fresh mangoes are out of stock until then." Cards now read "Out of stock until 1 February 2027".
 - The unverified "48 villages" count was removed (wording now "villages across Ratnagiri and Devgad", "our source villages", "Konkan villages").
 - Season Pass sentences were removed where they appeared as one sentence; the Season Pass article itself was NOT touched.
-- Articles covered: the 26 you named, 217 articles with pre-order wording (waves A01 to A24) and 247 with a village count (waves B01 to B28, B23 and B26 to B28 pending).
+- Articles covered: the 26 you named (25 edited, Season Pass article left alone), 217 articles with pre-order wording (waves A01 to A24, all done) and 247 articles with a village count (waves B01 to B27 done; B28 running). One article in wave B (`fresh-blueberry-price-per-kg`) was a false match and was not written.
 
 ## How the edits were checked (and where the check was weaker)
 - Most articles were compared with the live text by script or by eye after writing. Several batches had no byte-level check; they were read by eye.
@@ -70,3 +70,19 @@ Differing versions found across articles: cut-offs of 10 AM, 11 AM, 2 PM, 3 PM, 
 - **Core Web Vitals:** all 11 measured pages fail on mobile (saffron product page worst); needs a PageSpeed report to find the slow scripts.
 - **Indexing:** `/pages/horeca` is unknown to Google; request indexing and link it from the footer; re-run inspection for `/blogs/hapus/devgad-mangoes` (network error).
 - **Not scanned:** blogs other than "how" were scanned in this pass (978 articles in 53 blogs); product descriptions beyond Devgad and Kesar and collection pages were not.
+
+## 8. Findings added from the last batches (B23, B26, B27)
+- **More pass / subscription links:** `alphonso-mango-shop-near-me-best-deals-in-town` links "Alphonso season" to `/pages/monthly-pass` (same page as in `devgad-mangoes-in-mumbai-delicious-delight`). Does `/pages/monthly-pass` exist?
+- **Named person:** `mango-fun-facts`, `alphanso-mango` and several others name Prashant Powle personally. Confirm that is intended (the partner farm is not named anywhere).
+- **Judgement calls in the pass:** `mango-puree` ("Pawas, Velneshwar, and 46 further Konkan villages" now "…and other Konkan villages"); `aamrai-mangoes` ("48 such orchards" drop); `alphonso-mangoes-in-the-box` and a few waitlist cards changed to the 2027 line; `dasheri-mango` lost a garbled "₹0 … 47,961 customers" sentence; `mango-wholesale` lost its waitlist sentences.
+- **Typos and garbled text still live:** "revolurevolutionizedapus", "wibroadeach", "aa loyal" (`best-quality-mango-delivery-online-order-now`); "Powle Home Foods, a brand under Powle Home Foods We hold" (several); unfinished sentence "This section is a " (`alphanso-mango`); `border:1pxindo` (`why-alphonso-mango-is-costly`).
+- **Prices and season text still stale in:** `why-alphonso-mango-is-costly` (11 a.m. cut-off, "dispatch our first box in November", 2026 price dates), `mango-puree` ("opens April 2025" twice, "We do not ship July through March"), `aamrai` (₹599–₹1,699), `mango-delivery-in-mumbai` and `alphanso-mango` (April–June, "Order by mid-May", 10 AM cut-off), `mangos` ("Season: February to June" next to a March–June voice answer), `mango-in-the-third-trimester` ("We do not ship July through January"), `mango-modak` (availability April–June).
+- **Notify-me wording left on purpose:** `mango-delivery-in-mumbai`, `alphanso-mango`, `mango-modak`, `sweet-and-juicy-mango-madness-unveiled`.
+- **Delivery wording:** more differing versions ("next-day delivery", "same-day delivery before 12:00 noon", "weekdays with a 12:00 noon cut-off") in `order-fresh-mango-in-delhi-online-now`, `mangos`, `mango-fun-facts`, `mango-delivery-in-mumbai`.
+
+## 9. Final totals (to be confirmed when B28 reports)
+- Articles scanned: 978 in 53 blogs; 490 matched.
+- Named 26: 25 edited; 1 (Season Pass) waiting for your decision.
+- Wave A (pre-order wording): 217 articles, all written.
+- Wave B (village count only): 247 matched; 246 written or covered, 1 false match; B28 still to report.
+- Retried after approval prompts: `dry-fruit-store-near-me`, `devgad-alphonso-mangoes-online-mumbai`, `mango-for-breakfast`, six articles in B13: all written.
