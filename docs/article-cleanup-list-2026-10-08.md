@@ -1,13 +1,13 @@
 # Article cleanup list (8 Oct 2026)
 
 Compiled from the reports of every agent that edited articles in the "pre-order and 48 villages" pass.
-Batches B23, B26 and B27 are included below. Batch B28 (last batch) was still running when this version was written and will be appended when it reports.
+All batches (A01 to A24, B01 to B28) are included. This is the final version for the pre-order and village-count pass.
 
 ## What the pass changed (done, live on Shopify)
 - Pre-order, pre-book, pre-season booking and waitlist sentences about fresh mangoes became: "The 2027 mango season starts on 1 February 2027, and fresh mangoes are out of stock until then." Cards now read "Out of stock until 1 February 2027".
 - The unverified "48 villages" count was removed (wording now "villages across Ratnagiri and Devgad", "our source villages", "Konkan villages").
 - Season Pass sentences were removed where they appeared as one sentence; the Season Pass article itself was NOT touched.
-- Articles covered: the 26 you named (25 edited, Season Pass article left alone), 217 articles with pre-order wording (waves A01 to A24, all done) and 247 articles with a village count (waves B01 to B27 done; B28 running). One article in wave B (`fresh-blueberry-price-per-kg`) was a false match and was not written.
+- Articles covered: the 26 you named (25 edited, Season Pass article left alone), 217 articles with pre-order wording (waves A01 to A24, all done) and 247 articles with a village count (waves B01 to B28, all done). One article in wave B (`fresh-blueberry-price-per-kg`) was a false match and was not written.
 
 ## How the edits were checked (and where the check was weaker)
 - Most articles were compared with the live text by script or by eye after writing. Several batches had no byte-level check; they were read by eye.
@@ -20,7 +20,8 @@ Batches B23, B26 and B27 are included below. Batch B28 (last batch) was still ru
 ## 1. Decisions needed from you (claims I cannot verify or that carry risk)
 1. **Season Pass article** `what-is-season-pass-for-alphonso-mango` (id 30398021678): entirely about a Season Pass, weekly boxes and pre-order options. Remove, unpublish or rewrite? Not edited.
 2. **Subscription / pass claims:** `alphonso-mango-subscription-box-monthly-delivery-plan-2026` (whole page is a stale 2026 subscription offer with subscribe links), `devgad-mangoes-in-mumbai-delicious-delight` ("Monthly Mango Pass" link and "Automated Purchases & Subscriptions" section), `buy-mango-for-breakfast` ("weekly mango delivery subscription for families"). Do these products exist?
-3. **FSSAI number conflict:** `devgad-hapus` quotes 22110001060083; everywhere else and your brand facts use 10020022011783. The same article also says "98 villages" and "45,000+ hectares". Which is correct? This is a compliance risk.
+3. **FSSAI number: FIXED (8 Oct).** `devgad-hapus` quoted 22110001060083 in five places (two in schema data). It now says 10020022011783, the number used in about 1,300 other places. Checked by re-fetch and reading, not a byte diff. Still open in that article: "98 villages", "45,000+ hectares", "organic" wording and "Season 2026" text.
+3b. **Phone numbers:** your brand WhatsApp is +91 70830 75556, but that number is in none of the articles. +91 83690 48029 appears in 28 articles and 91676 68899 in two. Which is the correct customer contact number? Not changed.
 4. **Financial claim:** `fresh-alphonso-mangoes-home-delivery-near-me` says "Invest in Mango Bonds for a 10% interest rate". Recommend removing.
 5. **The word "organic"** (no certification). Articles using it: `organic-mango` (title, headings, schema, alt text), `organic-mangoes-online-1`, `order-ratnagiri-hapus-amba-online`, `shop-devgad-hapus-mango-store-pune-maharashtra` ("100% organic"), `devgad-alphonso-mangoes-online-mumbai` ("certified organic" repeated), `order-strawberries-online` (16 times), `devgad-hapus` ("Organic Farming", "Devgad Organic"), `buy-hapus-ratnagiri-online`, `best-website-to-buy-devgad-alphonso-mangoes-online`, `alphonso-mango-online-purchase`, `mango-near-me-v2`, `mangoes-alphonso-ratnagiri-online`, `indian-mango-online`, `ratnagirimangoes-sweet-juicy`, `mango-madness-delicious-mango-recipes`, `buy-mangos-online`, `ordering-mangoes-online`, `indian-mango-buy-online-alphonsomango-in-order-now`, `alphonso-mango-fruit-order-online-fresh-and-delicious`, `selection-storage-and-ripening`, `how-mango-is-good-for-health`, `how-many-mango-trees-per-acre`, `order-alphonso-mango-online-top-10-reasons-to-indulge`, `mango-a-day-keep-doctor-away` (schema "GI-certified organic"), `best-hapus-mango-price-online-exclusive-deals`, `buy-ratnagiri-hapus-amba-mango-bliss-from-konkan`, `mango-leaves-health-benefit`, `mango-tree-lifespan`, `mango-rate-in-pune-sweet-deals-unveiled`, `mango-chunda-recipe`, `hapus-mango-online`, `fresh-mango-near-me`, `pairi-mango-online-convenient-delicious`, `mango-export-from-india`, `buy-fresh-fruit-mango-taste-the-tropical-flavor`, `alphonso-mango-online-udaipur` and others. Reword all?
 6. **Customer counts:** "47,000+" / "47,961" customers appears in many articles (e.g. `aam-meaning-in-english`, `hapus-aam`, `mango-species`, `langra-mango`, `chausa-mango`, `origin-of-hapus-v2`, `mango-website`, `mango-leaves`, `best-mango-in-the-world`, `mango-tree-lifespan`, `amrakhand-mango-shrikhand`, `mango-for-infants`). Also "since 2019", "since 2020" and (in `llms-full`) 2017 for the founding year. Which wording is approved?
@@ -80,9 +81,16 @@ Differing versions found across articles: cut-offs of 10 AM, 11 AM, 2 PM, 3 PM, 
 - **Notify-me wording left on purpose:** `mango-delivery-in-mumbai`, `alphanso-mango`, `mango-modak`, `sweet-and-juicy-mango-madness-unveiled`.
 - **Delivery wording:** more differing versions ("next-day delivery", "same-day delivery before 12:00 noon", "weekdays with a 12:00 noon cut-off") in `order-fresh-mango-in-delhi-online-now`, `mangos`, `mango-fun-facts`, `mango-delivery-in-mumbai`.
 
-## 9. Final totals (to be confirmed when B28 reports)
+## 9. Final totals
 - Articles scanned: 978 in 53 blogs; 490 matched.
 - Named 26: 25 edited; 1 (Season Pass) waiting for your decision.
 - Wave A (pre-order wording): 217 articles, all written.
-- Wave B (village count only): 247 matched; 246 written or covered, 1 false match; B28 still to report.
+- Wave B (village count only): 247 matched; 246 written, 1 false match (`fresh-blueberry-price-per-kg`), plus 3 waitlist or pre-register fixes found in wave B (`alphonso-mangoes-allahabad`, `mango-delivery-by-post-office`, others) done.
 - Retried after approval prompts: `dry-fruit-store-near-me`, `devgad-alphonso-mangoes-online-mumbai`, `mango-for-breakfast`, six articles in B13: all written.
+
+## 10. Findings from batch B28 (last batch)
+- `mango-online-mumbai`: all four product cards say InStock in schema; "same-day or next-day delivery"; a "(2025)" price table.
+- `mango-festival-in-mumbai`: title says "2024"; "Two products below are available right now" while Amba Wadi is out of stock; "Notify Me" button; "Order before the season ends"; broken style `border:1pxdd`; "Orders placed in July or later will not be fulfilled".
+- `authentic-ratnagiri-alphonso-mango-online-order-now`: "free shipping in big cities", "next-day delivery", "usually from March to May", "Buy ... before stocks run out", widget products with empty src and title, author heading "Bhimseni Kapoor" while the author card says Prashant Powle.
+- `alphonso-mango-online-coimbatore`: "Buy Now" on a card that says "Currently out of stock"; Kesar and cashew offers valid until 2026-12-30; "Delivery in 1–3 days"; season text "late February to mid-June" vs "February–May" in its table.
+- `almonds-empty-stomach`: voice answer says "roughly 84 calories" while the body says about 98–100 kcal.
