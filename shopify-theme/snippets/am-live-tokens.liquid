@@ -1,0 +1,45 @@
+{%- comment -%}
+  am-live-tokens.liquid (6 Oct 2026) — live prices inside page bodies.
+  Usage: {% render 'am-live-tokens', content: page.content %}
+  A page body can contain tokens that are replaced with the current Shopify price when the page is rendered, so the text follows price edits in the admin.
+  Tokens (HANDLE = product handle; N = variant position, 1 is the first variant in the admin):
+    [[am:price:HANDLE:N]]    price of variant N, formatted, e.g. ₹1,849
+    [[am:raw:HANDLE:N]]      price of variant N as a plain number, e.g. 1849 (for JSON-LD and attributes)
+    [[am:min:HANDLE]]        lowest price of the product, formatted
+    [[am:max:HANDLE]]        highest price of the product, formatted
+    [[am:rawmin:HANDLE]]     lowest price, plain number
+    [[am:rawmax:HANDLE]]     highest price, plain number
+  Only the handles listed below are supported. Add a handle to am_handles to support another product.
+  Variant order assumption for the Alphonso products: variants 1-5 are the 1-dozen grades Small, Medium, Large, Extra Large, Jumbo; 6-10 the 2-dozen grades.
+  Content without a token is printed unchanged and costs nothing.
+{%- endcomment -%}
+{%- assign am_text = content -%}
+{%- if am_text contains '[[am:' -%}
+  {%- assign am_handles = 'ratnagiri-alphonso-mango,devgad-alphonso-mango,kesar-mango,alphonso-mango-order-online,alphonso-mango-pulp,alphonso-mango-cubes,pairi-mango,dasheri-mango-online,totapuri-mango,malgova-mango,salem-mango,malawi-mango,aamras-ambyacha-ras' | split: ',' -%}
+  {%- for am_h in am_handles -%}
+    {%- assign am_p = all_products[am_h] -%}
+    {%- if am_p != blank and am_p.variants.size > 0 -%}
+      {%- assign am_tok = '[[am:min:' | append: am_h | append: ']]' -%}
+      {%- assign am_val = am_p.price_min | money_without_currency | remove: '.00' | prepend: '₹' -%}
+      {%- assign am_text = am_text | replace: am_tok, am_val -%}
+      {%- assign am_tok = '[[am:max:' | append: am_h | append: ']]' -%}
+      {%- assign am_val = am_p.price_max | money_without_currency | remove: '.00' | prepend: '₹' -%}
+      {%- assign am_text = am_text | replace: am_tok, am_val -%}
+      {%- assign am_tok = '[[am:rawmin:' | append: am_h | append: ']]' -%}
+      {%- assign am_val = am_p.price_min | divided_by: 100 -%}
+      {%- assign am_text = am_text | replace: am_tok, am_val -%}
+      {%- assign am_tok = '[[am:rawmax:' | append: am_h | append: ']]' -%}
+      {%- assign am_val = am_p.price_max | divided_by: 100 -%}
+      {%- assign am_text = am_text | replace: am_tok, am_val -%}
+      {%- for am_v in am_p.variants -%}
+        {%- assign am_tok = '[[am:price:' | append: am_h | append: ':' | append: forloop.index | append: ']]' -%}
+        {%- assign am_val = am_v.price | money_without_currency | remove: '.00' | prepend: '₹' -%}
+        {%- assign am_text = am_text | replace: am_tok, am_val -%}
+        {%- assign am_tok = '[[am:raw:' | append: am_h | append: ':' | append: forloop.index | append: ']]' -%}
+        {%- assign am_val = am_v.price | divided_by: 100 -%}
+        {%- assign am_text = am_text | replace: am_tok, am_val -%}
+      {%- endfor -%}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+{{- am_text -}}

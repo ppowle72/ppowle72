@@ -1,0 +1,97 @@
+handle,proposed_feed_title_base,variant_suffix,issues_found_in_export
+ratnagiri-alphonso-mango,Ratnagiri Alphonso Mango (GI Tagged Hapus),"1 Dozen, <Size> (<g> each)","brand missing on 1 feed rows; google_product_category missing on 1 rows; condition missing on 1 rows; 3 stale variant offers (IN feed, variant not in INR feed)"
+devgad-alphonso-mango,Devgad Alphonso Mango (GI Authorised Hapus),"1 Dozen, <Size> (<g> each)","brand missing on 1 feed rows; google_product_category missing on 1 rows; condition missing on 1 rows; 1 stale variant offers (IN feed, variant not in INR feed)"
+alphonso-mango-order-online,"Hapus Alphonso Mango, GI Tagged (Standard Grade)","1 Dozen, <Size> (<g> each)",
+kesar-mango,Gir Kesar Mango (Gujarat Talala Kesar),"<variant title, e.g. 250 g>","brand missing on 1 feed rows; google_product_category missing on 1 rows; condition missing on 1 rows; 1 stale variant offers (IN feed, variant not in INR feed)"
+pairi-mango,"Pairi (Payari) Mango, Konkan","<variant title, e.g. 250 g>","mpn is a product name, not a part number"
+malawi-mango,Malawi Mango,"<variant title, e.g. 250 g>","brand missing on 2 feed rows; google_product_category missing on 2 rows; condition missing on 2 rows; 2 stale variant offers (IN feed, variant not in INR feed)"
+malgova-mango,Malgova Mango,"<variant title, e.g. 250 g>","mpn is a product name, not a part number"
+dasheri-mango-online,Dasheri Mango,"<variant title, e.g. 250 g>",condition missing on 1 rows
+totapuri-mango,Totapuri Mango,"<variant title, e.g. 250 g>",condition missing on 2 rows
+salem-mango,Salem Mango,"<variant title, e.g. 250 g>","mpn is a product name, not a part number"
+alphonso-mango-cubes,Freeze-Dried Alphonso Mango Cubes,"<variant title, e.g. 250 g>",google_product_category missing on 2 rows
+alphonso-mango-pulp,Alphonso Mango Pulp (Aamras) Tin,"<variant title, e.g. 250 g>","brand missing on 1 feed rows; google_product_category missing on 1 rows; condition missing on 1 rows; 1 stale variant offers (IN feed, variant not in INR feed)"
+aamras-ambyacha-ras,Aamras (Ambyacha Ras) Mango Pulp,"<variant title, e.g. 250 g>",condition missing on 5 rows
+amba-wadi-mango-barfi,Amba Wadi (Mango Barfi),"<variant title, e.g. 250 g>","google_product_category missing on 2 rows; mpn is a product name, not a part number"
+amba-modak,Amba Modak (Mango Modak),"<variant title, e.g. 250 g>",google_product_category missing on 2 rows; condition missing on 2 rows
+amba-poli,Amba Poli (Aam Papad),"<variant title, e.g. 250 g>","brand missing on 1 feed rows; google_product_category missing on 2 rows; condition missing on 1 rows; mpn is a product name, not a part number; 1 stale variant offers (IN feed, variant not in INR feed)"
+jackfruit-chips,Jackfruit Chips,"<variant title, e.g. 250 g>","mpn is a product name, not a part number"
+cashew-nuts-w180,W180 Jumbo Whole Cashew Nuts (Kaju),"<variant title, e.g. 250 g>","mpn is a product name, not a part number"
+w240-cashew-online,W240 Large Whole Cashew Nuts (Kaju),"<variant title, e.g. 250 g>",
+w320-cashew-nuts,W320 Whole Cashew Nuts (Kaju),"<variant title, e.g. 250 g>",
+broken-cashew-kaju-tukda,Kaju Tukda (Broken Cashew Pieces),"<variant title, e.g. 250 g>","brand missing on 1 feed rows; google_product_category missing on 1 rows; condition missing on 1 rows; 1 stale variant offers (IN feed, variant not in INR feed)"
+cashew-nut-split,Cashew Nut Split (Kaju Tukda),"<variant title, e.g. 250 g>",
+cashew-with-skin,Cashew with Skin (Raw Chilka Kaju),"<variant title, e.g. 250 g>","brand missing on 1 feed rows; google_product_category missing on 1 rows; condition missing on 1 rows; 1 stale variant offers (IN feed, variant not in INR feed)"
+masala-cashew,Masala Cashew Nuts (Spicy Roasted Kaju),"<variant title, e.g. 250 g>","brand missing on 1 feed rows; google_product_category missing on 1 rows; condition missing on 1 rows; 1 stale variant offers (IN feed, variant not in INR feed)"
+roasted-cashew-nut,Roasted Cashew Nuts (Plain Dry Roasted Kaju),"<variant title, e.g. 250 g>",
+salted-cashew-nuts,Salted Cashew Nuts (Khara Kaju),"<variant title, e.g. 250 g>","brand missing on 1 feed rows; google_product_category missing on 1 rows; condition missing on 1 rows; 1 stale variant offers (IN feed, variant not in INR feed)"
+ole-kaju-fresh-tender-cashew-non-dried,Ole Kaju (Fresh Tender Cashew),"<variant title, e.g. 250 g>","mpn is a product name, not a part number"
+godambi-marking-nut,Godambi (Marking Nut),"<variant title, e.g. 250 g>","brand missing on 1 feed rows; google_product_category missing on 1 rows; condition missing on 1 rows; 1 stale variant offers (IN feed, variant not in INR feed)"
+chia-seeds,Chia Seeds,"<variant title, e.g. 250 g>","brand missing on 1 feed rows; google_product_category missing on 1 rows; condition missing on 1 rows; 1 stale variant offers (IN feed, variant not in INR feed)"
+flax-seeds,Flax Seeds,"<variant title, e.g. 250 g>","brand missing on 1 feed rows; google_product_category missing on 1 rows; condition missing on 1 rows; 1 stale variant offers (IN feed, variant not in INR feed)"
+roasted-flax-seeds,Roasted Flax Seeds,"<variant title, e.g. 250 g>",
+pumpkin-seeds,Roasted Pumpkin Seeds,"<variant title, e.g. 250 g>",
+quinoa-seeds,Quinoa Seeds,"<variant title, e.g. 250 g>",
+sunflower-seeds,Roasted Sunflower Seeds (Salted),"<variant title, e.g. 250 g>",
+roasted-sunflower-seeds,Roasted Sunflower Seeds,"<variant title, e.g. 250 g>",
+watermelon-seeds,Melon Seeds (Watermelon Seeds),"<variant title, e.g. 250 g>","mpn is a product name, not a part number"
+kokum-butter,Kokum Butter (Kokum Oil),"<variant title, e.g. 250 g>","brand missing on 1 feed rows; google_product_category missing on 1 rows; condition missing on 1 rows; 1 stale variant offers (IN feed, variant not in INR feed)"
+raisins,"Indian Raisins (Kishmish, Munakka)","<variant title, e.g. 250 g>",
+black-raisins-seed-less,"Black Raisins (Kala Manuka), Seedless","<variant title, e.g. 250 g>",
+crimson-raisin,Crimson Raisins,"<variant title, e.g. 250 g>",
+saffron-kesar,Kashmiri Kesar (Saffron),"<variant title, e.g. 250 g>","brand missing on 2 feed rows; google_product_category missing on 2 rows; condition missing on 2 rows; 28 stale variant offers (IN feed, variant not in INR feed)"
+nutmeg-jayphal,"Nutmeg (Jaiphal, Jathikai)","<variant title, e.g. 250 g>","brand missing on 1 feed rows; google_product_category missing on 1 rows; condition missing on 1 rows; 1 stale variant offers (IN feed, variant not in INR feed)"
+bhimseni-kapoor-camphor,Bhimseni Kapoor (Pure Camphor),"<variant title, e.g. 250 g>","brand missing on 1 feed rows; google_product_category missing on 1 rows; condition missing on 1 rows; 1 stale variant offers (IN feed, variant not in INR feed)"
+strawberry,Mahabaleshwar Strawberry,"<variant title, e.g. 250 g>","brand missing on 1 feed rows; google_product_category missing on 1 rows; condition missing on 1 rows; 1 stale variant offers (IN feed, variant not in INR feed)"
+mazafati-date,Mazafati Dates (Kimia Dates),"<variant title, e.g. 250 g>","brand missing on 1 feed rows; google_product_category missing on 1 rows; condition missing on 1 rows; 1 stale variant offers (IN feed, variant not in INR feed)"
+persimmon-amarphal-online,Persimmon (Amarphal),"<variant title, e.g. 250 g>","brand missing on 1 feed rows; google_product_category missing on 1 rows; condition missing on 1 rows; 1 stale variant offers (IN feed, variant not in INR feed)"
+sandgi-mirchi,Sandgi Mirchi,"<variant title, e.g. 250 g>",condition missing on 2 rows
+kokum,Kokum (Aamsul) Rind,"<variant title, e.g. 250 g>","brand missing on 1 feed rows; google_product_category missing on 1 rows; condition missing on 1 rows; 1 stale variant offers (IN feed, variant not in INR feed)"
+brazil-nuts,Brazil Nuts,"<variant title, e.g. 250 g>","brand missing on 1 feed rows; google_product_category missing on 1 rows; condition missing on 1 rows; 1 stale variant offers (IN feed, variant not in INR feed)"
+california-almonds-badam,California Almonds (Badam),"<variant title, e.g. 250 g>","brand missing on 1 feed rows; google_product_category missing on 1 rows; condition missing on 1 rows; 1 stale variant offers (IN feed, variant not in INR feed)"
+ajwa-dates-ajwa-khajoor,Ajwa Dates (Medina),"<variant title, e.g. 250 g>","brand missing on 1 feed rows; google_product_category missing on 1 rows; condition missing on 1 rows; 1 stale variant offers (IN feed, variant not in INR feed)"
+buy-anjeer-dried-fig,Dried Anjeer (Dried Fig),"<variant title, e.g. 250 g>","brand missing on 1 feed rows; google_product_category missing on 1 rows; condition missing on 1 rows; 1 stale variant offers (IN feed, variant not in INR feed)"
+green-cardamom-elaichi,Green Cardamom (Elaichi),"<variant title, e.g. 250 g>","brand missing on 1 feed rows; google_product_category missing on 1 rows; condition missing on 1 rows; 1 stale variant offers (IN feed, variant not in INR feed)"
+dried-apricot,"Dried Apricot (Khubani), Pitted","<variant title, e.g. 250 g>","brand missing on 1 feed rows; google_product_category missing on 1 rows; condition missing on 1 rows; 1 stale variant offers (IN feed, variant not in INR feed)"
+dried-blueberries,Dried Blueberries,"<variant title, e.g. 250 g>","brand missing on 1 feed rows; google_product_category missing on 1 rows; condition missing on 1 rows; 1 stale variant offers (IN feed, variant not in INR feed)"
+hazelnuts-nuts-seeds,Hazelnuts,"<variant title, e.g. 250 g>",
+fresh-red-globe-grapes,Fresh Red Globe Grapes,"<variant title, e.g. 250 g>",
+buy-avocado-fruit-online,Imported Avocado,"<variant title, e.g. 250 g>","brand missing on 1 feed rows; google_product_category missing on 1 rows; condition missing on 1 rows; 1 stale variant offers (IN feed, variant not in INR feed)"
+beauty-pear,Beauty Pear,"<variant title, e.g. 250 g>",condition missing on 3 rows
+fresh-blueberries,Fresh Blueberries,"<variant title, e.g. 250 g>",
+donut-peach,Imported Donut Peach,"<variant title, e.g. 250 g>",condition missing on 2 rows
+golden-kiwi,Golden Kiwi,"<variant title, e.g. 250 g>",
+green-kiwi,Green Kiwi,"<variant title, e.g. 250 g>",
+imported-cherry-fruit,Imported Fresh Cherries,"<variant title, e.g. 250 g>","brand missing on 1 feed rows; google_product_category missing on 1 rows; condition missing on 1 rows; 1 stale variant offers (IN feed, variant not in INR feed)"
+mulberry-shahtoot,Mulberry (Shahtoot),"<variant title, e.g. 250 g>",condition missing on 1 rows
+nectarine,Imported Nectarine,"<variant title, e.g. 250 g>",
+packham-pear,Packham Pear,"<variant title, e.g. 250 g>",condition missing on 1 rows
+sweet-tamarind,Sweet Tamarind (Meethi Imli),"<variant title, e.g. 250 g>","mpn is a product name, not a part number"
+medjool-dates-medjoul-khajoor,Medjool Dates (Medjoul Khajoor),"<variant title, e.g. 250 g>","brand missing on 1 feed rows; google_product_category missing on 1 rows; condition missing on 1 rows; 1 stale variant offers (IN feed, variant not in INR feed)"
+kalmi-dates-safawi-dates,Kalmi Dates (Safawi Dates),"<variant title, e.g. 250 g>","brand missing on 1 feed rows; google_product_category missing on 1 rows; condition missing on 1 rows; 1 stale variant offers (IN feed, variant not in INR feed)"
+jardalu,"Dried Apricot (Jardalu), Non-Pitted","<variant title, e.g. 250 g>","brand missing on 1 feed rows; google_product_category missing on 1 rows; condition missing on 1 rows; 1 stale variant offers (IN feed, variant not in INR feed)"
+dried-blackberries,Dried Blackberries,"<variant title, e.g. 250 g>","brand missing on 1 feed rows; google_product_category missing on 1 rows; condition missing on 1 rows; 1 stale variant offers (IN feed, variant not in INR feed)"
+dried-cranberry-cranberries,Dried Cranberries,"<variant title, e.g. 250 g>","brand missing on 1 feed rows; google_product_category missing on 1 rows; condition missing on 1 rows; 1 stale variant offers (IN feed, variant not in INR feed)"
+dried-prunes-dried-plums-sun-dried,Dried Prunes (Sun-Dried Plums),"<variant title, e.g. 250 g>","brand missing on 1 feed rows; google_product_category missing on 1 rows; condition missing on 1 rows; 1 stale variant offers (IN feed, variant not in INR feed)"
+mamra-badam,Mamra Badam (Mamra Almonds),"<variant title, e.g. 250 g>","brand missing on 1 feed rows; google_product_category missing on 1 rows; condition missing on 1 rows; 1 stale variant offers (IN feed, variant not in INR feed)"
+walnut-akhrot-kernel-half-akhrot-giri,"Walnut Kernels (Akhrot Giri), Halves","<variant title, e.g. 250 g>",
+buy-salted-pista-online,Roasted Salted Pista (Pistachios),"<variant title, e.g. 250 g>","brand missing on 1 feed rows; google_product_category missing on 1 rows; condition missing on 1 rows; 1 stale variant offers (IN feed, variant not in INR feed)"
+chop-almonds-cut-badam,Sliced Almonds (Almond Flakes),"<variant title, e.g. 250 g>","brand missing on 1 feed rows; google_product_category missing on 1 rows; condition missing on 1 rows; 1 stale variant offers (IN feed, variant not in INR feed)"
+mix-dry-fruits,Mixed Dry Fruits (Panch Mewa),"<variant title, e.g. 250 g>","brand missing on 1 feed rows; google_product_category missing on 1 rows; condition missing on 1 rows; 1 stale variant offers (IN feed, variant not in INR feed)"
+kashmiri-lahsun-kashmiri-garlic,Kashmiri Lahsun (Kashmiri Garlic),"<variant title, e.g. 250 g>","brand missing on 1 feed rows; google_product_category missing on 1 rows; condition missing on 1 rows; 1 stale variant offers (IN feed, variant not in INR feed)"
+dried-chikoo-chips,Dried Chikoo Chips,"<variant title, e.g. 250 g>","brand missing on 1 feed rows; google_product_category missing on 1 rows; condition missing on 1 rows; 1 stale variant offers (IN feed, variant not in INR feed)"
+kashmiri-kahwa-kashmiri-tea,Kashmiri Kahwa (Kashmiri Tea),"<variant title, e.g. 250 g>","mpn is a product name, not a part number"
+pista,Pista Kernels (Pistachios),"<variant title, e.g. 250 g>",condition missing on 6 rows
+dates-sugar-kharik-powder,Dates Sugar (Kharik Powder),"<variant title, e.g. 250 g>",
+black-pepper-black-peppercorn,Black Pepper (Black Peppercorn),"<variant title, e.g. 250 g>",
+star-anise-chakra-phool,Star Anise (Chakra Phool),"<variant title, e.g. 250 g>",condition missing on 3 rows
+wheat-grass-powder-gavhankur-powder,Wheat Grass Powder (Gavhankur Powder),"<variant title, e.g. 250 g>",
+pecan-nuts,Pecan Nuts,"<variant title, e.g. 250 g>",
+gond-katira-badam-pisin,Gond Katira (Almond Gum),"<variant title, e.g. 250 g>",
+cranberry-blueberry-mix,Dried Cranberry and Blueberry Mix,"<variant title, e.g. 250 g>",
+dried-strawberry,Dried Strawberries,"<variant title, e.g. 250 g>",
+himalayan-pink-salt,Himalayan Pink Salt,"<variant title, e.g. 250 g>","mpn is a product name, not a part number"
+moringa-powder,Moringa Powder,"<variant title, e.g. 250 g>",
+macadamia-nuts,Jumbo Macadamia Nuts,"<variant title, e.g. 250 g>",
+chilgoza-pine-nuts,Chilgoza (Pine Nuts),"<variant title, e.g. 250 g>",
+nutmeg-powder-jaiphal-powder-jathikai-powder,Nutmeg Powder (Jaiphal Powder),"<variant title, e.g. 250 g>",

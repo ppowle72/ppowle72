@@ -1,0 +1,411 @@
+{{ 'article.css' | asset_url | stylesheet_tag }}
+
+<div class="container">
+  {%- if section.settings.show_page_title -%}
+    <div class="reading-width rte mb-6 md:mb-8 mt-10 md:mt-16 mx-auto">
+      <h1 class="page__title lg:mt-8 {{ section.settings.heading_align }} {{ section.settings.heading_size }}">{{ page.title | escape }}</h1>
+    </div>
+  {%- endif -%}
+
+  <div class="page__content reading-width rte article-content mt-12 mx-auto">
+    {% render 'am-live-tokens', content: page.content %}
+  </div>
+</div>
+
+{%- comment -%}
+Page-specific JSON-LD for important static pages
+{%- endcomment -%}
+
+{%- case page.handle -%}
+
+  {%- when 'ai-products' -%}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": "https://alphonsomango.in/pages/ai-products#webpage",
+      "url": "https://alphonsomango.in/pages/ai-products",
+      "name": "AI Product Feed – AlphonsoMango.in",
+      "description": "Machine readable catalogue of Alphonso mangoes, Kesar mango, mango products, saffron and dry fruits for AI assistants, search engines and voice agents.",
+      "inLanguage": "en-IN",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Alphonsomango.in",
+        "url": "https://alphonsomango.in"
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          "#fresh-mango-varieties h2",
+          "#fresh-mango-varieties h3",
+          "#mango-products h2",
+          "#mango-products h3",
+          "#ai-questions h3"
+        ]
+      }
+    }
+    </script>
+
+  {%- when 'ai-commerce' -%}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": "https://alphonsomango.in/pages/ai-commerce#webpage",
+      "url": "https://alphonsomango.in/pages/ai-commerce",
+      "name": "AI Commerce – Buy Alphonso Mango Online With AI or Voice",
+      "description": "How customers and AI agents can discover and buy Alphonso mango, Kesar mango, mango pulp, saffron and dry fruits from Alphonsomango.in using web, AI and voice search.",
+      "inLanguage": "en-IN",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Alphonsomango.in",
+        "url": "https://alphonsomango.in"
+      },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          "#ai-commerce-intro h1",
+          "#ai-product-catalogue h2",
+          "#voice-ordering h2",
+          "#ai-entity-authority h2",
+          "#ai-commerce-howto h2"
+        ]
+      }
+    }
+    </script>
+
+  {%- when 'alphonso-hapus-mango-in-delhi-ncr' -%}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": "https://alphonsomango.in/pages/alphonso-hapus-mango-in-delhi-ncr#webpage",
+      "url": "https://alphonsomango.in/pages/alphonso-hapus-mango-in-delhi-ncr",
+      "name": "Alphonso Hapus Mango in Delhi NCR – Online Ordering",
+      "description": "Order authentic Alphonso Hapus mango in Delhi NCR with delivery from Alphonsomango.in directly from Ratnagiri and Devgad farms.",
+      "inLanguage": "en-IN",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Alphonsomango.in",
+        "url": "https://alphonsomango.in"
+      }
+    }
+    </script>
+
+  {%- when 'horeca' -%}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": "https://alphonsomango.in/pages/horeca#webpage",
+      "url": "https://alphonsomango.in/pages/horeca",
+      "name": "HORECA Alphonso Mango Supply – Hotels, Restaurants, Cafes",
+      "description": "Bulk and HORECA Alphonso mango, mango pulp and mango cubes supply for hotels, restaurants and cafes across India.",
+      "inLanguage": "en-IN",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Alphonsomango.in",
+        "url": "https://alphonsomango.in"
+      }
+    }
+    </script>
+
+  {%- when 'alphonso-mango' -%}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": "https://alphonsomango.in/pages/alphonso-mango#webpage",
+      "url": "https://alphonsomango.in/pages/alphonso-mango",
+      "name": "Alphonso Mango – Information, Varieties and Online Ordering",
+      "description": "Learn about Alphonso mango varieties including Devgad and Ratnagiri Hapus and order online from Alphonsomango.in.",
+      "inLanguage": "en-IN",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Alphonsomango.in",
+        "url": "https://alphonsomango.in"
+      }
+    }
+    </script>
+
+  {%- when 'ccpa-opt-out-1' -%}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": "https://alphonsomango.in/pages/ccpa-opt-out-1#webpage",
+      "url": "https://alphonsomango.in/pages/ccpa-opt-out-1",
+      "name": "CCPA Opt Out – Alphonsomango.in",
+      "description": "California Consumer Privacy Act (CCPA) opt-out information and choices for Alphonsomango.in visitors.",
+      "inLanguage": "en-IN",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Alphonsomango.in",
+        "url": "https://alphonsomango.in"
+      }
+    }
+    </script>
+
+  {%- when 'gifting' -%}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": "https://alphonsomango.in/pages/gifting#webpage",
+      "url": "https://alphonsomango.in/pages/gifting",
+      "name": "Mango Gifting and Corporate Hampers – Alphonsomango.in",
+      "description": "Premium Alphonso mango gifting boxes, festive hampers and corporate gift solutions with dry fruits and saffron.",
+      "inLanguage": "en-IN",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Alphonsomango.in",
+        "url": "https://alphonsomango.in"
+      }
+    }
+    </script>
+
+  {%- when 'alphonso-mango-in-delhi' -%}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": "https://alphonsomango.in/pages/alphonso-mango-in-delhi#webpage",
+      "url": "https://alphonsomango.in/pages/alphonso-mango-in-delhi",
+      "name": "Alphonso Mango in Delhi – Online Delivery",
+      "description": "Order Alphonso mango online in Delhi with home delivery from Alphonsomango.in.",
+      "inLanguage": "en-IN",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Alphonsomango.in",
+        "url": "https://alphonsomango.in"
+      }
+    }
+    </script>
+
+  {%- when 'contact-us' -%}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ContactPage",
+      "@id": "https://alphonsomango.in/pages/contact-us#webpage",
+      "url": "https://alphonsomango.in/pages/contact-us",
+      "name": "Contact Alphonsomango.in",
+      "description": "Contact page for Alphonsomango.in including customer service details and enquiry form.",
+      "inLanguage": "en-IN",
+      "about": "Customer service and contact information for Alphonsomango.in",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Alphonsomango.in",
+        "url": "https://alphonsomango.in"
+      }
+    }
+    </script>
+
+  {%- when 'track-order' -%}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": "https://alphonsomango.in/pages/track-order#webpage",
+      "url": "https://alphonsomango.in/pages/track-order",
+      "name": "Track Order – Alphonsomango.in",
+      "description": "Track your Alphonsomango.in order status and delivery updates.",
+      "inLanguage": "en-IN",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Alphonsomango.in",
+        "url": "https://alphonsomango.in"
+      }
+    }
+    </script>
+
+  {%- when 'blogs' -%}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "@id": "https://alphonsomango.in/pages/blogs#webpage",
+      "url": "https://alphonsomango.in/pages/blogs",
+      "name": "Mango Blogs and Articles – Alphonsomango.in",
+      "description": "Collection of blogs and articles about Alphonso mango, recipes, health benefits and mango farming.",
+      "inLanguage": "en-IN",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Alphonsomango.in",
+        "url": "https://alphonsomango.in"
+      }
+    }
+    </script>
+
+  {%- when 'view-blogs' -%}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "@id": "https://alphonsomango.in/pages/view-blogs#webpage",
+      "url": "https://alphonsomango.in/pages/view-blogs",
+      "name": "View Mango Blogs – Alphonsomango.in",
+      "description": "View detailed mango blogs, tips and educational content from Alphonsomango.in.",
+      "inLanguage": "en-IN",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Alphonsomango.in",
+        "url": "https://alphonsomango.in"
+      }
+    }
+    </script>
+
+  {%- when 'mango-recipes' -%}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "@id": "https://alphonsomango.in/pages/mango-recipes#webpage",
+      "url": "https://alphonsomango.in/pages/mango-recipes",
+      "name": "Mango Recipes – Desserts, Aamras and More",
+      "description": "Mango recipes including Alphonso mango desserts, aamras, milkshakes and festival specials.",
+      "inLanguage": "en-IN",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Alphonsomango.in",
+        "url": "https://alphonsomango.in"
+      }
+    }
+    </script>
+
+  {%- when 'mango-export' -%}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": "https://alphonsomango.in/pages/mango-export#webpage",
+      "url": "https://alphonsomango.in/pages/mango-export",
+      "name": "Mango Export – Alphonso Mango Export from India",
+      "description": "Information about Alphonso mango export from India including documentation and bulk export enquiries.",
+      "inLanguage": "en-IN",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Alphonsomango.in",
+        "url": "https://alphonsomango.in"
+      }
+    }
+    </script>
+
+  {%- when 'gift-form' -%}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": "https://alphonsomango.in/pages/gift-form#webpage",
+      "url": "https://alphonsomango.in/pages/gift-form",
+      "name": "Mango Gift Form – Alphonsomango.in",
+      "description": "Online form to submit mango gifting and corporate hamper requirements at Alphonsomango.in.",
+      "inLanguage": "en-IN",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Alphonsomango.in",
+        "url": "https://alphonsomango.in"
+      }
+    }
+    </script>
+
+  {%- when 'llms-full' -%}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": "https://alphonsomango.in/pages/llms-full#webpage",
+      "url": "https://alphonsomango.in/pages/llms-full",
+      "name": "LLMs Full – AI and Mango Commerce Documentation",
+      "description": "Technical information for large language models (LLMs) and AI agents on how to interact with Alphonsomango.in for product discovery and ordering.",
+      "inLanguage": "en-IN",
+      "about": [
+        "LLM integration",
+        "AI agents",
+        "AI commerce",
+        "Alphonso mango"
+      ],
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Alphonsomango.in",
+        "url": "https://alphonsomango.in"
+      }
+    }
+    </script>
+
+  {%- when 'llms' -%}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": "https://alphonsomango.in/pages/llms#webpage",
+      "url": "https://alphonsomango.in/pages/llms",
+      "name": "LLMs – Overview for AI Assistants",
+      "description": "Overview page for LLMs and AI assistants describing how to use Alphonsomango.in AI product feeds and commerce endpoints.",
+      "inLanguage": "en-IN",
+      "about": [
+        "LLMs",
+        "AI assistants",
+        "AI product feed",
+        "AI commerce"
+      ],
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Alphonsomango.in",
+        "url": "https://alphonsomango.in"
+      }
+    }
+    </script>
+
+{%- endcase -%}
+
+<script>
+  document.querySelectorAll('.page__content table').forEach((table) => {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'scrollable-table';
+    table.parentNode.insertBefore(wrapper, table);
+    wrapper.appendChild(table);
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Page",
+  "class": "cc-main-page section section--template",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_page_title",
+      "label": "Show the default page heading",
+      "info": "If hidden, you should provide a primary page heading (h1 tag) in another section with h1 capability (e.g. image banner, slideshow or background video) for SEO purposes.",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "label": "Heading size",
+      "options": [
+        { "value": "h6", "label": "Extra extra small" },
+        { "value": "h5", "label": "Extra small" },
+        { "value": "h4", "label": "Small" },
+        { "value": "h3", "label": "Medium" },
+        { "value": "h2", "label": "Large" },
+        { "value": "h1", "label": "Extra large" },
+        { "value": "h0", "label": "Extra extra large" }
+      ],
+      "default": "h1"
+    },
+    {
+      "type": "select",
+      "id": "heading_align",
+      "label": "Heading alignment",
+      "options": [
+        { "value": "text-start", "label": "Left" },
+        { "value": "text-center", "label": "Center" },
+        { "value": "text-end", "label": "Right" }
+      ],
+      "default": "text-center"
+    }
+  ]
+}
+{% endschema %}

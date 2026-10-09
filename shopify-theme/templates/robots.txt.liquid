@@ -1,0 +1,193 @@
+# ==================================================
+# ALPHONSO MANGO - B2C + B2B + HORECA ROBOTS.TXT
+# Complete Edition - corrected by mango-seo-agent
+# Fixes vs previous version:
+#   /cdn/ and /s/files/ UNBLOCKED (3,191-page Semrush issue)
+#   CCBot allow/block contradiction resolved (blocked once)
+#   Duplicate AI-bot groups merged (one group per bot)
+#   Invalid *Siri* wildcard and fictional voice UAs removed
+#   (real assistants crawl as Applebot/Amazonbot/Googlebot/bingbot)
+#   Screaming Frog + Ahrefs + Semrush unblocked (your own tools)
+#   Sitemap on non-www canonical
+#   23 Sep 2026: supplementary policy sitemap added (served by Cloudflare Worker)
+# ==================================================
+
+# ---- SEARCH ENGINE CRAWLERS ----------------------
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Googlebot-News
+Allow: /
+
+User-agent: Googlebot-Video
+Allow: /
+
+User-agent: GoogleOther
+Allow: /
+
+User-agent: bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: ia_archiver
+Allow: /
+
+User-agent: archive.org_bot
+Allow: /
+
+# ---- AI SEARCH & CITATION CRAWLERS (AEO/GEO) -----
+# OpenAI / ChatGPT
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic / Claude
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Google AI (Gemini, AI Overviews, Vertex)
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Google-CloudVertexBot
+Allow: /
+
+# Apple Intelligence
+User-agent: Applebot-Extended
+Allow: /
+
+# Meta AI
+User-agent: FacebookBot
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: Meta-ExternalFetcher
+Allow: /
+
+# Amazon Alexa / Rufus
+User-agent: Amazonbot
+Allow: /
+
+# DuckDuckGo AI
+User-agent: DuckAssistBot
+Allow: /
+
+# Mistral
+User-agent: MistralAI-User
+Allow: /
+
+# ---- TRAINING-ONLY / SCRAPER BOTS (blocked) ------
+# 5 Oct 2026: CCBot is now blocked as the heading says (bulk public dataset, reused by anyone).
+# AI training bots GPTBot, ClaudeBot, Google-Extended, Applebot-Extended and meta-externalagent stay allowed on purpose (see Content-Signal ai-train=yes below).
+User-agent: CCBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: Timpibot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: DataForSeoBot
+Disallow: /
+
+User-agent: serpstatbot
+Disallow: /
+
+# AhrefsBot, SemrushBot, Screaming Frog intentionally NOT
+# blocked - they power your own audits and DA/DR tracking.
+
+# ---- DEFAULT RULE FOR ALL OTHER BOTS -------------
+# Content Signals: we welcome AI search, AI answers (RAG), and AI training.
+User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=yes
+Allow: /
+
+# Private and utility pages
+Disallow: /admin
+Disallow: /cart
+Disallow: /carts
+Disallow: /orders
+Disallow: /checkouts/
+Disallow: /checkout
+Disallow: /account
+Disallow: /password
+Disallow: /search
+Disallow: /?q=
+
+# Referral-spam and tracking parameters
+Disallow: /*?*lp=1*
+Disallow: /*?*Enough*
+Disallow: /*?*holostyak*
+Disallow: /*?*kanye-west*
+Disallow: /*?*constraint=*
+Disallow: /*ref=
+Disallow: /*utm_source=
+
+# Assets and key paths - MUST stay crawlable
+Allow: /cdn/
+Allow: /s/files/
+Allow: /products/
+Allow: /collections/
+Allow: /pages/
+Allow: /blogs/
+Allow: /policies/
+Allow: /sitemap.xml
+
+# LLM guidance manifests
+# https://alphonsomango.in/llms.txt
+Allow: /llms.txt
+Allow: /llms-full.txt
+
+# Sitemaps (non-www canonical)
+Sitemap: https://alphonsomango.in/sitemap.xml
+Sitemap: https://alphonsomango.in/sitemap_policies.xml

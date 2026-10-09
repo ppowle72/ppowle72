@@ -1,0 +1,43 @@
+{%- comment -%}
+seo-schema.liquid (v9, 6 Oct 2026) — metafield renderer with FAQ clean-up.
+Renders the JSON-LD @graph written by mango-seo-agent's engines into the metafield custom.seo_schema on articles, pages and collections.
+v9: the stored graphs contain FAQPage nodes whose Question entries have no "name" or no acceptedAnswer.text (empty shells), which Google reports as FAQ errors.
+    The graph is rebuilt here node by node: a Question is kept only when it has both a name and an answer text, and a FAQPage with no valid Question is dropped.
+    Every other node is printed unchanged with the json filter. If the metafield is not a parsed object with an @graph, the original output is used.
+All script tags carry class="gropulse-rich-snippets-schema" so the theme's Schema Deduplicator treats them as trusted sources.
+{%- endcomment -%}
+{%- assign am_sg = nil -%}
+{%- if template contains 'article' and article.metafields.custom.seo_schema != blank -%}
+  {%- assign am_sg = article.metafields.custom.seo_schema.value -%}
+{%- elsif template contains 'page' and page.metafields.custom.seo_schema != blank -%}
+  {%- assign am_sg = page.metafields.custom.seo_schema.value -%}
+{%- elsif template contains 'collection' and collection.metafields.custom.seo_schema != blank -%}
+  {%- assign am_sg = collection.metafields.custom.seo_schema.value -%}
+{%- endif -%}
+{%- if am_sg != blank -%}
+  {%- if am_sg['@graph'] -%}
+<script type="application/ld+json" class="gropulse-rich-snippets-schema">{"@context":"https://schema.org","@graph":[
+    {%- assign am_first = true -%}
+    {%- for am_node in am_sg['@graph'] -%}
+      {%- assign am_emit = true -%}
+      {%- assign am_qs = '' -%}
+      {%- if am_node['@type'] == 'FAQPage' -%}
+        {%- assign am_qf = true -%}
+        {%- capture am_qs -%}{%- for am_q in am_node.mainEntity -%}{%- if am_q.name != blank and am_q.acceptedAnswer.text != blank -%}{%- unless am_qf -%},{%- endunless -%}{{ am_q | json }}{%- assign am_qf = false -%}{%- endif -%}{%- endfor -%}{%- endcapture -%}
+        {%- if am_qs == blank -%}{%- assign am_emit = false -%}{%- endif -%}
+      {%- endif -%}
+      {%- if am_emit -%}
+        {%- unless am_first -%},{%- endunless -%}
+        {%- assign am_first = false -%}
+        {%- if am_node['@type'] == 'FAQPage' -%}
+{"@type":"FAQPage"{%- if am_node['@id'] != blank -%},"@id":{{ am_node['@id'] | json }}{%- endif -%},"mainEntity":[{{ am_qs }}]}
+        {%- else -%}
+{{ am_node | json }}
+        {%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}
+]}</script>
+  {%- else -%}
+<script type="application/ld+json" class="gropulse-rich-snippets-schema">{{ am_sg | json }}</script>
+  {%- endif -%}
+{%- endif -%}

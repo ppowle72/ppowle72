@@ -1,0 +1,51 @@
+{%- comment -%}
+  Homepage direct-answer block (AEO / voice search / AI Overviews).
+  One factual ~45-word answer directly under the hero. Primary keyword: "Alphonso mango".
+  Availability line is live: it reads the real stock of the flagship product, so it never
+  promises fresh fruit that is sold out.
+{%- endcomment -%}
+{%- assign am_rp = all_products['ratnagiri-alphonso-mango'] -%}
+<div class="section home-answer" id="home-answer">
+  <div class="container">
+    <div class="reading-width home-answer__box">
+      <h2 class="h4 home-answer__title">{{ section.settings.heading | escape }}</h2>
+      <p class="home-answer__text" data-speakable="answer">{{ section.settings.answer }}</p>
+      <p class="home-answer__status">
+        {%- if am_rp.available -%}
+          <strong>In stock now:</strong> fresh GI-tagged Alphonso mangoes by the dozen, shipped free across India.
+        {%- else -%}
+          <strong>Season update:</strong> fresh Alphonso lots are sold out until the next season. The 2027 season starts on 1 February 2027. Alphonso mango pulp is available all year.
+        {%- endif -%}
+        <a href="{{ section.settings.cta_link | default: '/collections/mangoes' }}">{{ section.settings.cta_label | escape }}</a>
+      </p>
+      {%- if section.settings.trust_line != blank -%}
+        <p class="home-answer__trust"><strong>{{ section.settings.trust_line | escape }}</strong></p>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+<style>
+  .home-answer { padding: 1.25rem 0; }
+  .home-answer__box { border-left: 4px solid currentColor; padding: .25rem 0 .25rem 1rem; }
+  .home-answer__title { margin: 0 0 .4rem; }
+  .home-answer__text { margin: 0 0 .5rem; font-size: 1.05em; line-height: 1.55; }
+  .home-answer__status { margin: 0; font-size: .95em; }
+  .home-answer__status a { margin-left: .5rem; text-decoration: underline; }
+  .home-answer__trust { margin: .5rem 0 0; font-size: .95em; }
+</style>
+{% schema %}
+{
+  "name": "Direct answer (SEO)",
+  "tag": "section",
+  "class": "home-direct-answer",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading (H2)", "default": "Where to buy Alphonso mango online in India" },
+    { "type": "textarea", "id": "answer", "label": "Direct answer (about 45 words, no filler)",
+      "default": "Buy Alphonso mango online in India at AlphonsoMango.in: GI-tagged Ratnagiri and Devgad Hapus mangoes, carbide-free, sold by the dozen by Powle Home Foods, Mumbai (FSSAI 10020022011783). Pick a size, add to cart, and get free delivery across India. Fresh season runs February to June." },
+    { "type": "text", "id": "cta_label", "label": "Link label", "default": "Shop Alphonso mangoes" },
+    { "type": "url", "id": "cta_link", "label": "Link (blank = /collections/mangoes)" },
+    { "type": "text", "id": "trust_line", "label": "Trust line (blank hides it)", "info": "Count customers who bought online and at the shop. Update when the figure changes.", "default": "12,000+ customers have bought from us, online and at our shop." }
+  ],
+  "presets": [ { "name": "Direct answer (SEO)", "category": "Text" } ]
+}
+{% endschema %}

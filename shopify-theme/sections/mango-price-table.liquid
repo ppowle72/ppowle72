@@ -1,0 +1,56 @@
+{%- comment -%}
+  mango-price-table.liquid (6 Oct 2026)
+  Live price table for the mango collection. Every price, option and stock label is read from Shopify when the page renders,
+  so there is nothing to update by hand. Only shows on the collection whose handle matches the setting.
+  Options come from the variants of each product listed in am_pt_handles. Stock label: custom.fulfillment_status, then variant availability.
+{%- endcomment -%}
+{%- if collection.handle == section.settings.collection_handle -%}
+  {%- assign am_pt_handles = 'ratnagiri-alphonso-mango,devgad-alphonso-mango,alphonso-mango-order-online,kesar-mango,pairi-mango,dasheri-mango-online,totapuri-mango,malgova-mango,salem-mango,malawi-mango' | split: ',' -%}
+  <section class="am-price-table section section--template" id="mango-prices">
+    <div class="container">
+      <div class="reading-width mx-auto rte">
+        <h2>{{ section.settings.heading | escape }}</h2>
+        <p>{{ section.settings.intro | escape }}</p>
+        <p>{{ section.settings.season_note | escape }}</p>
+        {%- for am_h in am_pt_handles -%}
+          {%- assign am_p = all_products[am_h] -%}
+          {%- if am_p != blank and am_p.variants.size > 0 -%}
+            <h3><a href="{{ am_p.url }}">{{ am_p.title | escape }}</a></h3>
+            <div class="scrollable-table"><table style="width:100%;border-collapse:collapse;margin:8px 0 24px;">
+              <thead><tr><th style="text-align:left;padding:8px;border:1px solid #ddd;">Option</th><th style="text-align:left;padding:8px;border:1px solid #ddd;">Price (INR)</th><th style="text-align:left;padding:8px;border:1px solid #ddd;">Status</th></tr></thead>
+              <tbody>
+              {%- for am_v in am_p.variants limit: 15 -%}
+                {%- assign am_fs = am_v.metafields.custom.fulfillment_status.value | default: '' | downcase -%}
+                {%- if am_fs == 'in_stock' -%}{%- assign am_st = 'In stock' -%}
+                {%- elsif am_fs == 'preorder' -%}{%- assign am_st = 'Pre-order' -%}
+                {%- elsif am_fs == 'backorder' -%}{%- assign am_st = 'Backorder' -%}
+                {%- elsif am_fs == 'out_of_stock' -%}{%- assign am_st = 'Out of stock (seasonal)' -%}
+                {%- elsif am_v.available -%}{%- assign am_st = 'In stock' -%}
+                {%- else -%}{%- assign am_st = 'Out of stock' -%}{%- endif -%}
+                <tr><td style="padding:8px;border:1px solid #ddd;">{% if am_v.title == 'Default Title' %}Standard pack{% else %}{{ am_v.title | escape }}{% endif %}</td><td style="padding:8px;border:1px solid #ddd;">{{ am_v.price | money_without_currency | remove: '.00' | prepend: '₹' }}</td><td style="padding:8px;border:1px solid #ddd;">{{ am_st }}</td></tr>
+              {%- endfor -%}
+              </tbody>
+            </table></div>
+          {%- endif -%}
+        {%- endfor -%}
+        <h3>How is the price per kg worked out?</h3>
+        <p>Alphonso mangoes are sold by the dozen. A dozen weighs roughly 1.8 to 3.6 kg depending on the grade (150 to 300 g per mango), so the price per kg is the dozen price divided by the weight of that grade. Kesar is sold by box weight, so its price per kg is the box price divided by the box weight.</p>
+        <h3>How long does delivery take?</h3>
+        <p>{{ section.settings.delivery | escape }}</p>
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Mango price table",
+  "settings": [
+    { "type": "text", "id": "collection_handle", "label": "Show on collection with this handle", "default": "mangoes" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Mango prices today by variety, size and grade" },
+    { "type": "textarea", "id": "intro", "label": "Intro", "default": "Prices below are read live from our store and change when we update them. Sold by the dozen or box, delivered across India." },
+    { "type": "textarea", "id": "season_note", "label": "Season note", "default": "Fresh mangoes are seasonal. The 2027 mango season starts on 1 February 2027. Stock status on this page is live." },
+    { "type": "textarea", "id": "delivery", "label": "Delivery text", "default": "Orders placed before 12 noon IST (Monday to Saturday) are dispatched the same day. Delivery takes 1 to 3 days for most PIN codes and 1 to 2 days to most metros, depending on your PIN code. Fresh mangoes are delivered by Blue Dart to more than 4,700 PIN codes." }
+  ]
+}
+{% endschema %}
