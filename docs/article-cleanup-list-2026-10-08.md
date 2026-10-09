@@ -145,3 +145,8 @@ How it was checked: each written body was re-queried and compared with the inten
 - mango-fruit-online-purchase and similar: leaked "Here is the completely cleaned..." lines removed (exclusive-deals, ratnagiri-hapus-price-guide, best-website-to-buy-devgad...).
 - `[FOUNDER: ...]` paragraphs removed from cherry-price-in-india, hapus-amba-in-marathi-v2, kesar-mango-peti, akrod-akhrot-walnut, keri-no-ras, blueberries-online, uric-acid guide and others.
 - Malawi price tokens used on best-mango-in-the-world card and ld+json.
+
+### 11.7 /pages/horeca (published 9 October 2026)
+- Fresh-mango offers set to OutOfStock, valid until 2027-06-30; delivery wording replaced with the approved Blue Dart sentence; hotel names (The Oberoi, The Trident, JW Marriott, Taj Group of Hotels) added with "supplied to" wording; cards show "average price ₹600 per kg (contact for final contract rates)".
+- Client purchase orders are confidential and are not stored in the repo or shown on the site.
+- Open: schema `shippingRate` 0 (free shipping) on each offer is still unconfirmed; page template `luxury-mango-dessert` is not in the live theme, so the page uses the default page template - check how it renders; hero image `Alphonso_mango_in_Hotels.png` should be checked for logos.
