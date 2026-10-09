@@ -94,3 +94,54 @@ Differing versions found across articles: cut-offs of 10 AM, 11 AM, 2 PM, 3 PM, 
 - `authentic-ratnagiri-alphonso-mango-online-order-now`: "free shipping in big cities", "next-day delivery", "usually from March to May", "Buy ... before stocks run out", widget products with empty src and title, author heading "Bhimseni Kapoor" while the author card says Prashant Powle.
 - `alphonso-mango-online-coimbatore`: "Buy Now" on a card that says "Currently out of stock"; Kesar and cashew offers valid until 2026-12-30; "Delivery in 1–3 days"; season text "late February to mid-June" vs "February–May" in its table.
 - `almonds-empty-stomach`: voice answer says "roughly 84 calories" while the body says about 98–100 kcal.
+
+## 11. Combined rebuilt-article pass (C01 to C55 and E01 to E17), finished 9 October 2026
+
+Scope: every article that needed the 48-villages restore, the season wording, button/availability, live price token, delivery sentence and placeholder fixes. First pass C01 to C55 (about 490 articles) and the season-only pass E01 to E17 (150 articles, some skipped as non-mango). All writes went straight to Shopify through articleUpdate. No theme was published.
+
+How it was checked: each written body was re-queried and compared with the intended text by script (whitespace and non-breaking spaces ignored), every ld+json block parsed after swapping price tokens for numbers, tag balance and class-attribute sequences were checked. Batches that could only be read through at first (C21, C24, C31, C32, C34, C36 to C39 and a few single articles) were re-scanned by script afterwards.
+
+### 11.1 Articles that need a decision or a rewrite
+- `alphonso-mango-myths-facts` (592663773441): the original already starts mid-sentence; voice answer, contents and intro are missing. Not touched.
+- `alphonso-mangoes-in-amritsar-punjab` (383615205422): original has a fragment after the ld+json and is missing the intro, contents and product section. Not touched.
+- `how-to-make-mango-pulp` (the original, not v2): table header (`<table>`/`<tr>`) missing at the start. Preserved as found.
+- `alphonso-mango-in-new-zealand`, `cherry-price-in-india`, `best-fruit-for-building-muscle`, `ratnagiri-hapus-price-guide`: on the earlier unpublish-or-rewrite list; they were cleaned with the same rules but still need your decision.
+- `test-a`: looks like a test page; consider unpublishing.
+- `mango-for-pcos` (590408...): the live body had been replaced after the earlier pass by a shorter rewrite; the pass was applied on top of that version.
+- Several other live bodies had been rewritten between the earlier pass and this one (for example `hafooz-mango-premium-quality`, `buying-farm-fresh-mangoes-online`, `mango-price-in-delhi`); the live body was used as the base each time.
+
+### 11.2 Facts that still conflict with "48 coastal villages"
+- Breakdowns that do not add up to 48: PCMC (14 + 13 + 24 + 5), Dubai (11 + 20 + 17 + 9 + 13), Cuttack (45 other villages, derived), green-mango-online-delivery (5+9, 5+8, 5+19, 2+3), buy-alphonso-mango-online (about 51 names listed).
+- Other village numbers left: 11 / 14 / 16 / 17 / 18 / 19 / 20 / 21 / 24 "other villages", "50+ other villages" (taste-the-best, mumbai-mango-market, pudding), "80+ sustainable villages" (exporters), "98 villages across Devgad taluka" (devgad-hapus).
+- Tamil, Hindi, Marathi and Gujarati articles: numbers changed only; the "Sindhudurg" wording in the Tamil one is unchanged.
+
+### 11.3 Delivery wording still contradicting the approved sentence
+- "15,000 to 17,000 serviceable pin codes", "19,000+", "20,000+", "500+ / 900+ additional pin codes", "300+ via BlueDart": mostly removed where inside replaced sentences; still present in cherry-fruit-online (5), alphonso-fruit, alphonso-mango-online-jaipur/aurangabad, mangoes-processing-and-packaging, indian-mango-varieties, best-places-to-buy-mangoes-online and several others.
+- "Harvested and shipped within 24 hours", "48 to 72 hours of harvest", "same day dispatch" style lines are kept as supply-chain facts and need a decision.
+- ld+json headlines and breadcrumb names that mirror titles still say "1-3 Day Delivery", "Delivered 1-3 Days", "Next Day ...", or carry hard-coded "from ₹1,849"; titles were left alone.
+- Courier lists (BlueDart, Delhivery, Ekart, XpressBees) remain beside the Blue Dart sentence in a number of articles.
+
+### 11.4 Prices and tokens
+- `data-price` and `data-price-max` card attributes are still hard-coded in many articles. In a few (buy-alphonso-mangoes-online-v2, amrakhand-mango-shrikhand-v2, ratnagiri-alphonso-mangoes-v2, aamras-recipe-v2, buy-premium-kungumapoo-saffron...) they were switched to price tokens. This sandbox cannot reach the public site, so please check one rendered page: if tokens inside attributes do not render, those attributes must go back to plain numbers.
+- Tokens inside ld+json strings (lowPrice / highPrice) are used widely; same check applies (view page source on one product article).
+- Devgad ld+json `lowPrice/highPrice` 1849 / 5499 still hard-coded in a few articles where only Ratnagiri was mapped. Kesar 999 / 1699 likewise.
+- "half dozen" wording remains in several places while the first variant (token :1) is one dozen.
+- Pairi ₹2,799 and similar single-variety prices not mapped.
+- Non-mango prices left on purpose: cashew, chia, flax, pulp, saffron, nutmeg, dates.
+
+### 11.5 Season and stock wording left on purpose
+- Kesar, Pairi, Dasheri, Langra, Chausa, Malawi windows ("March to June", "May to July", "April to June") were not touched.
+- Peak or harvest statements ("peak March to May", "first fruit mid-March", "Late March") were kept as Alphonso harvest facts; some now sit beside a 1 February start.
+- "Add to cart" steps remain in many how-to-order lists; "Notify me" buttons and "Currently out of stock" lines remain in a few; frozen-alphonso-mango-candy still has an Aamras waitlist card.
+- "Order Now" remains inside the Devgad product title (ld+json, alt text, filenames).
+- Past-season text (2025 and 2026 reports, Economic Times June 2026, April 2025 lab report) was not relabelled.
+- Typos kept as found: "Proashant Powle" (alphonso-mango-online-mumbai), "border:1px dolor #ddd", "border:1pxonso", "padding:0.6vim", "Powle Home Foods We hold".
+
+### 11.6 Small things changed beyond the plain rules (worth a glance)
+- cost-of-alphonso-mangoes-in-mumbai: phone +91-9167-401-401 replaced by +91 70830 75556; "Last Verified March 2026" set to 8 October 2026.
+- alphonso-mango-gift-box-...-2026: Mother's Day set to May 9, 2027; gift-box prices replaced by "See the current price on the product page"; delivery table replaced; "Diwali advance booking" removed.
+- delivery-period-for-mangoes: region-by-region transit list replaced by the approved delivery sentence.
+- alphonso-mango-price: transit-time table removed; several articles had transit lists removed.
+- mango-fruit-online-purchase and similar: leaked "Here is the completely cleaned..." lines removed (exclusive-deals, ratnagiri-hapus-price-guide, best-website-to-buy-devgad...).
+- `[FOUNDER: ...]` paragraphs removed from cherry-price-in-india, hapus-amba-in-marathi-v2, kesar-mango-peti, akrod-akhrot-walnut, keri-no-ras, blueberries-online, uric-acid guide and others.
+- Malawi price tokens used on best-mango-in-the-world card and ld+json.
