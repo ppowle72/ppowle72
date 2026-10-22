@@ -5,7 +5,8 @@ Setup (run on your PC, from the Mango SEO agent folder):
     python ga4_audiences.py --dry-run     # prints payloads, creates nothing
     python ga4_audiences.py               # creates them
 
-Credentials: uses GOOGLE_APPLICATION_CREDENTIALS from .env if set, otherwise the
+Credentials: uses GOOGLE_SERVICE_ACCOUNT_JSON (inline JSON) from .env if set,
+otherwise GOOGLE_APPLICATION_CREDENTIALS from .env if set, otherwise the
 google-service-account*.json file in the same folder. That service account needs Editor access on the GA4 property.
 """
 import argparse
@@ -83,6 +84,14 @@ def build():
     ]
 
 
+def load_credentials():
+    """Prefer inline GOOGLE_SERVICE_ACCOUNT_JSON from .env, else a key file."""
+    raw = os.environ.get("GOOGLE_SERVICE_ACCOUNT_JSON")
+    if raw:
+        return service_account.Credentials.from_service_account_info(json.loads(raw), scopes=[SCOPE])
+    return service_account.Credentials.from_service_account_file(find_key_file(), scopes=[SCOPE])
+
+
 def find_key_file():
     """Use .env path if set, else the google-service-account*.json next to this script."""
     path = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS") or os.environ.get("GOOGLE_SERVICE_ACCOUNT_FILE")
@@ -106,8 +115,7 @@ def main():
         print(json.dumps(audiences, indent=2))
         return
 
-    creds = service_account.Credentials.from_service_account_file(
-        find_key_file(), scopes=[SCOPE])
+    creds = load_credentials()
     creds.refresh(google.auth.transport.requests.Request())
     headers = {"Authorization": f"Bearer {creds.token}"}
 
