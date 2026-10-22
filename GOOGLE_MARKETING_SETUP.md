@@ -16,8 +16,12 @@ Run every script from `E:\Claude SEO tool\mango-seo-agent-v4.0`. All download wi
 | Enabled campaigns | None yet |
 | Audience sizes | 0 (new), `Purchasers of Alphonsomango.in` = 180 |
 | Disengaged / High-value purchasers | Created in UI |
-| Maps / source audiences | Scripts below (not yet run) |
+| Maps + source audiences (Instagram, Facebook, LinkedIn, YouTube, WhatsApp, Email, Paid social) | Created in GA4 |
+| UTM links pasted | Done: Instagram, Facebook, LinkedIn, YouTube (channel links and 2 video descriptions), Business Profile |
+| UTM links still to do | WhatsApp Business, Mailchimp/email buttons, Meta ads |
 | 6 dead Universal Analytics goals | Remove in UI (optional) |
+| Looker Studio dashboard | Not built yet |
+| Profile reviews | Later |
 
 ## 2. Scripts and when to use them
 
