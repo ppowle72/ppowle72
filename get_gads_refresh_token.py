@@ -9,7 +9,15 @@ import os
 from dotenv import load_dotenv
 from google_auth_oauthlib.flow import InstalledAppFlow
 
+import sys
+
 load_dotenv()
+if len(sys.argv) > 1:  # python get_gads_refresh_token.py client_secret.json
+    flow = InstalledAppFlow.from_client_secrets_file(sys.argv[1], scopes=["https://www.googleapis.com/auth/adwords"])
+    creds = flow.run_local_server(port=0, prompt="consent", access_type="offline", open_browser=False,
+                                  authorization_prompt_message="\nCopy this link into the browser profile signed in as alphonsomangoesin@gmail.com:\n{url}\n")
+    print("\nAdd this line to .env:\nGOOGLE_ADS_REFRESH_TOKEN=" + creds.refresh_token)
+    sys.exit()
 cid = os.environ["GOOGLE_ADS_CLIENT_ID"].strip().strip('"').strip("'")
 csec = os.environ["GOOGLE_ADS_CLIENT_SECRET"].strip().strip('"').strip("'")
 print("Using client ID starting:", cid[:20], "... length", len(cid))
