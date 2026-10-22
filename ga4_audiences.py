@@ -5,8 +5,8 @@ Setup (run on your PC, from the Mango SEO agent folder):
     python ga4_audiences.py --dry-run     # prints payloads, creates nothing
     python ga4_audiences.py               # creates them
 
-Credentials: set GOOGLE_APPLICATION_CREDENTIALS in .env to the service-account
-JSON path. That service account needs Editor access on the GA4 property.
+Credentials: uses GOOGLE_APPLICATION_CREDENTIALS from .env if set, otherwise the
+google-service-account*.json file in the same folder. That service account needs Editor access on the GA4 property.
 """
 import argparse
 import json
@@ -60,6 +60,9 @@ def build():
             clause("INCLUDE", event("session_start")),
             clause("EXCLUDE", event("purchase")),
         ]),
+        audience("Past purchasers 540d", "Anyone who purchased; seed for January pre-booking and lookalikes", 540, [
+            clause("INCLUDE", event("purchase")),
+        ]),
         audience("Overseas visitors", "Country is not India", 540, [
             clause("INCLUDE", {"notExpression": {"dimensionOrMetricFilter": {
                 "fieldName": "country",
@@ -80,6 +83,18 @@ def build():
     ]
 
 
+def find_key_file():
+    """Use .env path if set, else the google-service-account*.json next to this script."""
+    path = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS") or os.environ.get("GOOGLE_SERVICE_ACCOUNT_FILE")
+    if path and os.path.isfile(path):
+        return path
+    here = os.path.dirname(os.path.abspath(__file__))
+    for name in sorted(os.listdir(here)):
+        if name.lower().startswith("google-service-account") and name.lower().endswith(".json"):
+            return os.path.join(here, name)
+    raise SystemExit("No service-account JSON found. Set GOOGLE_APPLICATION_CREDENTIALS in .env.")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true")
@@ -92,7 +107,7 @@ def main():
         return
 
     creds = service_account.Credentials.from_service_account_file(
-        os.environ["GOOGLE_APPLICATION_CREDENTIALS"], scopes=[SCOPE])
+        find_key_file(), scopes=[SCOPE])
     creds.refresh(google.auth.transport.requests.Request())
     headers = {"Authorization": f"Bearer {creds.token}"}
 
