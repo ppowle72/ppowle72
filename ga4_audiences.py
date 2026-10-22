@@ -28,7 +28,14 @@ def event(name):
     return {"eventFilter": {"eventName": name}}
 
 
+def wrap(expr):
+    """GA4 needs and_group -> or_group -> leaf filter at the top level."""
+    return {"andGroup": {"filterExpressions": [{"orGroup": {"filterExpressions": [expr]}}]}}
+
+
 def clause(kind, expr):
+    if "andGroup" not in expr:
+        expr = wrap(expr)
     return {
         "clauseType": kind,
         "simpleFilter": {"scope": ALL_SESSIONS, "filterExpression": expr},
@@ -72,7 +79,7 @@ def build():
         ]),
         audience("Fresh mango viewers", "view_item for Alphonso/Hapus/Ratnagiri", 540, [
             clause("INCLUDE", {"andGroup": {"filterExpressions": [
-                event("view_item"),
+                {"orGroup": {"filterExpressions": [event("view_item")]}},
                 {"orGroup": {"filterExpressions": [
                     {"dimensionOrMetricFilter": {
                         "fieldName": "itemName",
