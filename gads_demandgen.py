@@ -5,7 +5,7 @@
                                           # Google to validate the whole campaign WITHOUT creating anything
     python gads_demandgen.py --apply      # creates it, PAUSED (it cannot spend until you enable it)
 
-The campaign, budget, ad group, audiences, images and ad are sent in ONE request: if anything is
+One ad is created per entry in "ads" (one product page each). The campaign, budget, ad group, audiences, images and ads are sent in ONE request: if anything is
 wrong, nothing is created. Images in the folder are sorted by shape: landscape 1.91:1, square 1:1,
 portrait 4:5; files whose name starts with "logo" are the logo (square).
 Uses the same .env as the other gads_*.py scripts.
@@ -42,23 +42,32 @@ def load_config(path):
         errs.append("daily_budget_inr must be set to a real amount (it is 0)")
     if not c.get("max_cpc_inr") or c["max_cpc_inr"] <= 0:
         errs.append("max_cpc_inr must be set (it caps what one click can cost)")
-    if not str(c.get("final_url", "")).startswith("https://alphonsomango.in"):
-        errs.append("final_url must start with https://alphonsomango.in")
-    h, d = c.get("headlines", []), c.get("descriptions", [])
-    if not 3 <= len(h) <= 5:
-        errs.append("give 3 to 5 headlines")
-    if not 1 <= len(d) <= 5:
-        errs.append("give 1 to 5 descriptions")
-    errs += [f"headline too long ({len(x)}>40): {x}" for x in h if len(x) > 40]
-    errs += [f"description too long ({len(x)}>90): {x}" for x in d if len(x) > 90]
     if len(c.get("business_name", "")) > 25 or not c.get("business_name"):
         errs.append("business_name must be 1 to 25 characters")
+    ads = c.get("ads")
+    if not ads:  # old single-ad format
+        ads = [{k: c[k] for k in ("name", "final_url", "images_folder", "headlines", "descriptions") if k in c}]
+        c["ads"] = ads
+    for i, a in enumerate(ads, 1):
+        tag = f"ad {i} ({a.get('name', '?')})"
+        a.setdefault("name", f"ad {i}")
+        if not str(a.get("final_url", "")).startswith("https://alphonsomango.in"):
+            errs.append(f"{tag}: final_url must start with https://alphonsomango.in")
+        h, d = a.get("headlines", []), a.get("descriptions", [])
+        if not 3 <= len(h) <= 5:
+            errs.append(f"{tag}: give 3 to 5 headlines")
+        if not 1 <= len(d) <= 5:
+            errs.append(f"{tag}: give 1 to 5 descriptions")
+        errs += [f"{tag}: headline too long ({len(x)}>40): {x}" for x in h if len(x) > 40]
+        errs += [f"{tag}: description too long ({len(x)}>90): {x}" for x in d if len(x) > 90]
+        if not a.get("images_folder"):
+            errs.append(f"{tag}: images_folder missing")
     if errs:
         sys.exit("Config problems:\n  - " + "\n  - ".join(errs))
     return c
 
 
-def scan_images(folder):
+def scan_images(folder, logo_file=None):
     if not os.path.isdir(folder):
         sys.exit(f"images_folder not found: {folder}")
     out = {"landscape": [], "square": [], "portrait": [], "logo": []}
@@ -87,6 +96,9 @@ def scan_images(folder):
             continue
         out[kind].append(p)
         print(f"  {kind:<9} {fn} ({w}x{h})")
+    if not out["logo"] and logo_file and os.path.exists(logo_file):
+        out["logo"].append(logo_file)
+        print(f"  logo      {os.path.basename(logo_file)} (shared)")
     for k in ("landscape", "square", "logo"):
         if not out[k]:
             sys.exit(f"Need at least one {k} image in {folder}")
@@ -151,40 +163,42 @@ def build_operations(client, cid, cfg, list_rn, images, ts):
         x.negative = True
         x.user_list.user_list = list_rn[nm]
 
-    asset_rn, tmp = {}, -10
-    for kind, paths in images.items():
-        for p in paths:
-            tmp -= 1
-            a = add(f"image {os.path.basename(p)}").asset_operation.create
-            a.resource_name = client.get_service("AssetService").asset_path(cid, tmp)
-            a.name = f"{cfg['campaign_name']} {os.path.basename(p)} {ts}"
-            with open(p, "rb") as f:
-                a.image_asset.data = f.read()
-            asset_rn[(kind, p)] = a.resource_name
+    tmp = -10
+    for ai, ad_cfg in enumerate(cfg["ads"]):
+        asset_rn = {}
+        for kind, paths in images[ai].items():
+            for p in paths:
+                tmp -= 1
+                a = add(f"{ad_cfg['name']}: image {os.path.basename(p)}").asset_operation.create
+                a.resource_name = client.get_service("AssetService").asset_path(cid, tmp)
+                a.name = f"{cfg['campaign_name']} {ad_cfg['name']} {os.path.basename(p)} {ts}"
+                with open(p, "rb") as f:
+                    a.image_asset.data = f.read()
+                asset_rn[(kind, p)] = a.resource_name
 
-    aga = add("ad").ad_group_ad_operation.create
-    aga.ad_group = ad_group_rn
-    aga.status = en.AdGroupAdStatusEnum.ENABLED
-    ad = aga.ad
-    ad.name = f"{cfg['campaign_name']} ad"
-    ad.final_urls.append(cfg["final_url"])
-    d = ad.demand_gen_multi_asset_ad
-    target = {"landscape": d.marketing_images, "square": d.square_marketing_images,
-              "portrait": d.portrait_marketing_images, "logo": d.logo_images}
-    for (kind, _p), rn in asset_rn.items():
-        img = client.get_type("AdImageAsset")
-        img.asset = rn
-        target[kind].append(img)
-    for h in cfg["headlines"]:
-        t = client.get_type("AdTextAsset")
-        t.text = h
-        d.headlines.append(t)
-    for x in cfg["descriptions"]:
-        t = client.get_type("AdTextAsset")
-        t.text = x
-        d.descriptions.append(t)
-    d.business_name = cfg["business_name"]
-    d.call_to_action_text = cfg.get("call_to_action", "Shop now")
+        aga = add(f"ad: {ad_cfg['name']}").ad_group_ad_operation.create
+        aga.ad_group = ad_group_rn
+        aga.status = en.AdGroupAdStatusEnum.ENABLED
+        ad = aga.ad
+        ad.name = f"{cfg['campaign_name']} - {ad_cfg['name']}"
+        ad.final_urls.append(ad_cfg["final_url"])
+        d = ad.demand_gen_multi_asset_ad
+        target = {"landscape": d.marketing_images, "square": d.square_marketing_images,
+                  "portrait": d.portrait_marketing_images, "logo": d.logo_images}
+        for (kind, _p), rn in asset_rn.items():
+            img = client.get_type("AdImageAsset")
+            img.asset = rn
+            target[kind].append(img)
+        for h in ad_cfg["headlines"]:
+            t = client.get_type("AdTextAsset")
+            t.text = h
+            d.headlines.append(t)
+        for x in ad_cfg["descriptions"]:
+            t = client.get_type("AdTextAsset")
+            t.text = x
+            d.descriptions.append(t)
+        d.business_name = cfg["business_name"]
+        d.call_to_action_text = cfg.get("call_to_action", "Shop now")
     return ops, names, campaign_idx
 
 
@@ -196,8 +210,10 @@ def main():
     load_dotenv()
     cfg = load_config(args.config)
     print("Config OK:", cfg["campaign_name"], f"| Rs {cfg['daily_budget_inr']}/day | max click Rs {cfg['max_cpc_inr']}")
-    print("Images:")
-    images = scan_images(cfg["images_folder"])
+    images = []
+    for a in cfg["ads"]:
+        print(f"Images for {a['name']}:")
+        images.append(scan_images(a["images_folder"], cfg.get("logo_file")))
 
     gcfg = {"developer_token": os.environ["GOOGLE_ADS_DEVELOPER_TOKEN"], "client_id": os.environ["GOOGLE_ADS_CLIENT_ID"],
             "client_secret": os.environ["GOOGLE_ADS_CLIENT_SECRET"], "refresh_token": os.environ["GOOGLE_ADS_REFRESH_TOKEN"],

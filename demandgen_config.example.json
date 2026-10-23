@@ -1,21 +1,43 @@
 {
-  "campaign_name": "Diwali Dry Fruits Retargeting",
-  "daily_budget_inr": 0,
+  "campaign_name": "Diwali Dates Retargeting",
+  "daily_budget_inr": 100,
   "max_cpc_inr": 8,
-  "final_url": "https://alphonsomango.in/collections/dry-fruits",
   "business_name": "Alphonso Mango",
   "call_to_action": "Shop now",
-  "images_folder": "E:\\Claude SEO tool\\mango-seo-agent-v4.0\\ad_images",
-  "headlines": [
-    "Diwali Dry Fruit Gift Boxes",
-    "Premium Kashmiri Saffron",
-    "Mamra & California Almonds",
-    "Dry Fruits Delivered Across India",
-    "Quality Dry Fruits Online"
-  ],
-  "descriptions": [
-    "Mamra almonds, saffron, dates and more. Diwali dry fruit gifts, delivered across India.",
-    "From Powle Home Foods, Mumbai. Shop dry fruits and saffron online at AlphonsoMango.in."
+  "logo_file": "E:\\Claude SEO tool\\mango-seo-agent-v4.0\\ad_images\\logo.png",
+  "ads": [
+    {
+      "name": "Medjool Dates",
+      "final_url": "https://alphonsomango.in/products/medjool-dates-medjoul-khajoor",
+      "images_folder": "E:\\Claude SEO tool\\mango-seo-agent-v4.0\\ad_images\\medjool",
+      "headlines": [
+        "Medjool Dates (Khajoor) Online",
+        "Medjool Dates for Diwali Gifts",
+        "Premium Medjool Dates",
+        "Delivered Across India",
+        "Shop at AlphonsoMango.in"
+      ],
+      "descriptions": [
+        "Premium Medjool dates (khajoor) for Diwali gifting and everyday snacking. Order online.",
+        "From Powle Home Foods, Mumbai. Delivered across India. Shop at AlphonsoMango.in."
+      ]
+    },
+    {
+      "name": "Ajwa Dates",
+      "final_url": "https://alphonsomango.in/products/ajwa-dates-ajwa-khajoor",
+      "images_folder": "E:\\Claude SEO tool\\mango-seo-agent-v4.0\\ad_images\\ajwa",
+      "headlines": [
+        "Ajwa Dates (Khajoor) Online",
+        "Ajwa Dates for Diwali Gifts",
+        "Premium Ajwa Dates",
+        "Delivered Across India",
+        "Shop at AlphonsoMango.in"
+      ],
+      "descriptions": [
+        "Premium Ajwa dates (khajoor) for Diwali gifting and everyday snacking. Order online.",
+        "From Powle Home Foods, Mumbai. Delivered across India. Shop at AlphonsoMango.in."
+      ]
+    }
   ],
   "target_lists": [
     "Shopify CM - Abandoned Checkouts 30d",
@@ -27,9 +49,6 @@
     "All Converters",
     "Purchasers of Alphonsomango.in"
   ],
-  "languages": [
-    "en",
-    "hi"
-  ],
+  "languages": ["en", "hi"],
   "optimized_targeting": null
 }

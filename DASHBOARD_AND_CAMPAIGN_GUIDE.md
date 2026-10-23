@@ -31,26 +31,32 @@ Chart recipe: **Add a chart** > type > drag a box on the canvas > right panel **
 
 **Merchant Center in the dashboard:** Data Studio has no direct Merchant Center connector that I can confirm. Options: (a) product performance from the Google Ads connector (Shopping product fields); (b) Merchant Center > BigQuery data transfer (merchant ID 719656549) at https://console.cloud.google.com/bigquery/transfers, then add BigQuery as a data source. Option (b) may need billing enabled; start with (a).
 
-## D. Diwali campaign by script (PowerShell)
-1. Make a folder `ad_images` inside the work folder with: landscape 1.91:1 images (for example 1200x628), square 1:1 (1200x1200), portrait 4:5 (960x1200), and a square logo named `logo.png`. Each file under 5 MB.
-2. Install and download:
+## D. Diwali Dates campaign by script (PowerShell): Medjool + Ajwa, Rs 100/day, NOTHING is started
+The script only ever creates the campaign PAUSED, and only when you add `--apply`. Plain `python gads_demandgen.py` creates nothing.
+
+1. Pictures. For each product save one good photo, then make the three shapes (nothing gets cropped; the photo sits on white):
+```powershell
+cd "E:\Claude SEO tool\mango-seo-agent-v4.0"
+mkdir ad_images
+curl.exe -L -o make_ad_images.py https://raw.githubusercontent.com/ppowle72/ppowle72/claude/elegant-hypatia-dvxtwj/make_ad_images.py
+python make_ad_images.py "C:\path\to\medjool-photo.jpg" ad_images\medjool
+python make_ad_images.py "C:\path\to\ajwa-photo.jpg" ad_images\ajwa
+python make_ad_images.py --logo "C:\path\to\logo.png" ad_images\logo.png
+```
+2. Script and config (this overwrites any earlier demandgen_config.json):
 ```powershell
 pip install pillow google-ads python-dotenv
 curl.exe -L -o gads_demandgen.py https://raw.githubusercontent.com/ppowle72/ppowle72/claude/elegant-hypatia-dvxtwj/gads_demandgen.py
 curl.exe -L -o demandgen_config.json https://raw.githubusercontent.com/ppowle72/ppowle72/claude/elegant-hypatia-dvxtwj/demandgen_config.example.json
 notepad demandgen_config.json
 ```
-3. In Notepad set `daily_budget_inr` (a real number), check `max_cpc_inr`, `images_folder`, the headlines and descriptions, and the audience names. Save.
-4. Preview (asks Google to validate, creates nothing):
+3. Check in Notepad: budget 100, the two product links, the headlines/descriptions, the audiences. Save.
+4. Preview (asks Google to validate the campaign, creates NOTHING):
 ```powershell
 python gads_demandgen.py
 ```
-5. If it says VALID, create it paused:
-```powershell
-python gads_demandgen.py --apply
-```
-6. Open https://ads.google.com/aw/campaigns?ocid=1201358296, review the campaign, then enable it.
-7. Check the toggle "Optimised targeting" on the ad group: turn it OFF if you want only your lists.
+5. Only when you decide to: create it paused with `python gads_demandgen.py --apply`, then review it at https://ads.google.com/aw/campaigns?ocid=1201358296 and enable it yourself.
+6. After creation check the ad group's "Optimised targeting" toggle and turn it off if you want only your own lists.
 
 ## E. Campaign by hand instead (Google Ads)
 Campaigns > + New campaign > Sales > Demand Gen > Purchase goal only > Maximize clicks > budget > India, English and Hindi > audiences (target: Shopify CM - Abandoned Checkouts 30d, Email Subscribers, Never Purchased; exclude: Shopify CM - Repeat Buyers, All Converters, Purchasers of Alphonsomango.in) > creative > final URL `https://alphonsomango.in/collections/dry-fruits` (no UTM tags; auto-tagging handles Google Ads) > publish.
