@@ -1,0 +1,35 @@
+{
+  "campaign_name": "Diwali Dry Fruits Retargeting",
+  "daily_budget_inr": 0,
+  "max_cpc_inr": 8,
+  "final_url": "https://alphonsomango.in/collections/dry-fruits",
+  "business_name": "Alphonso Mango",
+  "call_to_action": "Shop now",
+  "images_folder": "E:\\Claude SEO tool\\mango-seo-agent-v4.0\\ad_images",
+  "headlines": [
+    "Diwali Dry Fruit Gift Boxes",
+    "Premium Kashmiri Saffron",
+    "Mamra & California Almonds",
+    "Dry Fruits Delivered Across India",
+    "Quality Dry Fruits Online"
+  ],
+  "descriptions": [
+    "Mamra almonds, saffron, dates and more. Diwali dry fruit gifts, delivered across India.",
+    "From Powle Home Foods, Mumbai. Shop dry fruits and saffron online at AlphonsoMango.in."
+  ],
+  "target_lists": [
+    "Shopify CM - Abandoned Checkouts 30d",
+    "Shopify CM - Email Subscribers",
+    "Shopify CM - Never Purchased"
+  ],
+  "exclude_lists": [
+    "Shopify CM - Repeat Buyers",
+    "All Converters",
+    "Purchasers of Alphonsomango.in"
+  ],
+  "languages": [
+    "en",
+    "hi"
+  ],
+  "optimized_targeting": null
+}
